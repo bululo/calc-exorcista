@@ -2,6 +2,8 @@
 <html>
 <body>
 <!-- atqm base e de equipamentos -->
+Nível Base
+<select id="baseLevel"></select><br>
 <p id="pMATK">
 Status MATK
 <select id="Status MATK"></select><br>
@@ -30,40 +32,72 @@ Equip MATK
 <td><select id="bossMatkMultiplier"></select></td>
   </tr>
 </table>
+
 <br>Habilidade(%) <select id="skillDamageMultiplier"></select><br>
+
+<br>
+Alvo
+<table>
+	<tr>
+		<td>Soft DEFM</td>
+		<td><select id="softDEFM"></select></td>
+	</tr>
+	<tr>
+		<td>Hard DEFM</td>
+		<td><select id="hardDEFM"></select></td>
+</tr>
+</table>
 </p>
 
-<label for="finalMATK">ATQM Final:</label>
+<label for="finalMATK">Dano Final:</label>
 <input type="text" id="finalMATK" name="finalMATK" value="" readonly>
+<select id="skill">
+    <option>Judex</option>
+	<option>Adoramus</option>
+</select>
 <button onclick="MATK();">Calcular</button>
 <br><br>
-
 <script>
 // Main function
 function MATK(){
-var sum=0;
-sum += parseInt(document.getElementById("Status MATK").value);
-sum += parseInt(document.getElementById("Equip MATK").value);
-var a1 = 100+(parseInt(document.getElementById("raceMultiplier").value.replace('%', '')));
-var a2 = 100+(parseInt(document.getElementById("sizeMultiplier").value.replace('%', '')));
-var a3 = 100+(parseInt(document.getElementById("targetPropertyMultiplier").value.replace('%', '')));
-var a4 = 100+(parseInt(document.getElementById("monsterMultiplier").value.replace('%', '')));
-var a5 = 100+(parseInt(document.getElementById("matkMultiplier").value.replace('%', '')));
-var a6 = 100+(parseInt(document.getElementById("skillPropertyMultiplier").value.replace('%', '')));
-var a7 = 100+(parseInt(document.getElementById("bossMatkMultiplier").value.replace('%', '')));
-sum = Math.floor(sum*(a1)/100);
-sum = Math.floor(sum*(a2)/100);
-sum = Math.floor(sum*(a3)/100);
-sum = Math.floor(sum*(a4)/100);
-sum = Math.floor(sum*(a5)/100);
-sum = Math.floor(sum*(a6)/100);
-sum = Math.floor(sum*(a7)/100);
-document.getElementById("finalMATK").value = sum;
-//var select = document.getElementById();
-//select.value = 1;
+    // Soma os ATQMs
+	var sum= parseInt(document.getElementById("Status MATK").value)+ parseInt(document.getElementById("Equip MATK").value);
+    // Recupera os Multiplicadores
+	var a1 = 100+(parseInt(document.getElementById("raceMultiplier").value.replace('%', '')));
+	var a2 = 100+(parseInt(document.getElementById("sizeMultiplier").value.replace('%', '')));
+	var a3 = 100+(parseInt(document.getElementById("targetPropertyMultiplier").value.replace('%', '')));
+	var a4 = 100+(parseInt(document.getElementById("monsterMultiplier").value.replace('%', '')));
+	var a5 = 100+(parseInt(document.getElementById("matkMultiplier").value.replace('%', '')));
+	var a6 = 100+(parseInt(document.getElementById("skillPropertyMultiplier").value.replace('%', '')));
+	var a7 = 100+(parseInt(document.getElementById("bossMatkMultiplier").value.replace('%', '')));
+    // Aplica os Multiplicadores
+	sum = Math.floor(sum*(a1)/100);
+	sum = Math.floor(sum*(a2)/100);
+	sum = Math.floor(sum*(a3)/100);
+	sum = Math.floor(sum*(a4)/100);
+	sum = Math.floor(sum*(a5)/100);
+	sum = Math.floor(sum*(a6)/100);
+	sum = Math.floor(sum*(a7)/100);
+    // ATQM Final Calculado
+    var sdm = parseInt(document.getElementById("softDEFM").value);
+    var hdm = parseInt(document.getElementById("hardDEFM").value);
+    var dmg = (1000+hdm)/(1000+(hdm*10));
+    var skill = 0;
+    var hits = 0;
+    var base = parseInt(document.getElementById("baseLevel").value);
+    if (document.getElementById("skill").value == "Judex"){
+    	var skill = 4*(base/100);
+        var hits = 3;
+    } else if (document.getElementById("skill").value.valueOf() == "Adoramus"){
+    	var skill = 15*(base/100);
+        var hits = 10;
+    }
+    var skillper = 100+(parseInt(document.getElementById("skillDamageMultiplier").value.replace('%', '')));
+    var sum = Math.floor(Math.floor(Math.floor(Math.floor(sum*skill)*dmg-sdm)*(skillper)/100)/hits)*hits;
+	document.getElementById("finalMATK").value = sum;
 }
 // MATK
-// Main function
+// Populador de Select
 function SelectPopulator(id, array) {
 var select = document.getElementById(id);
 	for (var i = 0; i < array.length; i++) {
@@ -74,19 +108,25 @@ var select = document.getElementById(id);
 		select.appendChild(el);
 	}
 }
-// populate status matk
+// Nivel Base
 var array = new Array();
-for(var i=1; i <= 500; i++) {
+for(var i=175; i >= 0; i--) {
+	array.push(i)
+}
+SelectPopulator("baseLevel", array);
+// ATQM Base
+var array = new Array();
+for(var i=0; i <= 500; i++) {
 	array.push(i)
 }
 SelectPopulator("Status MATK", array);
-// populate equip matk
+// ATQM de Equips
 var array = new Array();
 for(var i=0; i <= 1500; i++) {
 	array.push(i)
 }
 SelectPopulator("Equip MATK", array);
-// populate multipliers
+// Multiplicadores
 var array = new Array();
 for(var i=0; i <= 300; i++) {
 	array.push(i+'%')
@@ -103,6 +143,18 @@ for(var i=0; i <= 2000; i++) {
 	array.push(i+'%')
 }
 SelectPopulator("skillDamageMultiplier", array);
+// Soft DEFM
+var array = new Array();
+for(var i=0; i <= 300; i++) {
+	array.push(i)
+}
+SelectPopulator("softDEFM", array);
+// Hard DEFM
+var array = new Array();
+for(var i=0; i <= 2000; i++) {
+	array.push(i)
+}
+SelectPopulator("hardDEFM", array);
 </script>
 </body>
 </html>
