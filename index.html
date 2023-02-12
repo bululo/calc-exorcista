@@ -1,14 +1,108 @@
 <!DOCTYPE html>
 <html>
 <body>
+<!-- atqm base e de equipamentos -->
+<p id="pMATK">
+Status MATK
+<select id="Status MATK"></select><br>
+Equip MATK
+<select id="Equip MATK"></select><br>
+</p>
+<!-- multiplicadores -->
+<p id="multiplicadores">
+<table id="multipliersTable">
+  <tr>
+    <td>Raça</td>
+    <td>Tamanho</td>
+    <td>Propriedade(Alvo)</td>
+    <td>Monstro</td>
+    <td>Ataque Mágico</td>
+    <td>Propriedade</td>
+    <td>Chefe</td>
+  </tr>
+<tr>
+<td><select id="raceMultiplier"></select></td>
+<td><select id="sizeMultiplier"></select></td>
+<td><select id="targetPropertyMultiplier"></select></td>
+<td><select id="monsterMultiplier"></select></td>
+<td><select id="matkMultiplier"></select></td>
+<td><select id="skillPropertyMultiplier"></select></td>
+<td><select id="bossMatkMultiplier"></select></td>
+  </tr>
+</table>
+<br>Habilidade(%) <select id="skillDamageMultiplier"></select><br>
+</p>
 
-<h1>My First JavaScript</h1>
+<label for="finalMATK">ATQM Final:</label>
+<input type="text" id="finalMATK" name="finalMATK" value="" readonly>
+<button onclick="MATK();">Calcular</button>
+<br><br>
 
-<button type="button"
-        onclick="document.getElementById('demo').innerHTML = Date()">
-  Click me to display Date and Time.</button>
-
-<p id="demo"></p>
-
+<script>
+// Main function
+function MATK(){
+var sum=0;
+sum += parseInt(document.getElementById("Status MATK").value);
+sum += parseInt(document.getElementById("Equip MATK").value);
+var a1 = 100+(parseInt(document.getElementById("raceMultiplier").value.replace('%', '')));
+var a2 = 100+(parseInt(document.getElementById("sizeMultiplier").value.replace('%', '')));
+var a3 = 100+(parseInt(document.getElementById("targetPropertyMultiplier").value.replace('%', '')));
+var a4 = 100+(parseInt(document.getElementById("monsterMultiplier").value.replace('%', '')));
+var a5 = 100+(parseInt(document.getElementById("matkMultiplier").value.replace('%', '')));
+var a6 = 100+(parseInt(document.getElementById("skillPropertyMultiplier").value.replace('%', '')));
+var a7 = 100+(parseInt(document.getElementById("bossMatkMultiplier").value.replace('%', '')));
+sum = Math.floor(sum*(a1)/100);
+sum = Math.floor(sum*(a2)/100);
+sum = Math.floor(sum*(a3)/100);
+sum = Math.floor(sum*(a4)/100);
+sum = Math.floor(sum*(a5)/100);
+sum = Math.floor(sum*(a6)/100);
+sum = Math.floor(sum*(a7)/100);
+document.getElementById("finalMATK").value = sum;
+//var select = document.getElementById();
+//select.value = 1;
+}
+// MATK
+// Main function
+function SelectPopulator(id, array) {
+var select = document.getElementById(id);
+	for (var i = 0; i < array.length; i++) {
+		var optn = array[i];
+		var el = document.createElement("option");
+		el.textContent = optn;
+		el.value = optn;
+		select.appendChild(el);
+	}
+}
+// populate status matk
+var array = new Array();
+for(var i=1; i <= 500; i++) {
+	array.push(i)
+}
+SelectPopulator("Status MATK", array);
+// populate equip matk
+var array = new Array();
+for(var i=0; i <= 1500; i++) {
+	array.push(i)
+}
+SelectPopulator("Equip MATK", array);
+// populate multipliers
+var array = new Array();
+for(var i=0; i <= 300; i++) {
+	array.push(i+'%')
+}
+SelectPopulator("raceMultiplier", array);
+SelectPopulator("sizeMultiplier", array);
+SelectPopulator("targetPropertyMultiplier", array);
+SelectPopulator("monsterMultiplier", array);
+SelectPopulator("matkMultiplier", array);
+SelectPopulator("skillPropertyMultiplier", array);
+SelectPopulator("bossMatkMultiplier", array);
+var array = new Array();
+for(var i=0; i <= 2000; i++) {
+	array.push(i+'%')
+}
+SelectPopulator("skillDamageMultiplier", array);
+</script>
 </body>
 </html>
