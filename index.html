@@ -16,6 +16,7 @@ table td + td {
     position: relative;
     display: inline-block;
     border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+    overflow:hide;
 }
 .tooltip .tooltiptext {
     visibility: hidden;
@@ -118,7 +119,21 @@ Alvo
 	<tr>
 		<td>Hard DEFM</td>
 		<td><select id="hardDEFM"></select></td>
-</tr>
+	</tr>
+    <tr>
+		<td><span class="tooltip">Fraqueza<span class="tooltiptext"><a href="https://browiki.org/wiki/Propriedade">Tabela Geral (bRO Wiki)</a></span>
+	</span></td>
+		<td>
+        	<select id="elementalWeakness">
+            	<option> 75%</option>
+                <option selected="selected">100%</option>
+                <option>125%</option>
+                <option>150%</option>
+                <option>175%</option>
+                <option>200%</option>
+            </select>
+        </td>
+	</tr>
 </table>
 </p>
 
@@ -170,7 +185,8 @@ function MATK(){
         var hits = 1;
     }
     var skillper = 100+(parseInt(document.getElementById("skillDamageMultiplier").value.replace('%', '')));
-    var sum = Math.floor(Math.floor(Math.floor(Math.floor(sum*skill)*dmg-sdm)*(skillper)/100)/hits)*hits;
+    var weakness = document.getElementById("elementalWeakness").value.replace('%', '');
+    var sum = Math.floor(Math.floor((Math.floor((Math.floor(sum*skill)*dmg-sdm)*(skillper)/100)* weakness)/100)/hits)*hits;
 	document.getElementById("finalMATK").value = sum;
 }
 // MATK
