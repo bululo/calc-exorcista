@@ -1,6 +1,58 @@
 <!DOCTYPE html>
 <html>
+<style>
+body {
+	font-family:verdana;
+	padding: 5px 0px 0px 5px;
+}
+select {
+	text-align: right;
+}
+table td + td {
+	border-left:2px solid green;
+    padding: 0px 3px;
+    }
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+.tooltip .tooltiptext {
+    visibility: hidden;
+    opacity: 0;
+    width: max-content;
+    background-color: gray;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px 5px;
+    border-radius: 6px;
+    transition: opacity 0.2s ease-in-out;
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    left: 50%;
+	transform:translateX(-50%);
+}
+.tooltip:hover .tooltiptext {
+	visibility: visible;
+	opacity: 1;
+}
+.center {
+	margin: auto;
+	border: 3px solid green;
+	padding: 10px;
+	width: fit-content;
+}
+.center::after {
+	content: "";
+	clear: both;
+	display: table;
+}
+</style>
 <body>
+<div class="center">
 <!-- atqm base e de equipamentos -->
 Nível Base
 <select id="baseLevel"></select><br>
@@ -14,26 +66,47 @@ Equip MATK
 <p id="multiplicadores">
 <table id="multipliersTable">
   <tr>
-    <td>Raça</td>
-    <td>Tamanho</td>
-    <td>Propriedade(Alvo)</td>
-    <td>Monstro</td>
-    <td>Ataque Mágico</td>
-    <td>Propriedade</td>
-    <td>Chefe</td>
+	<td><span class="tooltip">Dano Mágico
+    <span class="tooltiptext">Ex: Dano mágico +X%.</span>
+	</span></td>
+    
+    <td><span class="tooltip">Raça
+    	<span class="tooltiptext">Ex: Dano mágico contra a raça Amorfo +X%.<br>Dano mágico contra todas as raças +X%.</span>
+	</span></td>
+    
+    <td><span class="tooltip">Tamanho
+    	<span class="tooltiptext">Ex: Dano mágico contra oponentes de tamanho Pequeno +X%.<br>Dano mágico contra todos os Tamanhos +X%.</span>
+	</span></td>
+    
+    <td><span class="tooltip">Propriedade(Alvo)
+    	<span class="tooltiptext">Ex: Dano mágico contra oponentes de propriedade Neutro +X%.<br>Dano mágico contra oponentes de todas as propriedades +X%.</span>
+	</span></td>
+    
+    <td><span class="tooltip">Monstro
+    	<span class="tooltiptext">Ex: <a href="https://www.divine-pride.net/database/item/19349/chapepperoni-1">Chapepperoni</a></span>
+	</span></td>
+    
+    <td><span class="tooltip">Propriedade
+    	<span class="tooltiptext">Ex: Dano mágico de propriedade Sagrado +X%.<br>Dano mágico de todas as propriedades +X%.</span>
+	</span></td>
+    
+    <td><span class="tooltip">Chefe
+    	<span class="tooltiptext">Ex: Dano mágico contra monstros Chefes +X%.</span>
+	</span></td>
   </tr>
-<tr>
-<td><select id="raceMultiplier"></select></td>
-<td><select id="sizeMultiplier"></select></td>
-<td><select id="targetPropertyMultiplier"></select></td>
-<td><select id="monsterMultiplier"></select></td>
-<td><select id="matkMultiplier"></select></td>
-<td><select id="skillPropertyMultiplier"></select></td>
-<td><select id="bossMatkMultiplier"></select></td>
+    <tr>
+        <td><select id="matkMultiplier"></select></td>
+        <td><select id="raceMultiplier"></select></td>
+        <td><select id="sizeMultiplier"></select></td>
+        <td><select id="targetPropertyMultiplier"></select></td>
+        <td><select id="monsterMultiplier"></select></td>
+        <td><select id="skillPropertyMultiplier"></select></td>
+        <td><select id="bossMatkMultiplier"></select></td>
   </tr>
 </table>
 
-<br>Habilidade(%) <select id="skillDamageMultiplier"></select><br>
+<br><span class="tooltip">Habilidade(%) 	<span class="tooltiptext">Ex: Dano de [Adoramus] +X%. </span>
+	</span> <select id="skillDamageMultiplier"></select><br>
 
 <br>
 Alvo
@@ -52,22 +125,23 @@ Alvo
 <label for="finalMATK">Dano Final:</label>
 <input type="text" id="finalMATK" name="finalMATK" value="" readonly>
 <select id="skill">
-    <option>Judex</option>
 	<option>Adoramus</option>
+    <option>Judex</option>
+    <option>Luz Divina</option>
 </select>
 <button onclick="MATK();">Calcular</button>
-<br><br>
+</div>
 <script>
 // Main function
 function MATK(){
     // Soma os ATQMs
 	var sum= parseInt(document.getElementById("Status MATK").value)+ parseInt(document.getElementById("Equip MATK").value);
     // Recupera os Multiplicadores
-	var a1 = 100+(parseInt(document.getElementById("raceMultiplier").value.replace('%', '')));
-	var a2 = 100+(parseInt(document.getElementById("sizeMultiplier").value.replace('%', '')));
-	var a3 = 100+(parseInt(document.getElementById("targetPropertyMultiplier").value.replace('%', '')));
-	var a4 = 100+(parseInt(document.getElementById("monsterMultiplier").value.replace('%', '')));
-	var a5 = 100+(parseInt(document.getElementById("matkMultiplier").value.replace('%', '')));
+    var a1 = 100+(parseInt(document.getElementById("matkMultiplier").value.replace('%', '')));
+	var a2 = 100+(parseInt(document.getElementById("raceMultiplier").value.replace('%', '')));
+	var a3 = 100+(parseInt(document.getElementById("sizeMultiplier").value.replace('%', '')));
+	var a4 = 100+(parseInt(document.getElementById("targetPropertyMultiplier").value.replace('%', '')));
+	var a5 = 100+(parseInt(document.getElementById("monsterMultiplier").value.replace('%', '')));
 	var a6 = 100+(parseInt(document.getElementById("skillPropertyMultiplier").value.replace('%', '')));
 	var a7 = 100+(parseInt(document.getElementById("bossMatkMultiplier").value.replace('%', '')));
     // Aplica os Multiplicadores
@@ -91,6 +165,9 @@ function MATK(){
     } else if (document.getElementById("skill").value.valueOf() == "Adoramus"){
     	var skill = 15*(base/100);
         var hits = 10;
+    } else if (document.getElementById("skill").value.valueOf() == "Luz Divina"){
+    	var skill = 1.25;
+        var hits = 1;
     }
     var skillper = 100+(parseInt(document.getElementById("skillDamageMultiplier").value.replace('%', '')));
     var sum = Math.floor(Math.floor(Math.floor(Math.floor(sum*skill)*dmg-sdm)*(skillper)/100)/hits)*hits;
