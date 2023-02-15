@@ -56,15 +56,29 @@ table td + td {
 <div class="center">
 <!-- atqm base e de equipamentos -->
 Nível Base
-<select id="baseLevel"></select><br>
-<p id="pMATK">
-Status MATK
-<select id="Status MATK"></select><br>
-Equip MATK
-<select id="Equip MATK"></select><br>
-</p>
+<select id="baseLevel"></select><br><br>
+<table class="center">
+	<td>
+		ATQM Base <select id="Status MATK"></select><br>
+		ATQM Equip <select id="Equip MATK"></select><br>
+	</td>
+    <td style="text-align:right;">
+	    <table>
+			<tr>
+    			<td>Refino</td>
+				<td>ATQM</td>
+    			<td>Nível</td>
+			</tr>
+			<tr>
+    			<td>Arma <select id="weaponUpgrade"></select><br></td>
+				<td><select id="baseWeaponDamage"></select><br></td>
+    			<td><select id="weaponLevel"></select><br></td>
+			</tr>
+		</table>
+    </td>
+</table>
+<br>
 <!-- multiplicadores -->
-<p id="multiplicadores">
 <table id="multipliersTable">
   <tr>
 	<td><span class="tooltip">Dano Mágico
@@ -106,7 +120,7 @@ Equip MATK
   </tr>
 </table>
 
-<br><span class="tooltip">Habilidade(%) 	<span class="tooltiptext">Ex: Dano de [Adoramus] +X%. </span>
+<br><span class="tooltip">Dano de Habilidade<span class="tooltiptext">Ex: Dano de [Adoramus] +X%. </span>
 	</span> <select id="skillDamageMultiplier"></select><br>
 
 <br>
@@ -135,22 +149,59 @@ Alvo
         </td>
 	</tr>
 </table>
-</p>
 
-<label for="finalMATK">Dano Final:</label>
-<input type="text" id="finalMATK" name="finalMATK" value="" readonly>
-<select id="skill">
+
+<br>
+<div class="center">
+Dano Final: <input type="text" id="finalSkillDamage" value="" readonly style="text-align:right;">
+<select id="skill" style="text-align:left;">
 	<option>Adoramus</option>
-    <option>Judex</option>
-    <option>Luz Divina</option>
+	<option>Judex</option>
+	<option>Luz Divina</option>
 </select>
 <button onclick="MATK();">Calcular</button>
 </div>
+</div>
 <script>
-// Main function
+function weaponMATKvariance(){
+	var weaponLevel = parseInt(document.getElementById("weaponLevel").value);
+    var baseWeaponDamage = parseInt(document.getElementById("baseWeaponDamage").value);
+    var weaponUpgrade = parseInt(document.getElementById("weaponUpgrade").value.replace('+', ''));
+    var refinementBonus = 0;
+    if (weaponLevel == "4"){
+    	refinementBonus = 7 * weaponUpgrade;
+	} else if (weaponLevel == "3"){
+    	refinementBonus = 5 * weaponUpgrade;
+	} else if (weaponLevel == "2"){
+    	refinementBonus = 3 * weaponUpgrade;
+	} else if (weaponLevel == "1"){
+    	refinementBonus = 2 * weaponUpgrade;
+	}
+	var variance = Math.floor((weaponLevel) * (baseWeaponDamage + refinementBonus)/10);
+    return variance;
+}
+function overUpgradeBonus(){
+	var weaponLevel = parseInt(document.getElementById("weaponLevel").value);
+    var weaponUpgrade = parseInt(document.getElementById("weaponUpgrade").value.replace('+', ''));
+    var over = 0;
+    if (weaponLevel == "4" && weaponUpgrade>= 5){
+    	over = (weaponUpgrade - 4) * 14;
+	} else if (weaponLevel == "3" && weaponUpgrade>= 6){
+    	over = (weaponUpgrade - 5) * 8;
+	} else if (weaponLevel == "2" && weaponUpgrade>= 7){
+    	over = (weaponUpgrade - 6) * 5;
+	} else if (weaponLevel == "1" && weaponUpgrade>= 8){
+    	over = (weaponUpgrade - 7) * 2;
+	}
+    return over;
+}
 function MATK(){
     // Soma os ATQMs
-	var sum= parseInt(document.getElementById("Status MATK").value)+ parseInt(document.getElementById("Equip MATK").value);
+    var sum = parseInt(document.getElementById("Status MATK").value)+ parseInt(document.getElementById("Equip MATK").value);
+    var variance = weaponMATKvariance();
+    var over = overUpgradeBonus();
+    var minMATK = sum - variance;
+    var maxMATK = sum + variance + over;
     // Recupera os Multiplicadores
     var a1 = 100+(parseInt(document.getElementById("matkMultiplier").value.replace('%', '')));
 	var a2 = 100+(parseInt(document.getElementById("raceMultiplier").value.replace('%', '')));
@@ -160,13 +211,20 @@ function MATK(){
 	var a6 = 100+(parseInt(document.getElementById("skillPropertyMultiplier").value.replace('%', '')));
 	var a7 = 100+(parseInt(document.getElementById("bossMatkMultiplier").value.replace('%', '')));
     // Aplica os Multiplicadores
-	sum = Math.floor(sum*(a1)/100);
-	sum = Math.floor(sum*(a2)/100);
-	sum = Math.floor(sum*(a3)/100);
-	sum = Math.floor(sum*(a4)/100);
-	sum = Math.floor(sum*(a5)/100);
-	sum = Math.floor(sum*(a6)/100);
-	sum = Math.floor(sum*(a7)/100);
+	minMATK = Math.floor(minMATK*(a1)/100);
+	minMATK = Math.floor(minMATK*(a2)/100);
+	minMATK = Math.floor(minMATK*(a3)/100);
+	minMATK = Math.floor(minMATK*(a4)/100);
+	minMATK = Math.floor(minMATK*(a5)/100);
+	minMATK = Math.floor(minMATK*(a6)/100);
+	minMATK = Math.floor(minMATK*(a7)/100);
+    maxMATK = Math.floor(maxMATK*(a1)/100);
+	maxMATK = Math.floor(maxMATK*(a2)/100);
+	maxMATK = Math.floor(maxMATK*(a3)/100);
+	maxMATK = Math.floor(maxMATK*(a4)/100);
+	maxMATK = Math.floor(maxMATK*(a5)/100);
+	maxMATK = Math.floor(maxMATK*(a6)/100);
+	maxMATK = Math.floor(maxMATK*(a7)/100);
     // ATQM Final Calculado
     var sdm = parseInt(document.getElementById("softDEFM").value);
     var hdm = parseInt(document.getElementById("hardDEFM").value);
@@ -186,10 +244,14 @@ function MATK(){
     }
     var skillper = 100+(parseInt(document.getElementById("skillDamageMultiplier").value.replace('%', '')));
     var weakness = document.getElementById("elementalWeakness").value.replace('%', '');
-    var sum = Math.floor(Math.floor((Math.floor((Math.floor(sum*skill)*dmg-sdm)*(skillper)/100)* weakness)/100)/hits)*hits;
-	document.getElementById("finalMATK").value = sum;
+    var minMATK = Math.floor(Math.floor((Math.floor((Math.floor(minMATK*skill)*dmg-sdm)*(skillper)/100)* weakness)/100)/hits)*hits;
+    var maxMATK = Math.floor(Math.floor((Math.floor((Math.floor(maxMATK*skill)*dmg-sdm)*(skillper)/100)* weakness)/100)/hits)*hits;
+    if (minMATK == maxMATK){
+    	document.getElementById("finalSkillDamage").value = minMATK;
+    } else {
+    	document.getElementById("finalSkillDamage").value = minMATK+'~'+maxMATK;
+    }
 }
-// MATK
 // Populador de Select
 function SelectPopulator(id, array) {
 var select = document.getElementById(id);
@@ -213,12 +275,30 @@ for(var i=0; i <= 500; i++) {
 	array.push(i)
 }
 SelectPopulator("Status MATK", array);
-// ATQM de Equips
+// ATQM de Equip
 var array = new Array();
 for(var i=0; i <= 1500; i++) {
 	array.push(i)
 }
 SelectPopulator("Equip MATK", array);
+// Refino da Arma
+var array = new Array();
+for(var i=0; i <= 15; i++) {
+	array.push('+'+i)
+}
+SelectPopulator("weaponUpgrade", array);
+// ATQM Base da Arma
+var array = new Array();
+for(var i=0; i <= 500; i++) {
+	array.push(i)
+}
+SelectPopulator("baseWeaponDamage", array);
+// Nível da Arma
+var array = new Array();
+for(var i=1; i <= 4; i++) {
+	array.push(i)
+}
+SelectPopulator("weaponLevel", array);
 // Multiplicadores
 var array = new Array();
 for(var i=0; i <= 300; i++) {
@@ -236,13 +316,13 @@ for(var i=0; i <= 2000; i++) {
 	array.push(i+'%')
 }
 SelectPopulator("skillDamageMultiplier", array);
-// Soft DEFM
+// DEFM Leve
 var array = new Array();
 for(var i=0; i <= 300; i++) {
 	array.push(i)
 }
 SelectPopulator("softDEFM", array);
-// Hard DEFM
+// DEFM Pesada
 var array = new Array();
 for(var i=0; i <= 2000; i++) {
 	array.push(i)
