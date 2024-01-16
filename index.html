@@ -236,7 +236,7 @@ function MATK(){
     	var skill = 5*(base/100);
         var hits = 3;
     } else if (document.getElementById("skill").value.valueOf() == "Adoramus"){
-    	var skill = 10.3*(base/100);
+    	var skill = Math.floor(1030 * (stats.baseLv / 100)) / 100;
         var hits = 10;
     } else if (document.getElementById("skill").value.valueOf() == "Luz Divina"){
     	var skill = 1.25;
