@@ -100,6 +100,11 @@ const enchants = [
     {id: '29445', dbname: 'Amplification1', name: 'Pedra de Amplificação 1', script:function() { multipliers.matk+=sourceRefine();}},
     {id: '29446', dbname: 'Amplification2', name: 'Pedra de Amplificação 2', script:function() { multipliers.matk+=sourceRefine()*2;}},
     {id: '29447', dbname: 'Amplification3', name: 'Pedra de Amplificação 3', script:function() { multipliers.matk+=sourceRefine()*3;}},
+    // Epifania
+    {id: '4876', dbname: 'Runaway_Magic', name: 'Epifania', script:function() {}},
+    {id: '4876 ', dbname: 'Runaway_Magic', name: 'Epifania (Ativado)', script:function() { equipStats.int+=200; }},
+    // Pedra de Feitiço
+    {id: '4889', dbname: 'Conjure5',  name: 'Pedra de Feitiço 5',  script:function() { equipStats.flatMATK+= 30; equipStats.VCT+= 3;}},
 ];
 
 function sourceRefine(){
