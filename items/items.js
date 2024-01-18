@@ -559,11 +559,32 @@ const armors = [
 malangdo = '29446,29445,4827,4826,4812,4813,4761';
 brasilis = '29446,4831';
 const weapons = [
+    // {
+    //     id: '16039', dbname: 'Spoon', name: 'Colher', slot1: 'card',
+    //     script: function () {
+    //         weapon.baseMATK = 0;
+    //         weapon.lv = 3;
+    //     }
+    // },
     {
-        id: '16039', dbname: 'Spoon', name: 'Colher', slot1: 'card',
+        id: '540011', dbname: 'Up_Demon_Hunting_Bible', name: 'Tomo Primordial', slot1: 'card', slot2: 'card',
         script: function () {
-            weapon.baseMATK = 0;
-            weapon.lv = 3;
+            weapon.baseMATK = 190;
+            weapon.lv = 4;
+            // A cada 2 refinos:
+            // ATQ e ATQM +10.
+            equipStats.flatMATK += Math.floor(refinement.weapon / 2) * 10;
+            // A cada 3 refinos:
+            // Dano de [Gemini Lumen] e [Judex] +25%
+            if (skill.id === "AB_JUDEX")
+                multipliers.skill += Math.floor(refinement.weapon / 3) * 25;
+            if (refinement.weapon >= 7) {
+                equipStats.percentASPD += 10;
+                multipliers.skill_property[HOLY] += 15;
+            }
+            if (refinement.weapon >= 9)
+                if (skill.id === "AB_JUDEX")
+                    multipliers.skill += 30;
         }
     },
     {
