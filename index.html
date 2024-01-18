@@ -1,333 +1,316 @@
 <!DOCTYPE html>
-<html>
-<style>
-body {
-	font-family:verdana;
-	padding: 5px 0px 0px 5px;
-}
-select {
-	text-align: right;
-}
-table td + td {
-	border-left:2px solid green;
-    padding: 0px 3px;
-    }
-.tooltip {
-    position: relative;
-    display: inline-block;
-    border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
-    overflow:hide;
-}
-.tooltip .tooltiptext {
-    visibility: hidden;
-    opacity: 0;
-    width: max-content;
-    background-color: gray;
-    color: #fff;
-    text-align: center;
-    border-radius: 5px;
-    padding: 5px 5px;
-    border-radius: 6px;
-    transition: opacity 0.2s ease-in-out;
-    /* Position the tooltip */
-    position: absolute;
-    z-index: 1;
-    top: 100%;
-    left: 50%;
-	transform:translateX(-50%);
-}
-.tooltip:hover .tooltiptext {
-	visibility: visible;
-	opacity: 1;
-}
-.center {
-	margin: auto;
-	border: 3px solid green;
-	padding: 10px;
-	width: fit-content;
-}
-.center::after {
-	content: "";
-	clear: both;
-	display: table;
-}
-</style>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Adoramus</title>
+    <link rel="stylesheet" href="style2.css">
+    <link rel="icon" type="image/x-icon" href="img.png">
+</head>
 <body>
-<div class="center">
-<!-- atqm base e de equipamentos -->
-Nível Base
-<select id="baseLevel"></select><br><br>
-<table class="center">
-	<td>
-		ATQM Base <select id="Status MATK"></select><br>
-		ATQM Equip <select id="Equip MATK"></select><br>
-	</td>
-    <td style="text-align:right;">
-	    <table>
-			<tr>
-    			<td>Refino</td>
-				<td>ATQM</td>
-    			<td>Nível</td>
-			</tr>
-			<tr>
-    			<td>Arma <select id="weaponUpgrade"></select><br></td>
-				<td><select id="baseWeaponDamage"></select><br></td>
-    			<td><select id="weaponLevel"></select><br></td>
-			</tr>
-		</table>
-    </td>
-</table>
 <br>
-<!-- multiplicadores -->
-<table id="multipliersTable">
-  <tr>
-	<td><span class="tooltip">Dano Mágico
-    <span class="tooltiptext">Ex: Dano mágico +X%.</span>
-	</span></td>
-    
-    <td><span class="tooltip">Raça
-    	<span class="tooltiptext">Ex: Dano mágico contra a raça Amorfo +X%.<br>Dano mágico contra todas as raças +X%.</span>
-	</span></td>
-    
-    <td><span class="tooltip">Tamanho
-    	<span class="tooltiptext">Ex: Dano mágico contra oponentes de tamanho Pequeno +X%.<br>Dano mágico contra todos os Tamanhos +X%.</span>
-	</span></td>
-    
-    <td><span class="tooltip">Propriedade(Alvo)
-    	<span class="tooltiptext">Ex: Dano mágico contra oponentes de propriedade Neutro +X%.<br>Dano mágico contra oponentes de todas as propriedades +X%.</span>
-	</span></td>
-    
-    <td><span class="tooltip">Monstro
-    	<span class="tooltiptext">Ex: <a href="https://www.divine-pride.net/database/item/19349/chapepperoni-1">Chapepperoni</a></span>
-	</span></td>
-    
-    <td><span class="tooltip">Propriedade
-    	<span class="tooltiptext">Ex: Dano mágico de propriedade Sagrado +X%.<br>Dano mágico de todas as propriedades +X%.</span>
-	</span></td>
-    
-    <td><span class="tooltip">Chefe
-    	<span class="tooltiptext">Ex: Dano mágico contra monstros Chefes +X%.</span>
-	</span></td>
-  </tr>
-    <tr>
-        <td><select id="matkMultiplier"></select></td>
-        <td><select id="raceMultiplier"></select></td>
-        <td><select id="sizeMultiplier"></select></td>
-        <td><select id="targetPropertyMultiplier"></select></td>
-        <td><select id="monsterMultiplier"></select></td>
-        <td><select id="skillPropertyMultiplier"></select></td>
-        <td><select id="bossMatkMultiplier"></select></td>
-  </tr>
-</table>
+<div class="container split">
 
-<br><span class="tooltip">Dano de Habilidade<span class="tooltiptext">Ex: Dano de [Adoramus] +X%. </span>
-	</span> <select id="skillDamageMultiplier"></select><br>
+    <div class="column" id="character">
+        <table class="character">
+            <tr>
+                <td><span>Base: </span><input type="number" id="base_lvl"
+                                              class="atributo-input" min="1" max="185"
+                                              value="178"
+                                              onkeypress="return /[0-9]/i.test(event.key)"
+                                              style="width: 50px;"
+                                              oninput="imposeMinMax(this);calcularPontos()"></td>
+                <td>Classe: <input type="number" id="job_lvl" class="atributo-input" min="1" max="65" value="65"
+                                   onkeypress="return /[0-9]/i.test(event.key)"
+                                   style="width: 50px;"
+                                   oninput="imposeMinMax(this);calcularPontos()"></td>
+            </tr>
+        </table>
+        <br>
+        <span>Atributos</span>
+        <table id="stats" class="stats">
+            <tr>
+                <td><label for="base_str">FOR:</label></td>
+                <td><label for="base_agi">AGI:</label></td>
+                <td><label for="base_vit">VIT:</label></td>
+            </tr>
+            <tr>
+                <td><input type="number" id="base_str" class="atributo" min="1" max="130" value="1"
+                           onkeypress="return /[0-9]/i.test(event.key)"
+                           oninput="imposeMinMax(this);calcularPontos()"><span style="min-width: 16px"> + X </span>
+                </td>
+                <td><input type="number" id="base_agi" class="atributo" min="1" max="130" value="90"
+                           onkeypress="return /[0-9]/i.test(event.key)"
+                           oninput="imposeMinMax(this);calcularPontos()"><span class="bonus_stat"> + X </span>
+                </td>
+                <td><input type="number" id="base_vit" class="atributo" min="1" max="130" value="100"
+                           onkeypress="return /[0-9]/i.test(event.key)"
+                           oninput="imposeMinMax(this);calcularPontos()"><span> + X </span>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="base_int">INT:</label></td>
+                <td><label for="base_dex">DES:</label></td>
+                <td><label for="base_luk">SOR:</label></td>
+            </tr>
+            <tr>
+                <td><input type="number" id="base_int" class="atributo" min="1" max="130" value="100"
+                           onkeypress="return /[0-9]/i.test(event.key)"
+                           oninput="imposeMinMax(this);calcularPontos()"><span> + 300 </span>
+                </td>
+                <td><input type="number" id="base_dex" class="atributo" min="1" max="130" value="100"
+                           onkeypress="return /[0-9]/i.test(event.key)"
+                           oninput="imposeMinMax(this);calcularPontos()"><span> + X </span>
+                </td>
+                <td><input type="number" id="base_luk" class="atributo" min="1" max="130" value="1"
+                           onkeypress="return /[0-9]/i.test(event.key)"
+                           oninput="imposeMinMax(this);calcularPontos()"><span> + X </span>
+                </td>
+            </tr>
+        </table>
 
-<br>
-Alvo
-<table>
-	<tr>
-		<td>Soft DEFM</td>
-		<td><select id="softDEFM"></select></td>
-	</tr>
-	<tr>
-		<td>Hard DEFM</td>
-		<td><select id="hardDEFM"></select></td>
-	</tr>
-    <tr>
-		<td><span class="tooltip">Fraqueza<span class="tooltiptext"><a href="https://browiki.org/wiki/Propriedade">Tabela Geral (bRO Wiki)</a></span>
-	</span></td>
-		<td>
-        	<select id="elementalWeakness">
-            	<option> 75%</option>
-                <option selected="selected">100%</option>
-                <option>125%</option>
-                <option>150%</option>
-                <option>175%</option>
-                <option>200%</option>
-            </select>
-        </td>
-	</tr>
-</table>
+        <p id="custoAtributo" class="atributo-custo">Pontos: 0</p></div>
+    <div class="column class" id="target" style="">
+        <table class="character">
+            <tr>
+                <td style="height: 29px; min-width: 31px;">
+                    <span>Alvo: </span><select id="target_name"
+                                               style="width: 200px;height: 21px;padding: 0;  margin-bottom: 0;"
+                                               onchange="loadTarget(this.value);">
+                    <option></option>
+                </select>
+                </td>
+            </tr>
+        </table>
+        <br><br>
+        <table>
+            <tr>
+                <td style="height: 29px;">
+                    <span>Nível: </span><input id="target_level" value="1"
+                                               style="width:60px;max-height: 21px;padding: 0;  margin-bottom: 0;text-align: right;">
+                    <span>Raça: </span><select id="target_race"
+                                               style="width:100px;height: 21px;padding: 0;  margin-bottom: 0;"></select>
 
+                </td>
+            </tr>
+            <tr>
+                <td style="height: 29px;">
+                    <span>Propriedade: </span><select id="target_property"
+                                                      style="width: 120px;height: 21px;padding: 0;  margin-bottom: 0;"></select>
+                    <select id="target_property_level"
+                            style="width: 40px;height: 21px;padding: 0;  margin-bottom: 0;"></select>
+                </td>
+            </tr>
+            <tr>
+                <td style="height: 29px;">
+                    <span>Tipo: </span><select id="target_size"
+                                               style="width:80px;max-height: 21px;padding: 0;  margin-bottom: 0;">
+                    <option>Pequeno</option>
+                    <option>Médio</option>
+                    <option>Grande</option>
+                </select>
+                    <span>Tipo: </span><select id="target_type"
+                                               style="width:80px;max-height: 21px;padding: 0;  margin-bottom: 0;">
+                    <option>Normal</option>
+                    <option>Chefe</option>
+                </select>
+                    <!--                    <span style="display: flex; align-items: center;justify-content: left;">-->
+                    <!--                        <span>Chefe:</span><input type="checkbox" id="target_type" style="width: 18px;height: 18px;padding: 0;  margin-bottom: 0;">-->
+                    <!--                    </span>-->
 
-<br>
-<div class="center">
-Dano Final: <input type="text" id="finalSkillDamage" value="" readonly style="text-align:right;">
-<select id="skill" style="text-align:left;">
-	<option>Adoramus</option>
-	<option>Judex</option>
-	<option>Luz Divina</option>
-</select>
-<button onclick="MATK();">Calcular</button>
+                </td>
+            </tr>
+            <tr>
+                <td style="height: 29px;">
+                    <span>INT: </span><input id="target_int" value="0"
+                                             style="width:50px;max-height: 21px;padding: 0;  margin-bottom: 0;">
+                    <span>DEFM: </span><input id="target_mdef" value="0"
+                                              style="width:50px;max-height: 21px;padding: 0;  margin-bottom: 0;">
+                </td>
+            </tr>
+        </table>
+
+    </div>
 </div>
+<div class="container">
+    Dano Final: <input type="text" id="finalSkillDamage" value="" readonly style="text-align:right;">
+    <select id="skill" style="text-align:left; width: 89px;
+    max-width: 89px;
+    height: 21px;
+    padding: 0px;
+    /*margin-top: 4px;*/
+    margin-bottom: 0px;
+    box-sizing: revert">
+        <option value="AB_ADORAMUS">Adoramus</option>
+        <option value="AB_JUDEX">Judex</option>
+        <!--        <option>Luz Divina</option>-->
+    </select>
+    <button onclick="damage_calculation();" style="text-align:center; width: 89px;
+    max-width: 65px;
+    height: 21px;
+    padding: 0;
+    /*margin-top: 4px;*/
+    margin-bottom: 0;
+    box-sizing: revert">Calcular
+    </button>
+
+    <!--    <input type="text" id="finalSkillDamage" value="" readonly="" style="text-align:right;">-->
+    <!--    <button onclick="damage_calculation();">Calcular!</button>-->
 </div>
-<script>
-function weaponMATKvariance(){
-	var weaponLevel = parseInt(document.getElementById("weaponLevel").value);
-    var baseWeaponDamage = parseInt(document.getElementById("baseWeaponDamage").value);
-    var weaponUpgrade = parseInt(document.getElementById("weaponUpgrade").value.replace('+', ''));
-    var refinementBonus = 0;
-    if (weaponLevel == "4"){
-    	refinementBonus = 7 * weaponUpgrade;
-	} else if (weaponLevel == "3"){
-    	refinementBonus = 5 * weaponUpgrade;
-	} else if (weaponLevel == "2"){
-    	refinementBonus = 3 * weaponUpgrade;
-	} else if (weaponLevel == "1"){
-    	refinementBonus = 2 * weaponUpgrade;
-	}
-	var variance = Math.floor((weaponLevel) * (baseWeaponDamage + refinementBonus)/10);
-    return variance;
-}
-function overUpgradeBonus(){
-	var weaponLevel = parseInt(document.getElementById("weaponLevel").value);
-    var weaponUpgrade = parseInt(document.getElementById("weaponUpgrade").value.replace('+', ''));
-    var over = 0;
-    if (weaponLevel == "4" && weaponUpgrade>= 5){
-    	over = (weaponUpgrade - 4) * 14;
-	} else if (weaponLevel == "3" && weaponUpgrade>= 6){
-    	over = (weaponUpgrade - 5) * 8;
-	} else if (weaponLevel == "2" && weaponUpgrade>= 7){
-    	over = (weaponUpgrade - 6) * 5;
-	} else if (weaponLevel == "1" && weaponUpgrade>= 8){
-    	over = (weaponUpgrade - 7) * 2;
-	}
-    return over;
-}
-function MATK(){
-    // Soma os ATQMs
-    var sum = parseInt(document.getElementById("Status MATK").value)+ parseInt(document.getElementById("Equip MATK").value);
-    var variance = weaponMATKvariance();
-    var over = overUpgradeBonus();
-    var minMATK = sum - variance;
-    var maxMATK = sum + variance + over;
-    // Recupera os Multiplicadores
-    var a1 = 100+(parseInt(document.getElementById("matkMultiplier").value.replace('%', '')));
-	var a2 = 100+(parseInt(document.getElementById("raceMultiplier").value.replace('%', '')));
-	var a3 = 100+(parseInt(document.getElementById("sizeMultiplier").value.replace('%', '')));
-	var a4 = 100+(parseInt(document.getElementById("targetPropertyMultiplier").value.replace('%', '')));
-	var a5 = 100+(parseInt(document.getElementById("monsterMultiplier").value.replace('%', '')));
-	var a6 = 100+(parseInt(document.getElementById("skillPropertyMultiplier").value.replace('%', '')));
-	var a7 = 100+(parseInt(document.getElementById("bossMatkMultiplier").value.replace('%', '')));
-    // Aplica os Multiplicadores
-	minMATK = Math.floor(minMATK*(a1)/100);
-	minMATK = Math.floor(minMATK*(a2)/100);
-	minMATK = Math.floor(minMATK*(a3)/100);
-	minMATK = Math.floor(minMATK*(a4)/100);
-	minMATK = Math.floor(minMATK*(a5)/100);
-	minMATK = Math.floor(minMATK*(a6)/100);
-	minMATK = Math.floor(minMATK*(a7)/100);
-    maxMATK = Math.floor(maxMATK*(a1)/100);
-	maxMATK = Math.floor(maxMATK*(a2)/100);
-	maxMATK = Math.floor(maxMATK*(a3)/100);
-	maxMATK = Math.floor(maxMATK*(a4)/100);
-	maxMATK = Math.floor(maxMATK*(a5)/100);
-	maxMATK = Math.floor(maxMATK*(a6)/100);
-	maxMATK = Math.floor(maxMATK*(a7)/100);
-    // ATQM Final Calculado
-    var sdm = parseInt(document.getElementById("softDEFM").value);
-    var hdm = parseInt(document.getElementById("hardDEFM").value);
-    var dmg = (1000+hdm)/(1000+(hdm*10));
-    var skill = 0;
-    var hits = 0;
-    var base = parseInt(document.getElementById("baseLevel").value);
-    if (document.getElementById("skill").value == "Judex"){
-    	var skill = 5*(base/100);
-        var hits = 3;
-    } else if (document.getElementById("skill").value.valueOf() == "Adoramus"){
-    	var skill = Math.floor(1030 * (base / 100)) / 100;
-        var hits = 10;
-    } else if (document.getElementById("skill").value.valueOf() == "Luz Divina"){
-    	var skill = 1.25;
-        var hits = 1;
-    }
-    var skillper = 100+(parseInt(document.getElementById("skillDamageMultiplier").value.replace('%', '')));
-    var weakness = document.getElementById("elementalWeakness").value.replace('%', '');
-    var minMATK = Math.floor(Math.floor((Math.floor((Math.floor(minMATK*skill)*dmg-sdm)*(skillper)/100)* weakness)/100)/hits)*hits;
-    var maxMATK = Math.floor(Math.floor((Math.floor((Math.floor(maxMATK*skill)*dmg-sdm)*(skillper)/100)* weakness)/100)/hits)*hits;
-    if (minMATK == maxMATK){
-    	document.getElementById("finalSkillDamage").value = minMATK;
-    } else {
-    	document.getElementById("finalSkillDamage").value = minMATK+'~'+maxMATK;
-    }
-}
-// Populador de Select
-function SelectPopulator(id, array) {
-var select = document.getElementById(id);
-	for (var i = 0; i < array.length; i++) {
-		var optn = array[i];
-		var el = document.createElement("option");
-		el.textContent = optn;
-		el.value = optn;
-		select.appendChild(el);
-	}
-}
-// Nivel Base
-var array = new Array();
-for(var i=185; i >= 0; i--) {
-	array.push(i)
-}
-SelectPopulator("baseLevel", array);
-// ATQM Base
-var array = new Array();
-for(var i=0; i <= 750; i++) {
-	array.push(i)
-}
-SelectPopulator("Status MATK", array);
-// ATQM de Equip
-var array = new Array();
-for(var i=0; i <= 1750; i++) {
-	array.push(i)
-}
-SelectPopulator("Equip MATK", array);
-// Refino da Arma
-var array = new Array();
-for(var i=0; i <= 15; i++) {
-	array.push('+'+i)
-}
-SelectPopulator("weaponUpgrade", array);
-// ATQM Base da Arma
-var array = new Array();
-for(var i=0; i <= 500; i++) {
-	array.push(i)
-}
-SelectPopulator("baseWeaponDamage", array);
-// Nível da Arma
-var array = new Array();
-for(var i=1; i <= 4; i++) {
-	array.push(i)
-}
-SelectPopulator("weaponLevel", array);
-// Multiplicadores
-var array = new Array();
-for(var i=0; i <= 300; i++) {
-	array.push(i+'%')
-}
-SelectPopulator("raceMultiplier", array);
-SelectPopulator("sizeMultiplier", array);
-SelectPopulator("targetPropertyMultiplier", array);
-SelectPopulator("monsterMultiplier", array);
-SelectPopulator("matkMultiplier", array);
-SelectPopulator("skillPropertyMultiplier", array);
-SelectPopulator("bossMatkMultiplier", array);
-var array = new Array();
-for(var i=0; i <= 2000; i++) {
-	array.push(i+'%')
-}
-SelectPopulator("skillDamageMultiplier", array);
-// DEFM Leve
-var array = new Array();
-for(var i=0; i <= 300; i++) {
-	array.push(i)
-}
-SelectPopulator("softDEFM", array);
-// DEFM Pesada
-var array = new Array();
-for(var i=0; i <= 2000; i++) {
-	array.push(i)
-}
-SelectPopulator("hardDEFM", array);
-</script>
+
+<br>
+<div class="tab" style="text-align: center">
+    <button class="tablinks" onclick="switchTab(event, 'Equipamentos')" id="defaultOpen">Equipamentos</button>
+    <!--    <button class="tablinks" onclick="switchTab(event, 'Equip. Sombrios')">Equip. Sombrios</button>-->
+    <!--    <button class="tablinks" onclick="switchTab(event, 'Buffs/Consumíveis')">Buffs/Consumíveis</button>-->
+</div>
+<div class="container split tabcontent" id="Equipamentos">
+    <!-- TOP -->
+    <div class="column">
+        <label for="top">Topo</label>
+        <img src="" id="top_img" style="position: absolute; margin-left: 85px; margin-top: 3px; pointer-events: none;"
+             alt="">
+        <select id="top_refine" class="refine" style="width: 75px;"></select>
+        <select id="top" style="width:calc(100% - 80px)" class="select-icon" onchange="populateSlot('top')">
+            <option value=""></option>
+        </select>
+        <div class="card-section">
+            <select id="top_slot1"></select> <select id="top_slot2"></select>
+            <select id="top_slot3"></select> <select id="top_slot4"></select>
+        </div>
+    </div>
+    <!-- MID -->
+    <div class="column">
+        <label for="mid">Meio</label>
+        <img src="" id="mid_img" style="position: absolute; margin-left: 6px; margin-top: 3px; pointer-events: none;">
+        <select id="mid" style="width:calc(100%)" class="select-icon" onchange="populateSlot('mid')">
+            <option value=""></option>
+        </select>
+        <div class="card-section">
+            <select id="mid_slot1"></select> <select id="mid_slot2"></select>
+            <select id="mid_slot3"></select> <select id="mid_slot4"></select>
+        </div>
+    </div>
+    <!-- LOW -->
+    <div class="column">
+        <label for="low">Baixo</label>
+        <img src="" id="low_img" style="position: absolute; margin-left: 6px; margin-top: 3px; pointer-events: none;">
+        <select id="low" style="width:calc(100%)" class="select-icon" onchange="populateSlot('low')">
+            <option value=""></option>
+        </select>
+        <div class="card-section">
+            <select id="low_slot1"></select> <select id="low_slot2"></select>
+            <select id="low_slot3"></select> <select id="low_slot4"></select>
+        </div>
+    </div>
+    <!-- ARMOR -->
+    <div class="column">
+        <label for="arm">Armadura</label>
+        <img src="" id="arm_img" style="position: absolute; margin-left: 85px; margin-top: 3px; pointer-events: none;">
+        <select id="arm_refine" class="refine" style="width: 75px"></select>
+        <select id="arm" style="width:calc(100% - 80px)" class="select-icon" onchange="populateSlot('arm')">
+            <option value=""></option>
+        </select>
+        <div class="card-section">
+            <select id="arm_slot1"></select><select id="arm_slot2"></select>
+            <select id="arm_slot3"></select><select id="arm_slot4"></select>
+        </div>
+    </div>
+    <!-- WEAPON -->
+    <div class="column">
+        <label for="wea">Arma</label>
+        <img src="" id="wea_img" style="position: absolute; margin-left: 85px; margin-top: 3px; pointer-events: none;">
+        <select id="wea_refine" class="refine" style="width: 75px"></select>
+        <select id="wea" style="width:calc(100% - 80px)" class="select-icon" onchange="populateSlot('wea')">
+            <option value=""></option>
+        </select>
+        <div class="card-section">
+            <select id="wea_slot1"></select>
+            <select id="wea_slot2"></select>
+            <select id="wea_slot3"></select>
+            <select id="wea_slot4"></select>
+        </div>
+    </div>
+    <!-- SHIELD -->
+    <div class="column">
+        <label for="shi">Escudo</label>
+        <img src="" id="shi_img" style="position: absolute; margin-left: 85px; margin-top: 3px; pointer-events: none;">
+        <select id="shi_refine" class="refine" style="width: 75px"></select>
+        <select id="shi" style="width:calc(100% - 80px)" class="select-icon" onchange="populateSlot('shi')">
+            <option value=""></option>
+        </select>
+        <div class="card-section">
+            <select id="shi_slot1"></select><select id="shi_slot2"></select>
+            <select id="shi_slot3"></select><select id="shi_slot4"></select>
+        </div>
+    </div>
+    <!-- GARMENT -->
+    <div class="column">
+        <label for="gar">Capa</label>
+        <img src="" id="gar_img" style="position: absolute; margin-left: 85px; margin-top: 3px; pointer-events: none;">
+        <select id="gar_refine" class="refine" style="width: 75px"></select>
+        <select id="gar" style="width:calc(100% - 80px)" class="select-icon" onchange="populateSlot('gar')">
+            <option value=""></option>
+        </select>
+        <div class="card-section">
+            <select id="gar_slot1"></select><select id="gar_slot2"></select>
+            <select id="gar_slot3"></select><select id="gar_slot4"></select>
+        </div>
+    </div>
+    <!-- SHOES -->
+    <div class="column">
+        <label for="sho">Calçado</label>
+        <img src="" id="sho_img" style="position: absolute; margin-left: 85px; margin-top: 3px; pointer-events: none;">
+        <select id="sho_refine" class="refine" style="width: 75px"></select>
+        <select id="sho" style="width:calc(100% - 80px)" class="select-icon" onchange="populateSlot('sho')">
+            <option value=""></option>
+        </select>
+        <div class="card-section">
+            <select id="sho_slot1"></select><select id="sho_slot2"></select>
+            <select id="sho_slot3"></select><select id="sho_slot4"></select>
+        </div>
+    </div>
+    <!-- ACCESSORY 1 -->
+    <div class="column">
+        <label for="ac1">Acessório Direito</label>
+        <img src="" id="ac1_img" style="position: absolute; margin-left: 6px; margin-top: 3px; pointer-events: none;">
+        <select id="ac1" style="width:calc(100%)" class="select-icon" onchange="populateSlot('ac1')">
+            <option value=""></option>
+        </select>
+        <div class="card-section">
+            <select id="ac1_slot1"></select> <select id="ac1_slot2"></select>
+            <select id="ac1_slot3"></select> <select id="ac1_slot4"></select>
+        </div>
+    </div>
+    <!-- ACCESSORY 2 -->
+    <div class="column">
+        <label for="ac2">Acessório Esquerdo</label>
+        <img src="" id="ac2_img" style="position: absolute; margin-left: 6px; margin-top: 3px; pointer-events: none;">
+        <select id="ac2" style="width:calc(100%)" class="select-icon" onchange="populateSlot('ac2')">
+            <option value=""></option>
+        </select>
+        <div class="card-section">
+            <select id="ac2_slot1"></select><select id="ac2_slot2"></select>
+            <select id="ac2_slot3"></select><select id="ac2_slot4"></select>
+        </div>
+    </div>
+</div>
+<div class="container split tabcontent" id="Equip. Sombrios">
+</div>
+<div class="container split tabcontent" id="Buffs/Consumíveis">
+</div>
+
+<script src="other/define.js"></script>
+<script src="other/script.js"></script>
+<script src="other/stat.js"></script>
+<script src="other/dmg_calculation.js"></script>
+<script src="other/skills.js"></script>
+<script src="other/jobstatbonus.js"></script>
+<script src="items/monsters.js"></script>
+<script src="items/items.js"></script>
+<script src="items/cards.js"></script>
+<script src="items/enchants.js"></script>
+<script src="items/random_options.js"></script>
+<script>load();</script>
 </body>
 </html>
