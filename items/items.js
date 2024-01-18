@@ -507,6 +507,23 @@ const armors = [
         }
     },
     {
+        id: '15121', dbname: 'Robe_Of_Sarah', name: 'Manto da Sara',
+        slot1: 'card',
+        slot3: '29447,4876,4876 ,4831',
+        slot4: '4889,4950,4881',
+        script: function () {
+        }
+    },
+    {
+        id: '15121 ', dbname: 'Robe_Of_Sarah', name: 'Manto da Sara (Ativado)',
+        slot1: 'card',
+        slot3: '29447,4876,4876 ,4831',
+        slot4: '4889,4950,4881',
+        script: function () {
+            equipStats.flatMATK += refinement.armor * 8;
+        }
+    },
+    {
         id: '450291', dbname: 'Amazing_Grace', name: '(jRO) Amazing Grace', slot1: 'card',
         script: function () {
             equipStats.percentASPD += 10;
@@ -1040,8 +1057,13 @@ const shoes = [
                 multipliers.race[ANGEL] += 20;
             }
             // Conjunto [Epifania]
-            // INT +40.
-            // Pós-conjuração -40%.
+            if (document.getElementById('arm_slot3').value ==='4876' || document.getElementById('arm_slot3').value ==='4876 ') {
+                // INT +40.
+                // Pós-conjuração -40%.
+                equipStats.int+=40;
+                equipStats.castdelay+=40;
+            }
+
         }
     },
     {
@@ -1139,14 +1161,24 @@ const accessory = [
             multipliers.property[EARTH] += 30;
             multipliers.property[WIND] += 30;
             multipliers.property[HOLY] += 30;
-            // Conjunto
-            // [Pedra de Amplificação 1] ou
-            // Conjunto
-            // [Pedra de Amplificação 2]
-            // Conjunto
-            // [Pedra de Amplificação 3]
+            // Conjunto [Pedra de Amplificação 1]
             // Ignora 70% da DEFM de todas as raças.
             // Dano mágico contra todas as raças +10%.
+            if (document.getElementById('wea_slot4').value === '29445' || document.getElementById('wea_slot3').value === '29445'){
+                equipStats.bypass+=70;
+                multipliers.race[ALL]+=10;
+            }
+            // Conjunto [Pedra de Amplificação 2]
+            if (document.getElementById('wea_slot4').value === '29446' || document.getElementById('wea_slot3').value === '29446'){
+                equipStats.bypass+=70;
+                multipliers.race[ALL]+=10;
+            }
+            // Conjunto [Pedra de Amplificação 3]
+            // Conjunto [Pedra de Amplificação 2]
+            if (document.getElementById('arm_slot3').value === '29447'){
+                equipStats.bypass+=70;
+                multipliers.race[ALL]+=10;
+            }
         }
     },
     {
