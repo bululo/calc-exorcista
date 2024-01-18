@@ -778,8 +778,14 @@ const shields = [
         }
     },
     {
-        id: '28941', dbname: 'Excelion_Shield', name: 'Escudo E.X.C', slot1: 'card',
+        id: '28941', dbname: 'Excelion_Shield (A-INT/A-ATQM bi)', name: 'Escudo E.X.C', slot1: 'card',
         script: function () {
+            // A-ATQM bi (4987)
+            equipStats.flatMATK += 40;
+            // A-INT (4983)
+            equipStats.flatMATK += Math.floor(stats.int / 10) * 5;
+            if (refinement.shield >= 7)
+                equipStats.flatMATK += 10;
         }
     },
     {
