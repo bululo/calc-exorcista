@@ -265,7 +265,11 @@ function updateImage(position, value) {
                 break;
         }
     }
-    image.src = "https://www.divine-pride.net/img/items/item/bRO/" + id;
+    if (id !== '470106') {
+        image.src = "https://www.divine-pride.net/img/items/item/bRO/" + id;
+    } else {
+        image.src = "https://www.divine-pride.net/img/items/item/jRO/" + id;
+    }
 }
 
 // Função para popular os elementos <select> com valores de refinamento de 0 a 20
