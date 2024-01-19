@@ -1132,6 +1132,22 @@ const shoes = [
             equipStats.flatMATK += stats.baseLv;
         }
     },
+    {
+        id: '470106', dbname: 'Shoes_Of_Judex_', name: '(jRO) Purge Shoes (Ativado)', slot1: 'card',
+        script: function () {
+            equipStats.VCT += 50;
+            equipStats.castdelay += 50;
+            multipliers.property[ALL] += 25;
+            // Efeito
+            if (skill.id === 'AB_JUDEX')
+                multipliers.skill += stats.baseLv;
+            //
+            if (refinement.shoes >= 5)
+                equipStats.castdelay += 10;
+            if (refinement.shoes >= 7)
+                equipStats.castdelay += 10;
+        }
+    },
 ];
 
 explo_acc = '4814,4815,4869,4872,4897';
