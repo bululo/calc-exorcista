@@ -216,6 +216,49 @@ const cards = [
             }
         }
     },
+    {
+        id: '4675 ', dbname: 'Archbishop_Card', name: 'Carta Arcebispa Margaretha (Transformação)', position: 'gar',
+        script: function () {
+            if (refinement.garment >= 10) {
+                equipStats.str += 10;
+                equipStats.agi += 10;
+                equipStats.vit += 10;
+                equipStats.int += 10;
+                equipStats.dex += 10;
+                equipStats.luk += 10;
+            }
+            if (stats.baseLv >= 175) {
+                equipStats.str += 10;
+                equipStats.agi += 10;
+                equipStats.vit += 10;
+                equipStats.int += 10;
+                equipStats.dex += 10;
+                equipStats.luk += 10;
+            }
+            if (document.getElementById('wea_slot1').value === '4685' ||
+                document.getElementById('wea_slot2').value === '4685' ||
+                document.getElementById('wea_slot3').value === '4685' ||
+                document.getElementById('wea_slot4').value === '4685') {
+                equipStats.flatMATK+=100;
+
+            }
+        }
+    },
+    {
+        id: '27381', dbname: 'C_Himel_Card', name: '(kRO) Phantom of Himmelmez Card', position: 'gar',
+        script: function () {
+            // Increases holy and neutral property magical damage by 100%.
+            multipliers.skill_property[HOLY] += 100;
+            multipliers.skill_property[NEUTRAL] += 100;
+        }
+    },
+    {
+        id: '300122', dbname: 'Pitaya_Y_Card', name: '(kRO) Yellow Pitaya Card', position: 'gar',
+        script: function () {
+            // Increases holy property magical damage by 3% per refine rate.
+            multipliers.skill_property[HOLY] += refinement.garment * 3;
+        }
+    },
 
     // shoes cards
     {
