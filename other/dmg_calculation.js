@@ -17,6 +17,7 @@ let equipStats = {
     bypass: null
 };
 let refinement = {top: null, armor: null, weapon: null, shield: null, garment: null, shoes: null};
+let s_refinement = {armor: null, weapon: null, shield: null, shoes: null, earring: null, necklace: null};
 let weapon = {baseMATK: null, lv: null, upgradeBonus: null};
 let currentEquip = null;
 let skill = {
@@ -66,23 +67,26 @@ function damage_calculation() {
     let luk = stats.luk + equipStats.luk;
     let statMATK = Math.floor(Math.floor(stats.baseLv / 4) + int + Math.floor(int / 2) + Math.floor(dex / 5) + Math.floor(luk / 3));
     let MATK = statMATK + equipStats.flatMATK + weapon.baseMATK + weapon.upgradeBonus;
+
     // Calcula o ATQM máximo e mínimo brutos
     let minMATK = MATK - variance;
     let maxMATK = MATK + variance + over;
     // Aplica os Multiplicadores
+    console.log('StatMATK' + statMATK);
+    console.log('EquipMATK: ' + (MATK - statMATK));
     // ATQM Mínimo
     minMATK = Math.floor(minMATK * (multipliers.matk) / 100);
     minMATK = Math.floor(minMATK * (multipliers.race[ALL] + multipliers.race[target.race]) / 100);
-    minMATK = Math.floor(minMATK * (multipliers.size[ALL] + multipliers.size[target.size]) / 100);
     minMATK = Math.floor(minMATK * (multipliers.property[ALL] + multipliers.property[target.property[0]]) / 100);
+    minMATK = Math.floor(minMATK * (multipliers.size[ALL] + multipliers.size[target.size]) / 100);
     minMATK = Math.floor(minMATK * (multipliers.monster) / 100);
     minMATK = Math.floor(minMATK * (multipliers.skill_property[ALL] + multipliers.skill_property[skill.property]) / 100);
     minMATK = Math.floor(minMATK * (multipliers.protocol[ALL] + multipliers.protocol[target.type]) / 100);
     // ATQM Máximo
     maxMATK = Math.floor(maxMATK * (multipliers.matk) / 100);
     maxMATK = Math.floor(maxMATK * (multipliers.race[ALL] + multipliers.race[target.race]) / 100);
-    maxMATK = Math.floor(maxMATK * (multipliers.size[ALL] + multipliers.size[target.size]) / 100);
     maxMATK = Math.floor(maxMATK * (multipliers.property[ALL] + multipliers.property[target.property[0]]) / 100);
+    maxMATK = Math.floor(maxMATK * (multipliers.size[ALL] + multipliers.size[target.size]) / 100);
     maxMATK = Math.floor(maxMATK * (multipliers.monster) / 100);
     maxMATK = Math.floor(maxMATK * (multipliers.skill_property[ALL] + multipliers.skill_property[skill.property]) / 100);
     maxMATK = Math.floor(maxMATK * (multipliers.protocol[ALL] + multipliers.protocol[target.type]) / 100);
@@ -93,7 +97,7 @@ function damage_calculation() {
     let hardMDEF = target.mdef - Math.floor(equipStats.bypass * target.mdef / 100); // Calculate pierce here
     hardMDEF = (1000 + hardMDEF) / (1000 + (hardMDEF * 10));
     let weakness = 100;
-    weakness = properties[target.property[1]-1][target.property[0]-1];
+    weakness = properties[target.property[1] - 1][target.property[0] - 1];
     //alert('Property:'+target.property[0]+' Property level:'+target.property[1]+' Weakness'+weakness);
     // Calculo do Dano da Habilidade
     minMATK = Math.floor(Math.floor((Math.floor((Math.floor(minMATK * skill.dmg) * hardMDEF - softMDEF) * (multipliers.skill) / 100) * weakness) / 100) / skill.hits) * skill.hits;
@@ -179,18 +183,24 @@ function updateTarget() {
 }
 
 function retrieveRefinements() {
-    //refinement.top = parseInt(document.getElementById("top_refine").replace('+', ''));
     refinement.top = document.getElementById('top_refine').options.selectedIndex.valueOf();
     refinement.armor = document.getElementById("arm_refine").options.selectedIndex.valueOf();
     refinement.weapon = document.getElementById("wea_refine").options.selectedIndex.valueOf();
     refinement.shield = document.getElementById("shi_refine").options.selectedIndex.valueOf();
     refinement.garment = document.getElementById("gar_refine").options.selectedIndex.valueOf();
     refinement.shoes = document.getElementById("sho_refine").options.selectedIndex.valueOf();
+
+    s_refinement.armor = document.getElementById('s_arm_refine').options.selectedIndex.valueOf();
+    s_refinement.weapon = document.getElementById('s_wea_refine').options.selectedIndex.valueOf();
+    s_refinement.shield = document.getElementById('s_shi_refine').options.selectedIndex.valueOf();
+    s_refinement.shoes = document.getElementById('s_sho_refine').options.selectedIndex.valueOf();
+    s_refinement.earring = document.getElementById('s_ear_refine').options.selectedIndex.valueOf();
+    s_refinement.necklace = document.getElementById('s_nec_refine').options.selectedIndex.valueOf();
 }
 
 function retrieveEquipBonus() {
     retrieveRefinements();
-    const equipsArray = ['top', 'mid', 'low', 'arm', 'wea', 'shi', 'gar', 'sho', 'ac1', 'ac2'];
+    const equipsArray = ['top', 'mid', 'low', 'arm', 'wea', 'shi', 'gar', 'sho', 'ac1', 'ac2', 'c_top', 'c_mid', 'c_low', 's_arm', 's_wea', 's_shi', 'c_gar', 's_sho', 's_ear', 's_nec'];
     equipsArray.forEach(equip => {
         //alert("Posição: "+equip);
         currentEquip = equip;
@@ -227,6 +237,7 @@ function retrieveSlot(i, text, equip) {
 
 function returnArray(array) {
     switch (array) {
+        // Equipamentos
         case 'top':
             return tops;
         case 'mid':
@@ -247,6 +258,28 @@ function returnArray(array) {
             return accessory;
         case 'ac2':
             return accessory;
+        // Encantamentos Visuais
+        case 'c_top':
+            return c_top;
+        case 'c_mid':
+            return c_mid;
+        case 'c_low':
+            return c_low;
+        case 'c_gar':
+            return c_gar;
+        // Equipamentos Sombrios
+        case 's_arm':
+            return s_armor;
+        case 's_wea':
+            return s_weapon;
+        case 's_shi':
+            return s_shield;
+        case 's_sho':
+            return s_shoes;
+        case 's_ear':
+            return s_earring;
+        case 's_nec':
+            return s_necklace;
     }
 }
 
