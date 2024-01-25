@@ -44,7 +44,7 @@ const c_mid = [
                     multipliers.skill += 15;
             // Conjunto Archbishop Stone II (Garment)
             // Increases Judex damage by 15%.
-            if (document.getElementById('c_gar').value === '29516')
+            if (document.getElementById('c_gar').value === '310011')
                 if (skill.id === 'AB_JUDEX')
                     multipliers.skill += 15;
         }
@@ -72,7 +72,7 @@ const c_low = [
                 multipliers.race[ALL] += 15;
             // Conjunto Archbishop Stone II (Garment)
             // Increases all property magical damage by 15%.
-            if (document.getElementById('c_gar').value === '29516')
+            if (document.getElementById('c_gar').value === '310011')
                 multipliers.skill_property[ALL] += 15;
         }
     },
