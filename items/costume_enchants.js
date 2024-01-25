@@ -17,7 +17,7 @@ const c_top = [
                 multipliers.skill_property[ALL] += 15;
             // Conjunto Archbishop Stone II (Garment)
             // Increases magical damage against all size enemies by 15%.
-            if (document.getElementById('c_gar').value === '29516')
+            if (document.getElementById('c_gar').value === '310011')
                 multipliers.size[ALL] += 15;
         }
     },
