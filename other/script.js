@@ -27,11 +27,26 @@ function populateItemsSelect(selectId, itemList) {
     populateSlot(selectId);
 }
 
+// Function to populate the Costume Enchants and Shadow Equipments selects
+function populateCostumeShadowSelect(selectId, itemList) {
+    const select = document.getElementById(selectId);
+
+    itemList.forEach(item => {
+        const option = document.createElement('option');
+        option.value = item.id;
+        option.textContent = item.name;
+        option.data = item.dbname;
+        select.appendChild(option);
+    });
+
+    updateImage(selectId, select.value);
+}
+
 // Function to populate select slots with cards and enchants options
 function populateSlot(position) {
     let select = document.getElementById(position);
 
-    updateImage(position, select.value)
+    updateImage(position, select.value);
 
     // For each of the 4 possible slots
     for (let i = 1; i < 5; i++) {
@@ -202,7 +217,7 @@ function populateTargetSelect() {
     select.appendChild(option);
 
     select = document.getElementById('target_property_level');
-    for (let i=1;i<5;i++) {
+    for (let i = 1; i < 5; i++) {
         option = document.createElement('option');
         option.value = i;
         option.textContent = i;
@@ -221,7 +236,7 @@ function loadTarget(id) {
     document.getElementById('target_race').value = searchObject.race;
     document.getElementById('target_property').value = searchObject.property[0];
     document.getElementById('target_property_level').value = searchObject.property[1];
-    document.getElementById('target_size').selectedIndex = searchObject.size-1;
+    document.getElementById('target_size').selectedIndex = searchObject.size - 1;
     document.getElementById('target_int').value = searchObject.int;
     document.getElementById('target_mdef').value = searchObject.mdef;
 }
@@ -230,6 +245,7 @@ function loadTarget(id) {
 function updateImage(position, value) {
     let image = document.getElementById(position + "_img");
     let id = value;
+    //let server = x;
     // equipamentos para as seleções vazias
     if (id === "") {
         switch (position) {
@@ -263,21 +279,69 @@ function updateImage(position, value) {
             case "ac2":
                 id = "2607";
                 break;
+            // Encantamentos Visuais
+            case "c_top":
+                id = "19602";
+                break;
+            case "c_mid":
+                id = "19603";
+                break;
+            case "c_low":
+                id = "19604";
+                break;
+            case "c_gar":
+                id = "20506";
+                break;
+            // Sombrios
+            case "s_arm":
+                id = "24273";
+                break;
+            case "s_wea":
+                id = "24292";
+                break;
+            case "s_shi":
+                id = "24305";
+                break;
+            case "s_sho":
+                id = "24260";
+                break;
+            case "s_ear":
+                id = "24248";
+                break;
+            case "s_nec":
+                id = "24252";
+                break;
         }
     }
-    if (id !== '470106') {
-        image.src = "https://www.divine-pride.net/img/items/item/bRO/" + id;
-    } else {
+    if (id === '470106') {
         image.src = "https://www.divine-pride.net/img/items/item/jRO/" + id;
+    } else if (id === '29516' || id === '310011') {
+        image.src = "https://www.divine-pride.net/img/items/item/kRO/" + id;
+    } else {
+        image.src = "https://www.divine-pride.net/img/items/item/bRO/" + id;
     }
 }
 
-// Função para popular os elementos <select> com valores de refinamento de 0 a 20
+// Função para preencher os elementos <select> com valores de refinamento de 0 a 20
 function populateRefinementOptions() {
     const refinementsSelects = document.querySelectorAll('[class^="refine"]');
 
     refinementsSelects.forEach(select => {
         for (let i = 0; i <= 20; i++) {
+            const option = document.createElement('option');
+            option.value = i;
+            option.textContent = `+${i}`;
+            select.appendChild(option);
+        }
+    });
+}
+
+// Função para preencher os elementos <select> com valores de refinamento de 0 a 10
+function populateShadowRefinementOptions() {
+    const refinementsSelects = document.querySelectorAll('[class^="s_refine"]');
+
+    refinementsSelects.forEach(select => {
+        for (let i = 0; i <= 10; i++) {
             const option = document.createElement('option');
             option.value = i;
             option.textContent = `+${i}`;
@@ -330,6 +394,7 @@ function switchTab(evt, tabName) {
 function load() {
     // Chamada da função para preencher os selects de refinamento com +0~+20
     populateRefinementOptions();
+    populateShadowRefinementOptions();
     // Chamada da função para preencher as listas de equipamentos, cartas
     // encantamentos e bônus aleatório
     populateItemsSelect('top', tops);
@@ -342,6 +407,18 @@ function load() {
     populateItemsSelect('sho', shoes);
     populateItemsSelect('ac1', accessory);
     populateItemsSelect('ac2', accessory);
+    // Encantamentos Visuais
+    populateCostumeShadowSelect('c_top', c_top);
+    populateCostumeShadowSelect('c_mid', c_mid);
+    populateCostumeShadowSelect('c_low', c_low);
+    populateCostumeShadowSelect('c_gar', c_gar);
+    // Sombrios
+    populateCostumeShadowSelect('s_arm', s_armor);
+    populateCostumeShadowSelect('s_wea', s_weapon);
+    populateCostumeShadowSelect('s_shi', s_shield);
+    populateCostumeShadowSelect('s_sho', s_shoes);
+    populateCostumeShadowSelect('s_ear', s_earring);
+    populateCostumeShadowSelect('s_nec', s_necklace);
     // Chama a função para preencher os alvos
     populateTargetSelect();
     // Calculo dos atributos
