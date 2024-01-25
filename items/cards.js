@@ -239,7 +239,7 @@ const cards = [
                 document.getElementById('wea_slot2').value === '4685' ||
                 document.getElementById('wea_slot3').value === '4685' ||
                 document.getElementById('wea_slot4').value === '4685') {
-                equipStats.flatMATK+=100;
+                equipStats.flatMATK += 100;
 
             }
         }
@@ -257,6 +257,29 @@ const cards = [
         script: function () {
             // Increases holy property magical damage by 3% per refine rate.
             multipliers.skill_property[HOLY] += refinement.garment * 3;
+        }
+    },
+    {
+        id: '300424', dbname: 'S_Friedrich_Card', name: '(kRO) Friedrich S. Heine Card', position: 'gar',
+        script: function () {
+            // Increases all property magical damage by 5%.
+            multipliers.skill_property[ALL] += 5;
+            // Increases all property magical damage by additional 4% per 2 refine rate.
+            multipliers.skill_property[ALL] += Math.floor(refinement.garment / 2) * 4;
+            // When equipped with Meyer Lugenburg Card, increases all property magical damage by 5%.
+            if (document.getElementById('arm_slot1').value === '300308')
+                multipliers.skill_property[ALL] += 5;
+        }
+    },
+    {
+        id: '27177', dbname: 'Rr_Arclouse_Card', name: '(kRO) Carta Tapuru', position: 'gar',
+        script: function () {
+            // A cada 10 de INT, ATQM +3, ASPD +1%.
+            equipStats.flatMATK += Math.floor(stats.int / 10) * 3;
+            equipStats.percentASPD += Math.floor(stats.int / 10);
+            // INT 120 ou mais ATQM+ 40.
+            if (stats.int >= 120)
+                equipStats.flatMATK += 40;
         }
     },
 
