@@ -548,18 +548,18 @@ const armors = [
         }
     },
     {
-        id: '450291 ', dbname: 'Amazing_Grace', name: '(20%) Amazing Grace', slot1: 'card',
+        id: '450291 ', dbname: 'Amazing_Grace', name: 'Graça Alcançada', slot1: 'card',
         script: function () {
             equipStats.percentASPD += 10;
-            if (refinement.armor >= 5) {
+            if (refinement.armor >= 9) {
                 if (skill.id === "AB_ADORAMUS" || skill.id === "AB_JUDEX")
                     multipliers.skill += 50;
             }
-            if (refinement.armor >= 7) {
+            if (refinement.armor >= 11) {
                 if (skill.id === "AB_ADORAMUS" || skill.id === "AB_JUDEX")
                     multipliers.skill += 50;
             }
-            if (refinement.armor >= 10) {
+            if (refinement.armor >= 13) {
                 multipliers.skill_property[HOLY] += 15;
             }
             // A cada nível de [Oratio]:
@@ -567,7 +567,7 @@ const armors = [
             equipStats.int += 30;
             equipStats.flatMATK += 150;
             // A cada nível de [Gênese]:
-            // Dano mágico contra todas as raças +14%.
+            // Dano mágico contra todas as raças +4%.
             multipliers.race[ALL] += 20;
         }
     },
