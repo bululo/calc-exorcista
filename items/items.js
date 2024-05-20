@@ -364,7 +364,7 @@ const armors = [
                 // Soma dos refinos +23 ou mais:
                 // Dano mágico de todas as propriedades +20% adicional.
                 if ((refinement.top + refinement.armor) >= 23)
-                    multipliers.skill_property[ALL] += 23;
+                    multipliers.] += 23;
             }
             // Conjunto [Adereço da Celine]
             if (document.getElementById('ac1').value === '32237' || document.getElementById('ac2').value === '32237') {
@@ -856,7 +856,7 @@ const garments = [
         script: function () {
             equipStats.flatMATK += Math.floor(refinement.garment / 2) * 10;
             multipliers.matk += Math.floor(refinement.garment / 2);
-            multipliers.skill_property[ALL] += Math.floor(refinement.garment / 4) * 3;
+            multipliers.] += Math.floor(refinement.garment / 4) * 3;
             if (refinement.garment >= 7)
                 multipliers.matk += 7;
             if (refinement.garment >= 9)
@@ -876,7 +876,7 @@ const garments = [
             if (refinement.garment >= 7)
                 equipStats.VCT;
             if (refinement.garment >= 11)
-                multipliers.skill_property[ALL] += 10;
+                multipliers.] += 10;
         }
     },
     {
@@ -1076,10 +1076,12 @@ const shoes = [
         id: '470021', dbname: 'Grace_Magic_Boots', name: 'Grácil Bota Magica', slot1: 'card',
         script: function () {
             equipStats.flatMATK += 20;
-            if (refinement.shoes >= 7)
+            if (refinement.shoes >= 7) {
                 equipStats.flatFCT += 0.5;
-            if (refinement.shoes >= 9)
-                multipliers.skill_property[ALL]+=10;
+            }
+            if (refinement.shoes >= 9) {
+                multipliers.skill_property[ALL] += 10;
+            }
         }
     },
     // {
