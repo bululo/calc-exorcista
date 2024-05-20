@@ -1079,7 +1079,7 @@ const shoes = [
             if (refinement.shoes >= 7)
                 equipStats.flatFCT += 0.5;
             if (refinement.shoes >= 9)
-                multipliers.skill_property[ALL];
+                multipliers.skill_property[ALL]+=10;
         }
     },
     // {
