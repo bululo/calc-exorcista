@@ -1076,12 +1076,10 @@ const shoes = [
         id: '470021', dbname: 'Grace_Magic_Boots', name: 'Grácil Bota Magica', slot1: 'card',
         script: function () {
             equipStats.flatMATK += 20;
-            if (refinement.shoes >= 7) {
+            if (refinement.shoes >= 7)
                 equipStats.flatFCT += 0.5;
-            }
-            if (refinement.shoes >= 9) {
+            if (refinement.shoes >= 9)
                 multipliers.skill_property[ALL] += 10;
-            }
         }
     },
     // {
