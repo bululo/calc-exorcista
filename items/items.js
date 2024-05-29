@@ -649,6 +649,53 @@ const weapons = [
         }
     },
     {
+        id: '550031', dbname: 'Dea_Staff_IL Dea_Staff_IL', name: 'Dea Ilusional', slot1: 'card', slot2: 'card',
+        script: function () {
+            weapon.baseMATK = 190;
+            weapon.lv = 4;
+            //
+            equipStats.int += 6;
+            equipStats.vit += 2;
+            // A cada 3 refinos:
+            // Dano de [Judex] +20%
+            if (skill.id === "AB_JUDEX")
+                multipliers.skill += Math.floor(refinement.weapon / 3) * 20;
+            if (refinement.weapon >= 7) {
+                multipliers.skill_property[HOLY] += 15;
+            }
+            if (refinement.weapon >= 9) {
+                if (skill.id === "AB_JUDEX")
+                    multipliers.skill += 30;
+                equipStats.castdelay += 10;
+            }
+        }
+    },
+    {
+        id: '550031 ', dbname: 'Dea_Staff_IL Dea_Staff_IL', name: 'Dea Ilusional (Ativado)', slot1: 'card', slot2: 'card',
+        script: function () {
+            weapon.baseMATK = 190;
+            weapon.lv = 4;
+            //
+            equipStats.int += 6;
+            equipStats.vit += 2;
+            // A cada 3 refinos:
+            // Dano de [Judex] +20%
+            if (skill.id === "AB_JUDEX")
+                multipliers.skill += Math.floor(refinement.weapon / 3) * 20;
+            if (refinement.weapon >= 7) {
+                multipliers.skill_property[HOLY] += 15;
+            }
+            if (refinement.weapon >= 9) {
+                if (skill.id === "AB_JUDEX")
+                    multipliers.skill += 30;
+                equipStats.castdelay += 10;
+            }
+            if (refinement.weapon >= 11) {
+                multipliers.size[ALL] += 20;
+            }
+        }
+    },
+    {
         id: '590012', dbname: 'Up_Saint_Hall', name: 'Clava Primordial', slot1: 'card', slot2: 'card',
         script: function () {
             weapon.baseMATK = 200;
@@ -1080,6 +1127,19 @@ const shoes = [
                 equipStats.flatFCT += 0.5;
             if (refinement.shoes >= 9)
                 multipliers.skill_property[ALL]+=10;
+        }
+    },
+    {
+        id: '470106 ', dbname: 'Shoes_Of_Judex_', name: 'Sapatos da Persistência', slot1: 'card',
+        script: function () {
+            equipStats.VCT += 20;
+            equipStats.castdelay += 10;
+            multipliers.property[ALL] += 25;
+            //
+            if (refinement.shoes >= 5)
+                equipStats.castdelay += 10;
+            if (refinement.shoes >= 7)
+                equipStats.castdelay += 10;
         }
     },
     // {
