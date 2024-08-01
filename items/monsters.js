@@ -59,7 +59,7 @@ const monsters = [
 
         hp: 2000000000,
         mdef: 0,
-        int: 1,
+        int: 0,
     },
     {
         id: '21065',
@@ -74,7 +74,7 @@ const monsters = [
 
         hp: 2000000000,
         mdef: 0,
-        int: 1,
+        int: 0,
     },
     {
         id: '21066',
@@ -89,7 +89,7 @@ const monsters = [
 
         hp: 2000000000,
         mdef: 0,
-        int: 1,
+        int: 0,
     },
     // DUMMIES RAÇA
     {
@@ -105,7 +105,7 @@ const monsters = [
 
         hp: 2000000000,
         mdef: 0,
-        int: 1,
+        int: 0,
     },
     {
         id: '21068',
@@ -120,7 +120,7 @@ const monsters = [
 
         hp: 2000000000,
         mdef: 0,
-        int: 1,
+        int: 0,
     },
     {
         id: '21069',
@@ -135,7 +135,7 @@ const monsters = [
 
         hp: 2000000000,
         mdef: 0,
-        int: 1,
+        int: 0,
     },
     {
         id: '21070',
@@ -150,7 +150,7 @@ const monsters = [
 
         hp: 2000000000,
         mdef: 0,
-        int: 1,
+        int: 0,
     },
     {
         id: '21071',
@@ -165,7 +165,7 @@ const monsters = [
 
         hp: 2000000000,
         mdef: 0,
-        int: 1,
+        int: 0,
     },
     {
         id: '21072',
@@ -180,7 +180,7 @@ const monsters = [
 
         hp: 2000000000,
         mdef: 0,
-        int: 1,
+        int: 0,
     },
     {
         id: '21073',
@@ -195,7 +195,7 @@ const monsters = [
 
         hp: 2000000000,
         mdef: 0,
-        int: 1,
+        int: 0,
     },
     {
         id: '21074',
@@ -210,7 +210,7 @@ const monsters = [
 
         hp: 2000000000,
         mdef: 0,
-        int: 1,
+        int: 0,
     },
     {
         id: '21075',
@@ -225,7 +225,7 @@ const monsters = [
 
         hp: 2000000000,
         mdef: 0,
-        int: 1,
+        int: 0,
     },
     {
         id: '21076',
@@ -240,7 +240,7 @@ const monsters = [
 
         hp: 2000000000,
         mdef: 0,
-        int: 1,
+        int: 0,
     },
     // DUMMIES PROPRIEDADE
     {
@@ -256,7 +256,7 @@ const monsters = [
 
         hp: 2000000000,
         mdef: 0,
-        int: 1,
+        int: 0,
     },
     {
         id: '21078',
@@ -271,7 +271,7 @@ const monsters = [
 
         hp: 2000000000,
         mdef: 0,
-        int: 1,
+        int: 0,
     },
     {
         id: '21079',
@@ -286,7 +286,7 @@ const monsters = [
 
         hp: 2000000000,
         mdef: 0,
-        int: 1,
+        int: 0,
     },
     {
         id: '21080',
@@ -301,7 +301,7 @@ const monsters = [
 
         hp: 2000000000,
         mdef: 0,
-        int: 1,
+        int: 0,
     },
     {
         id: '21081',
@@ -316,7 +316,7 @@ const monsters = [
 
         hp: 2000000000,
         mdef: 0,
-        int: 1,
+        int: 0,
     },
     {
         id: '21082',
@@ -331,7 +331,7 @@ const monsters = [
 
         hp: 2000000000,
         mdef: 0,
-        int: 1,
+        int: 0,
     },
     {
         id: '21083',
@@ -346,7 +346,7 @@ const monsters = [
 
         hp: 2000000000,
         mdef: 0,
-        int: 1,
+        int: 0,
     },
     {
         id: '21084',
@@ -361,7 +361,7 @@ const monsters = [
 
         hp: 2000000000,
         mdef: 0,
-        int: 1,
+        int: 0,
     },
     {
         id: '21085',
@@ -376,7 +376,7 @@ const monsters = [
 
         hp: 2000000000,
         mdef: 0,
-        int: 1,
+        int: 0,
     },
     {
         id: '21086',
@@ -391,11 +391,11 @@ const monsters = [
 
         hp: 2000000000,
         mdef: 0,
-        int: 1,
+        int: 0,
     },
 ];
 
-const properties = [[100, 100, 100, 100, 100, 100,    0 , 125, 100, 150],
-                    [100, 100, 100, 100, 100, 100, (-25), 150, 100, 175],
-                    [100, 100, 100, 100, 100, 125, (-50), 175, 100, 200],
-                    [100,  75,  75,  75,  75, 125,(-100), 200, 100, 200]];
+const properties = [[100, 100, 100, 100, 100,  75,   0, 125, 100, 125],
+                    [100, 100, 100, 100, 100,  75,   0, 150, 100, 150],
+                    [100, 100, 100, 100, 100,  50,   0, 175, 100, 175],
+                    [100, 100, 100, 100, 100,  50,   0, 200, 100, 200]];
