@@ -11,6 +11,7 @@ const enchants = [
     {id: '4712', dbname: 'Inteligence3', name: 'INT +3', script:function() { equipStats.int+=3;}},
     {id: '4713', dbname: 'Inteligence4', name: 'INT +4', script:function() { equipStats.int+=4;}},
     {id: '4714', dbname: 'Inteligence5', name: 'INT +5', script:function() { equipStats.int+=5;}},
+    {id: '4715', dbname: 'Inteligence6', name: 'INT +6', script:function() { equipStats.int+=6;}},
     // Pedras de Atributo DES
     {id: '4720', dbname: 'Dexterity1', name: 'DES +1', script:function() { equipStats.dex+=1;}},
     {id: '4721', dbname: 'Dexterity2', name: 'DES +2', script:function() { equipStats.dex+=2;}},
