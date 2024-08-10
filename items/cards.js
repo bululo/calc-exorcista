@@ -260,7 +260,7 @@ const cards = [
         }
     },
     {
-        id: '300424', dbname: 'S_Friedrich_Card', name: '(kRO) Friedrich S. Heine Card', position: 'gar',
+        id: '300424', dbname: 'S_Friedrich_Card', name: 'Carta Friedrich', position: 'gar',
         script: function () {
             // Increases all property magical damage by 5%.
             multipliers.skill_property[ALL] += 5;
