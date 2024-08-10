@@ -1211,9 +1211,10 @@ const shoes = [
 ];
 
 explo_acc = '4814,4815,4869,4872,4897';
+tumulo = '4721,4722,4723,4711,4713,4715,4813,4812,4826,4760,4883';
 const accessory = [
     {
-        id: '490118', dbname: 'RingOfAdoramus', name: 'Anel de Adoramus', slot1: 'card',
+        id: '490118', dbname: 'RingOfAdoramus', name: 'Anel de Adoramus', slot1: 'card', slot4: tumulo,
         script: function () {
             equipStats.int += 7;
             multipliers.size[ALL] += 10;
@@ -1230,7 +1231,7 @@ const accessory = [
         }
     },
     {
-        id: '490036', dbname: 'Pendant_of_Solomon_', name: 'Colar do Mago Salomão', slot1: 'card',
+        id: '490036', dbname: 'Pendant_of_Solomon_', name: 'Colar do Mago Salomão', slot1: 'card', slot4: tumulo,
         script: function () {
             equipStats.int += 5;
             equipStats.dex += 5;
@@ -1336,7 +1337,7 @@ const accessory = [
         }
     },
     {
-        id: '28564', dbname: 'Valkyrie_Drop', name: 'Lágrima de Valquíria', slot1: 'card',
+        id: '28564', dbname: 'Valkyrie_Drop', name: 'Lágrima de Valquíria', slot1: 'card', slot4: tumulo,
         script: function () {
             equipStats.castdelay += 5;
             equipStats.VCT += 10;
@@ -1357,26 +1358,8 @@ const accessory = [
             equipStats.agi += Math.floor(stats.luk / 18) * 3;
         }
     },
-    // {id: '490022', dbname: 'TrustRing', name: 'Anel de Iansã', slot1: 'card'},
-    // {
-    //     id: '490290', dbname: 'Ameretat', name: 'Anel de Ameretat', position: '2', slot1: 'card',
-    //     script: function () {
-    //         multipliers.matk += 10;
-    //         // Conjunto
-    //         // [Super Agilidade]
-    //         // Velocidade de ataque +15%.
-    //
-    //         // Conjunto
-    //         // [Super Inteligência]
-    //         // Dano mágico +30%.
-    //
-    //         // Conjunto
-    //         // [Super Sorte]
-    //         // Pós-conjuração -30%.
-    //     }
-    // },
     {
-        id: '28538', dbname: 'Glove_Of_Wizard_BR', name: 'Luvas de H. Motto', slot1: 'card',
+        id: '28538', dbname: 'Glove_Of_Wizard_BR', name: 'Luvas de H. Motto', slot1: 'card', slot4: tumulo,
         script: function () {
             equipStats.VCT += 5;
             equipStats.bypass += 20;
@@ -1388,7 +1371,7 @@ const accessory = [
         }
     },
     {
-        id: '490068', dbname: 'RingofVenus', name: 'Anel de Vênus', slot1: 'card',
+        id: '490068', dbname: 'RingofVenus', name: 'Anel de Vênus', slot1: 'card', slot4: tumulo,
         script: function () {
             // Lado Direito
             if (currentEquip === 'ac1') {
