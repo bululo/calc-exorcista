@@ -200,6 +200,30 @@ const tops = [
     //         // Conjuração variável -3%.
     //     }
     // },
+    {
+        id: '400687',
+        dbname: '',
+        name: 'Garra Diabólica',
+        slot1: 'card',
+        script: function () {
+            multipliers.matk += refinement.top * 5;
+            equipStats.flatMATK += Math.floor(refinement.top / 2) * 15;
+            if (refinement.top >= 7) {
+                equipStats.castdelay += 8;
+                equipStats.VCT += 8;
+            }
+            if (refinement.top >= 9) {
+                //bugado
+                //multipliers.skill_property+=10;
+            }
+            if (refinement.top >= 11)
+                equipStats.flatFCT += 0.2;
+            //Conjuntos
+            if (document.getElementById('arm').value === '15146' || document.getElementById('arm').value === '15163') {
+                multipliers.race[ALL] += Math.floor(refinement.armor / 3) * 8;
+            }
+        }
+    },
 ];
 
 desentupidor = '4730,4710,4720,4750';
@@ -569,6 +593,28 @@ const armors = [
             // A cada nível de [Gênese]:
             // Dano mágico contra todas as raças +4%.
             multipliers.race[ALL] += 20;
+        }
+    },
+    {
+        id: '15146', dbname: 'Robe_Of_Flattery', name: 'Vestimenta Arrogante', slot1: 'card',
+        script: function () {
+            equipStats.flatMATK += 50;
+            if (stats.baseLv >= 120)
+                equipStats.flatMATK += 50;
+            if (stats.baseLv >= 140)
+                equipStats.flatMATK += 50;
+
+        }
+    },
+    {
+        id: '15163', dbname: 'Agenda_Robe', name: 'Vestimenta Atraente', slot1: 'card',
+        script: function () {
+            multipliers.matk += 5;
+            if (stats.baseLv >= 120)
+                multipliers.matk += 4;
+            if (stats.baseLv >= 140)
+                multipliers.matk += 5;
+
         }
     },
 ];
@@ -1384,6 +1430,24 @@ const accessory = [
                 multipliers.matk += Math.floor(stats.agi / 10);
                 if (stats.agi >= 125)
                     equipStats.castdelay += 25;
+            }
+        }
+    },
+    {
+        id: '490290', dbname: 'Ameretat', name: 'Anel de Ameretat', position: '2', slot1: 'card',
+        script: function () {
+            multipliers.matk += 10;
+            // Super Agilidade
+            if (document.getElementById('sho_slot2').value === '4854' || document.getElementById('arm_slot2').value === '4854') {
+                equipStats.percentASPD+=15;
+            }
+            // Super Inteligência
+            if (document.getElementById('sho_slot2').value === '4856' || document.getElementById('arm_slot2').value === '4856') {
+                multipliers.matk+=30;
+            }
+            // Super Sorte
+            if (document.getElementById('sho_slot2').value === '4858' || document.getElementById('arm_slot2').value === '4858') {
+                equipStats.castdelay+=30;
             }
         }
     },
