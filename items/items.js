@@ -1053,9 +1053,9 @@ const garments = [
     //     }
     // },
     {
-        id: '480319', dbname: 'Divine_Phoenix', name: '(jRO) Divine Phoenix', slot1: 'card',
+        id: '480319', dbname: 'Divine_Phoenix', name: 'Relíquia Divina', slot1: 'card',
         script: function () {
-            if (refinement.garment >= 7) {
+            if (refinement.garment >= 10) {
                 equipStats.str += 10;
                 equipStats.agi += 10;
                 equipStats.vit += 10;
@@ -1064,7 +1064,7 @@ const garments = [
                 equipStats.luk += 10;
                 multipliers.property[ALL] += 10;
             }
-            if (refinement.garment >= 9)
+            if (refinement.garment >= 12)
                 multipliers.property[ALL] += 15;
         }
     },
