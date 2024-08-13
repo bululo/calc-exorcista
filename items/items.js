@@ -1254,6 +1254,30 @@ const shoes = [
                 equipStats.castdelay += 10;
         }
     },
+    {
+        id: '470180', dbname: 'Starry_Sky_Twin_Prime', name: 'Botas Três Marias', slot1: 'card',
+        script: function () {
+            equipStats.castdelay += refinement.shoes * 2;
+            if (refinement.shoes >= 10) {
+                equipStats.str += 15;
+                equipStats.agi += 15;
+                equipStats.vit += 15;
+                equipStats.int += 15;
+                equipStats.dex += 15;
+                equipStats.luk += 15;
+                multipliers.matk += 15;
+            }
+            if (refinement.shoes >= 12) {
+                equipStats.str += 15;
+                equipStats.agi += 15;
+                equipStats.vit += 15;
+                equipStats.int += 15;
+                equipStats.dex += 15;
+                equipStats.luk += 15;
+                multipliers.matk += 25;
+            }
+        }
+    },
 ];
 
 explo_acc = '4814,4815,4869,4872,4897';
@@ -1323,7 +1347,7 @@ const accessory = [
                 if (equipStats.percentFCT < 50)
                     equipStats.percentFCT = 50;
                 multipliers.protocol[BOSS] += 20;
-                limit = Math.min(3, Math.floor(refinement.top / 3));
+                limit = Math.min(4, Math.floor(refinement.top / 3));
                 equipStats.str += limit;
                 equipStats.agi += limit;
                 equipStats.vit += limit;
