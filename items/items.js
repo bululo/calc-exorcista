@@ -350,9 +350,9 @@ const low = [
     {
         id: '420187',
         dbname: 'Sacred_Lapel',
-        name: '(jRO) Sacred Lapel',
+        name: 'Lapela Sagrada',
         script: function () {
-            multipliers.skill_property[ALL] += 10;
+            equipStats.castdelay += 15;
             multipliers.size[ALL] += 15;
         }
     },
