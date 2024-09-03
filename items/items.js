@@ -617,6 +617,19 @@ const armors = [
 
         }
     },
+    {
+        id: '450338', dbname: 'Screaming_Ghoost_Party', name: 'Algazarra', slot1: 'card',
+        script: function () {
+            equipStats.flatMATK += 30 * refinement.armor;
+            if (refinement.armor >= 7) {
+                equipStats.percentASPD += 10;
+                multipliers.race[ALL] += 15;
+            }
+            if (refinement.armor >= 9) {
+                multipliers.race[ALL] += 25;
+            }            
+        }
+    },
 ];
 
 malangdo = '29446,29445,4827,4826,4812,4813,4761';
