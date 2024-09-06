@@ -1291,6 +1291,18 @@ const shoes = [
             }
         }
     },
+    {
+        id: '470014', dbname: 'Virgo_Shoes_J', name: 'Sapatos de Virgem',
+        script: function () {
+            equipStats.flatMATK += 50;
+            equipStats.percentASPD += 10;
+            // Arcebispos e evoluções:
+            equipStats.flatMATK += 80;
+            if (skill.id === "AB_JUDEX")
+                multipliers.skill += 100;
+            multipliers.skill_property[HOLY] += 20;
+        }
+    },
 ];
 
 explo_acc = '4814,4815,4869,4872,4897';
