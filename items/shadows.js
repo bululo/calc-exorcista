@@ -47,6 +47,20 @@ const s_armor = [
             }
         }
     },
+    {
+        id: '24728', dbname: 'S_M_AutoSpell_Armor', name: 'Malha Sombria de Automagia',
+        script: function () {
+            multipliers.matk += 3;
+            multipliers.skill_property[ALL] += Math.floor(s_refinement.armor / 2);
+            if (s_refinement.armor >= 9)
+                equipStats.flatASPD += 1;
+            // Conjunto
+            // Greva Sombria de Automagia
+            if (document.getElementById('s_sho').value === '24729') {
+                multipliers.matk += 2;
+            }
+        }
+    },
 ];
 
 const s_weapon = [
@@ -171,6 +185,15 @@ const s_shoes = [
             // Refino +10 ou mais: Dano mágico contra todas as raças de monstros +3%.
             if (s_refinement.shoes === 10)
                 multipliers.race[ALL] += 3;
+        }
+    },
+    {
+        id: '24729', dbname: 'S_M_AutoSpell_Shoes', name: 'Greva Sombria de Automagia',
+        script: function () {
+            multipliers.matk += 3;
+            multipliers.skill_property[ALL] += Math.floor(s_refinement.shoes / 2);
+            if (s_refinement.shoes >= 9)
+                equipStats.percentASPD += 3;
         }
     },
 ];
