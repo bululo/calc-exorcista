@@ -61,6 +61,21 @@ const s_armor = [
             }
         }
     },
+    {
+        id: '24675', dbname: 'S_TrueGem_Armor', name: 'Malha Sombria de Pedras Preciosas',
+        script: function () {
+            multipliers.matk += 3;
+            multipliers.skill_property[ALL] += Math.floor(s_refinement.armor / 2);
+            if (s_refinement.armor >= 10)
+                equipStats.VCT += 3;
+            if (document.getElementById('s_sho').value === '24676') {
+                multipliers.matk += 2;
+                if ((s_refinement.armor + s_refinement.shoes) >= 20) {
+                    multipliers.size[ALL] += 12
+                }
+            }
+        }
+    },
 ];
 
 const s_weapon = [
@@ -157,6 +172,17 @@ const s_shield = [
                 equipStats.castdelay += 1;
         }
     },
+    {
+        id: '24737', dbname: 'S_Clever_Shield', name: 'Escudo Sombrio Pontual',
+        script: function () {
+            multipliers.skill_property[ALL] += 2;
+            multipliers.matk += Math.floor(s_refinement.shield / 2)
+            if (s_refinement.shield >= 9)
+                equipStats.VCT += 5;
+            if (s_refinement.shield === 10)
+                multipliers.skill_property[ALL] += 7;
+        }
+    },
 ];
 
 const s_shoes = [
@@ -196,6 +222,15 @@ const s_shoes = [
                 equipStats.percentASPD += 3;
         }
     },
+    {
+        id: '24676', dbname: 'S_TrueGem_Shoes', name: 'Greva Sombria de Pedras Preciosas',
+        script: function () {
+            multipliers.matk += 3;
+            multipliers.skill_property[ALL] += Math.floor(s_refinement.shoes/2);
+            if (s_refinement.shoes >= 10)
+                equipStats.VCT += 3;
+        }
+    },
 ];
 
 const s_earring = [
@@ -229,6 +264,21 @@ const s_earring = [
                 multipliers.matk += 1;
                 if ((s_refinement.earring + s_refinement.necklace) >= 10)
                     multipliers.matk += 3;
+            }
+        }
+    },
+    {
+        id: '24677', dbname: 'S_TrueGem_Earring', name: 'Brinco Sombrio de Pedras Preciosas',
+        script: function () {
+            multipliers.matk += 3;
+            multipliers.skill_property[ALL] += Math.floor(s_refinement.earring/2);
+            if (s_refinement.earring >= 10)
+                equipStats.VCT += 3;
+            if (document.getElementById('s_nec').value === '24678'){
+                multipliers.matk += 2;
+                if ((s_refinement.earring+s_refinement.necklace)>=20){
+                    multipliers.size[ALL]+=12
+                }
             }
         }
     },
@@ -269,6 +319,15 @@ const s_necklace = [
     {
         id: '24252', dbname: 'S_Acolyte_Pendant', name: 'Colar Sombrio de Noviço',
         script: function () {
+        }
+    },
+    {
+        id: '24678', dbname: 'S_TrueGem_Pendant', name: 'Colar Sombrio de Pedras Preciosas',
+        script: function () {
+            multipliers.matk += 3;
+            multipliers.skill_property[ALL] += Math.floor(s_refinement.necklace/2);
+            if (s_refinement.necklace >= 10)
+                equipStats.VCT += 3;
         }
     },
 ];
