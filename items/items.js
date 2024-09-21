@@ -635,18 +635,58 @@ const armors = [
 malangdo = '29446,29445,4827,4826,4812,4813,4761';
 brasilis = '29446,4831';
 const weapons = [
-    // {
-    //     id: '16039', dbname: 'Spoon', name: 'Colher', slot1: 'card',
-    //     script: function () {
-    //         weapon.baseMATK = 0;
-    //         weapon.lv = 3;
-    //     }
-    // },
     {
         id: '540011', dbname: 'Up_Demon_Hunting_Bible', name: 'Tomo Primordial', slot1: 'card', slot2: 'card',
         script: function () {
             weapon.baseMATK = 190;
             weapon.lv = 4;
+            // A cada 2 refinos:
+            // ATQ e ATQM +10.
+            equipStats.flatMATK += Math.floor(refinement.weapon / 2) * 10;
+            // A cada 3 refinos:
+            // Dano de [Gemini Lumen] e [Judex] +25%
+            if (skill.id === "AB_JUDEX")
+                multipliers.skill += Math.floor(refinement.weapon / 3) * 25;
+            if (refinement.weapon >= 7) {
+                equipStats.percentASPD += 10;
+                multipliers.skill_property[HOLY] += 15;
+            }
+            if (refinement.weapon >= 9)
+                if (skill.id === "AB_JUDEX")
+                    multipliers.skill += 30;
+        }
+    },
+    {
+        id: '540011 ', dbname: 'Up_Demon_Hunting_Bible', name: 'Tomo Primordial (12% Sagrado)', slot1: 'card', slot2: 'card',
+        script: function () {
+            weapon.baseMATK = 190;
+            weapon.lv = 4;
+            // Random Options
+            multipliers.skill_property[HOLY] +=12;
+            // A cada 2 refinos:
+            // ATQ e ATQM +10.
+            equipStats.flatMATK += Math.floor(refinement.weapon / 2) * 10;
+            // A cada 3 refinos:
+            // Dano de [Gemini Lumen] e [Judex] +25%
+            if (skill.id === "AB_JUDEX")
+                multipliers.skill += Math.floor(refinement.weapon / 3) * 25;
+            if (refinement.weapon >= 7) {
+                equipStats.percentASPD += 10;
+                multipliers.skill_property[HOLY] += 15;
+            }
+            if (refinement.weapon >= 9)
+                if (skill.id === "AB_JUDEX")
+                    multipliers.skill += 30;
+        }
+    },
+    {
+        id: '540011  ', dbname: 'Up_Demon_Hunting_Bible', name: 'Tomo Primordial (12% Sagrado/12% Chefe)', slot1: 'card', slot2: 'card',
+        script: function () {
+            weapon.baseMATK = 190;
+            weapon.lv = 4;
+            // Random Options
+            multipliers.protocol[BOSS] += 12;
+            multipliers.skill_property[HOLY] +=12;
             // A cada 2 refinos:
             // ATQ e ATQM +10.
             equipStats.flatMATK += Math.floor(refinement.weapon / 2) * 10;
@@ -670,7 +710,7 @@ const weapons = [
             weapon.lv = 4;
         }
     },
-    {   // Adicionar BAs
+    {
         id: '16089', dbname: 'Ultio_Spes_OS', name: 'Ultio-OS', slot1: 'card', slot2: 'card',
         script: function () {
             weapon.baseMATK = 170;
@@ -936,6 +976,33 @@ const garments = [
     {
         id: '480088', dbname: 'Ultio_Cape_TW', name: 'Capa Ultio-OS', slot1: 'card',
         script: function () {
+            equipStats.flatMATK += Math.floor(refinement.garment / 2) * 10;
+            multipliers.skill_property[NEUTRAL] += Math.floor(refinement.garment / 4) * 3;
+            multipliers.skill_property[HOLY] += Math.floor(refinement.garment / 4) * 3;
+            if (refinement.garment >= 9)
+                multipliers.matk += 10;
+            if (refinement.garment >= 11)
+                equipStats.castdelay += 12;
+            if (refinement.garment >= 13)
+                if (target.type === BOSS)
+                    equipStats.bypass += 10;
+            if (document.getElementById('wea').value === '16089') {
+                equipStats.flatMATK += 30;
+                if (refinement.weapon >= 12) {
+                    if (skill.id === "AB_ADORAMUS")
+                        skill.cooldown += -0.5;
+                    if (target.race === DEMON || target.race === UNDEAD)
+                        equipStats.bypass += 15;
+                }
+            }
+        }
+    },
+    {
+        id: '480088 ', dbname: 'Ultio_Cape_TW', name: 'Capa Ultio-OS (10% Chefe)', slot1: 'card',
+        script: function () {
+            // BA
+            multipliers.protocol[BOSS]+=10;
+            //
             equipStats.flatMATK += Math.floor(refinement.garment / 2) * 10;
             multipliers.skill_property[NEUTRAL] += Math.floor(refinement.garment / 4) * 3;
             multipliers.skill_property[HOLY] += Math.floor(refinement.garment / 4) * 3;
