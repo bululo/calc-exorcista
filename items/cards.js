@@ -340,4 +340,14 @@ const cards = [
             multipliers.skill_property[HOLY] += 20;
         }
     },
+    {
+        id: '27323', dbname: 'Shnaim_Card', name: 'Carta Shenime', position: 'acc',
+        script: function () {
+        }
+    },
+    {
+        id: '27322', dbname: 'Ahat_Card', name: 'Carta Ahat', position: 'acc',
+        script: function () {
+        }
+    },
 ];
