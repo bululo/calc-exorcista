@@ -356,6 +356,64 @@ const low = [
             multipliers.size[ALL] += 15;
         }
     },
+    {
+        id: '420236',
+        dbname: 'Moroc_Slave_TW',
+        name: '(twRO) Servos de Morroc',
+        script: function () {
+            // Increases damage against demihuman race enemies and angel race monster by 5%.
+            // Inclui a raça humano jogador conforme descrição do twRO embora essa não tenha como ser selecionada como alvo KEKW
+            // 對人類型、玩家人類型、天使型的傷害+5%。 -> +5% de dano a tipos humanos, jogadores-humanos e anjos.
+            multipliers.race[HUMAN]+=5;
+            multipliers.race[DEMI_HUMAN]+=5;
+            multipliers.race[ANGEL]+=5;
+            // When equipped with Darklord Essence Intelligence 3,
+            // Increases all property magical damage by 20%.
+            // Increases damage taken from all race enemies by 15%.
+
+            // Set Bonus Demon God's Apostle Shnaim Card
+            // Increases physical and magical damage against all race enemies by 15%.
+            if (document.getElementById('ac1_slot1').value === '27323' || document.getElementById('ac2_slot1').value === '27323') {
+                console.log('shenime');
+                multipliers.race[ALL] += 15;
+            }
+            // Set Bonus Demon God's Apostle Ahat Card
+            // Increases physical and magical damage against all size enemies by 15%.
+            if (document.getElementById('ac1_slot1').value === '27322' || document.getElementById('ac2_slot1').value === '27322') {
+                console.log('ahat');
+                multipliers.size[ALL] += 15;
+            }
+        }
+    },
+    {
+        id: '420236 ',
+        dbname: 'Moroc_Slave_TW',
+        name: '(twRO) Servos de Morroc (Conjunto INT3 Ativado)',
+        script: function () {
+            // Increases damage against demihuman race enemies and angel race monster by 5%.
+            // Inclui a raça humano jogador conforme descrição do twRO embora essa não tenha como ser selecionada como alvo KEKW
+            // 對人類型、玩家人類型、天使型的傷害+5%。 -> +5% de dano a tipos humanos, jogadores-humanos e anjos.
+            multipliers.race[HUMAN]+=5;
+            multipliers.race[DEMI_HUMAN]+=5;
+            multipliers.race[ANGEL]+=5;
+            // When equipped with Darklord Essence Intelligence 3,
+            // Increases all property magical damage by 20%.
+            // Increases damage taken from all race enemies by 15%.
+            multipliers.skill_property[ALL] += 20;
+            // Set Bonus Demon God's Apostle Shnaim Card
+            // Increases physical and magical damage against all race enemies by 15%.
+            if (document.getElementById('ac1_slot1').value === '27323' || document.getElementById('ac2_slot1').value === '27323') {
+                console.log('shenime');
+                multipliers.race[ALL] += 15;
+            }
+            // Set Bonus Demon God's Apostle Ahat Card
+            // Increases physical and magical damage against all size enemies by 15%.
+            if (document.getElementById('ac1_slot1').value === '27322' || document.getElementById('ac2_slot1').value === '27322') {
+                console.log('ahat');
+                multipliers.size[ALL] += 15;
+            }
+        }
+    },
 ];
 
 const armors = [
@@ -1146,6 +1204,17 @@ const garments = [
             }
             if (refinement.garment >= 12)
                 multipliers.property[ALL] += 15;
+        }
+    },
+    {
+        id: '480251', dbname: 'Mystical_Wing', name: '(jRO) Asas Majestosas', slot1: 'card',
+        script: function () {
+            sum = stats.str + stats.agi + stats.vit + stats.int + stats.dex + stats.luk;
+            multipliers.matk += Math.floor(sum/100) * 5;
+            if (sum >= 400){
+                equipStats.percentASPD += 15;
+                equipStats.castdelay += 15;
+            }
         }
     },
 ];
