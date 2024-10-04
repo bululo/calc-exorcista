@@ -371,6 +371,17 @@ function switchTab(evt, tabName) {
     evt.currentTarget.classList.add("active");
 }
 
+// Consumível exclusivo - ativar uma pílula de combate desativa a anterior
+function pillSelector (pill){
+    if (pill.checked === true){
+        if (pill.id === "Combat_Pill"){
+            document.getElementById("P_Combat_Pill").checked = false;
+        } else {
+            document.getElementById("Combat_Pill").checked = false;
+        }
+    }
+}
+
 // Atualiza a imagem das cartas e encantamentos
 // function updateImage(element) {
 //     alert(element.value);

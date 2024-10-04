@@ -41,6 +41,12 @@ let multipliers = {
     protocol: null,
     skill: null
 };
+let buffs = {
+    oratio: 0,
+    lex_aeterna: false,
+    mystical_amplification: 0,
+    recognized_spell: false
+}
 
 function damage_calculation() {
     // Zera os multiplicadores
@@ -49,6 +55,7 @@ function damage_calculation() {
     updateTarget();
     // Aplica os Bonus dos Equipamentos
     retrieveEquipBonus();
+    retrieveBuffs();
     // Seta os status na tela
     let span = document.getElementsByTagName("span");
     span[2].innerText = ' + ' + equipStats.str;
@@ -66,14 +73,10 @@ function damage_calculation() {
     let dex = stats.dex + equipStats.dex;
     let luk = stats.luk + equipStats.luk;
     let statMATK = Math.floor(Math.floor(stats.baseLv / 4) + int + Math.floor(int / 2) + Math.floor(dex / 5) + Math.floor(luk / 3));
-    let MATK = statMATK + equipStats.flatMATK + weapon.baseMATK + weapon.upgradeBonus;
-
     // Calcula o ATQM máximo e mínimo brutos
-    let minMATK = MATK - variance;
-    let maxMATK = MATK + variance + over;
+    let minMATK = Math.floor((statMATK + weapon.baseMATK + weapon.upgradeBonus - variance) * (1+(0.1*buffs.mystical_amplification))) + equipStats.flatMATK;
+    let maxMATK = Math.floor((statMATK + weapon.baseMATK + weapon.upgradeBonus + variance + over) * (1+(0.1*buffs.mystical_amplification))) + equipStats.flatMATK;
     // Aplica os Multiplicadores
-    console.log('StatMATK' + statMATK);
-    console.log('EquipMATK: ' + (MATK - statMATK));
     // ATQM Mínimo
     minMATK = Math.floor(minMATK * (multipliers.matk) / 100);
     minMATK = Math.floor(minMATK * (multipliers.size[ALL] + multipliers.size[target.size]) / 100);
@@ -90,18 +93,30 @@ function damage_calculation() {
     maxMATK = Math.floor(maxMATK * (multipliers.race[ALL] + multipliers.race[target.race]) / 100);
     maxMATK = Math.floor(maxMATK * (multipliers.protocol[ALL] + multipliers.protocol[target.type]) / 100);
     maxMATK = Math.floor(maxMATK * (multipliers.monster) / 100);
+    // Oratio
+    if (buffs.oratio > 0) {
+        minMATK = Math.floor(minMATK * 1.1);
+        maxMATK = Math.floor(maxMATK * 1.1);
+    }
     // Calculo de Fraqueza e Resistência
     let softMDEF = Math.floor(((target.level / 4) + (target.int / 4)));
     if (equipStats.bypass > 100)
         equipStats.bypass = 100;
-    let hardMDEF = target.mdef - Math.floor(equipStats.bypass * target.mdef / 100); // Calculate pierce here
+    // Bypass
+    let hardMDEF = target.mdef - Math.floor(equipStats.bypass * target.mdef / 100);
     hardMDEF = (1000 + hardMDEF) / (1000 + (hardMDEF * 10));
-    let weakness = 100;
-    weakness = properties[target.property[1] - 1][target.property[0] - 1];
-    //alert('Property:'+target.property[0]+' Property level:'+target.property[1]+' Weakness'+weakness);
+    let weakness = properties[target.property[1] - 1][target.property[0] - 1];
     // Calculo do Dano da Habilidade
-    minMATK = Math.floor(Math.floor((Math.floor((Math.floor(minMATK * skill.dmg) * hardMDEF - softMDEF) * (multipliers.skill) / 100) * weakness) / 100) / skill.hits) * skill.hits;
-    maxMATK = Math.floor(Math.floor((Math.floor((Math.floor(maxMATK * skill.dmg) * hardMDEF - softMDEF) * (multipliers.skill) / 100) * weakness) / 100) / skill.hits) * skill.hits;
+    minMATK = Math.floor((Math.floor((Math.floor(minMATK * skill.dmg) * hardMDEF - softMDEF) * (multipliers.skill) / 100) * weakness) / 100);
+    maxMATK = Math.floor((Math.floor((Math.floor(maxMATK * skill.dmg) * hardMDEF - softMDEF) * (multipliers.skill) / 100) * weakness) / 100);
+    // Lex aeterna
+    if (buffs.lex_aeterna){
+        minMATK = minMATK * 2;
+        maxMATK = maxMATK * 2;
+    }
+    // Divisibilidade do Dano
+    minMATK = Math.floor(minMATK / skill.hits) * skill.hits;
+    maxMATK = Math.floor(maxMATK / skill.hits) * skill.hits;
     // Atualização do Resultado
     if (minMATK === maxMATK) {
         document.getElementById("finalSkillDamage").value = minMATK;
@@ -167,6 +182,11 @@ function init() {
     skill.fct = selectedSkill.fct;
     skill.vct = selectedSkill.vct;
     skill.castdelay = selectedSkill.castdelay;
+    //
+    buffs.oratio = 0;
+    buffs.lex_aeterna = false;
+    buffs.mystical_amplification = 0;
+    buffs.recognized_spell = false;
 }
 
 function updateTarget() {
@@ -219,6 +239,25 @@ function retrieveEquipBonus() {
             //alert('rodou com sucesso todos os slots do '+equip);
         }
     });
+}
+
+function retrieveBuffs() {
+    let buffsString = "";
+    var inputs = document.getElementsByTagName("input");
+    for(var i = 0; i < inputs.length; i++) {
+        if(inputs[i].type === "checkbox" && inputs[i].checked === true) {
+            buffsString+= inputs[i].value +" "+inputs[i].className;
+
+            if (inputs[i].parentElement.className==='consumable') {
+                let searchObject = consumables.find((consumable) => consumable.id === inputs[i].value);
+                searchObject.script();
+            } else {
+                //run buffs
+                let searchObject = buffs.find((buff) => buff.id === inputs[i].value);
+                searchObject.script(searchObject.max_level);
+            }
+        }
+    }
 }
 
 function retrieveSlot(i, text, equip) {

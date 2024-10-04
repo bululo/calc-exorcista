@@ -126,7 +126,6 @@ if (typeof DP.Tooltips == 'undefined') DP.Tooltips = new function () { // Remind
     }
 
     function initialize() {
-
         setTimeout(getCss, 1);
         setTimeout(bindEvents, 1);
     }
@@ -139,19 +138,26 @@ if (typeof DP.Tooltips == 'undefined') DP.Tooltips = new function () { // Remind
         if (currentScript && currentScript.src.match(URL_PATTERN_SELF)) {
             scriptRegion = RegExp.$1;
         }
-
         $.getStyle('https://www.divine-pride.net/Content/css/tooltip.css?v=20180403');
     }
 
     //
     function bindEvents() {
-
         $.bindEvent(document, 'mouseover', function (e) {
             e = $.normalizeEvent(e);
+
+            // Adds tooltip to label tag
+            if (e.target && e.target.nodeName.toUpperCase() == 'LABEL') {
+                linkMouseOver(e.target);
+            }
+            if (e.target.parentElement && e.target.parentElement.nodeName.toUpperCase() == 'LABEL') {
+                linkMouseOver(e.target.parentElement);
+            }
+
+            // Adds tooltip to select tag
             if (e.target && e.target.nodeName.toUpperCase() == 'SELECT') {
                 linkMouseOver(e.target);
             }
-
             if (e.target.parentElement && e.target.parentElement.nodeName.toUpperCase() == 'SELECT') {
                 linkMouseOver(e.target.parentElement);
             }
@@ -159,10 +165,18 @@ if (typeof DP.Tooltips == 'undefined') DP.Tooltips = new function () { // Remind
 
         $.bindEvent(document, 'mouseout', function (e) {
             e = $.normalizeEvent(e);
+            // Adds tooltip to label tag
+            if (e.target && e.target.nodeName.toUpperCase() == 'LABEL') {
+                linkMouseOut(e.target);
+            }
+            if (e.target.parentElement && e.target.parentElement.nodeName.toUpperCase() == 'LABEL') {
+                linkMouseOut(e.target.parentElement);
+            }
+
+            // Adds tooltip to select tag
             if (e.target && e.target.nodeName.toUpperCase() == 'SELECT') {
                 linkMouseOut(e.target);
             }
-
             if (e.target.parentElement && e.target.parentElement.nodeName.toUpperCase() == 'SELECT') {
                 linkMouseOut(e.target.parentElement);
             }
@@ -172,16 +186,17 @@ if (typeof DP.Tooltips == 'undefined') DP.Tooltips = new function () { // Remind
     function linkMouseOver(link) {
         var params = {};
 
-        if(link.className !== 'select-icon' && link.className !== 'slot'){
+        // pass class name to be able to retrieve item id
+        var className = "";
+        if (link.className == 'select-icon' || link.className == 'slot'){
+            className = "select";
+        } else if (link.className == 'consumable') {
+            className = "consumable";
+        } else {
             return;
         }
 
-        //
-        // let id = link.options[link.selectedIndex].value;
-        // let itemURL = 'https://www.divine-pride.net/database/item/'+id;
-        //
-
-        if (!parseUrl(link, params)) {
+        if (!parseUrl(link, params, className)) {
             parseUrlDebug(link, params);
         }
 
@@ -210,9 +225,15 @@ if (typeof DP.Tooltips == 'undefined') DP.Tooltips = new function () { // Remind
         currentParams = null;
     }
 
-    function parseUrl(link, params) {
-        //
-        let id = link.options[link.selectedIndex].value;
+    function parseUrl(link, params, className) {
+        let id;
+        // correctly retrieves item id
+        if (className=="select"){
+            id = link.options[link.selectedIndex].value;
+        } else {
+            id = link.id;
+        }
+
         let itemURL = 'https://www.divine-pride.net/database/item/' + id;
         //
         if (!itemURL.match(URL_PATTERN_BASE)) {
@@ -527,7 +548,6 @@ if (typeof DP.Tooltips == 'undefined') DP.Tooltips = new function () { // Remind
     $.Browser = {};
     $.Browser.ie = !!(window.attachEvent && !window.opera);
     $.Browser.ie6 = $.Browser.ie && navigator.userAgent.indexOf("MSIE 6.0") != -1;
-
 
     // Helper class that handles displaying tooltips
     var Tooltip = new function () {

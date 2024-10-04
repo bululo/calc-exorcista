@@ -359,7 +359,7 @@ const low = [
     {
         id: '420236',
         dbname: 'Moroc_Slave_TW',
-        name: '(twRO) Servos de Morroc',
+        name: 'Servos de Morroc',
         script: function () {
             // Increases damage against demihuman race enemies and angel race monster by 5%.
             // Inclui a raça humano jogador conforme descrição do twRO embora essa não tenha como ser selecionada como alvo KEKW
@@ -388,7 +388,7 @@ const low = [
     {
         id: '420236 ',
         dbname: 'Moroc_Slave_TW',
-        name: '(twRO) Servos de Morroc (Conjunto INT3 Ativado)',
+        name: 'Servos de Morroc (Conjunto INT3 Ativado)',
         script: function () {
             // Increases damage against demihuman race enemies and angel race monster by 5%.
             // Inclui a raça humano jogador conforme descrição do twRO embora essa não tenha como ser selecionada como alvo KEKW
@@ -605,30 +605,30 @@ const armors = [
             equipStats.flatMATK += refinement.armor * 8;
         }
     },
-    {
-        id: '450291', dbname: 'Amazing_Grace', name: '(jRO) Amazing Grace', slot1: 'card',
-        script: function () {
-            equipStats.percentASPD += 10;
-            if (refinement.armor >= 5) {
-                if (skill.id === "AB_ADORAMUS" || skill.id === "AB_JUDEX")
-                    multipliers.skill += 50;
-            }
-            if (refinement.armor >= 7) {
-                if (skill.id === "AB_ADORAMUS" || skill.id === "AB_JUDEX")
-                    multipliers.skill += 50;
-            }
-            if (refinement.armor >= 10) {
-                multipliers.skill_property[HOLY] += 15;
-            }
-            // A cada nível de [Oratio]:
-            // INT +3. ATQM +15.
-            equipStats.int += 30;
-            equipStats.flatMATK += 150;
-            // A cada nível de [Gênese]:
-            // Dano mágico contra todas as raças +14%.
-            multipliers.race[ALL] += 70;
-        }
-    },
+    // {
+    //     id: '450291', dbname: 'Amazing_Grace', name: '(jRO) Amazing Grace', slot1: 'card',
+    //     script: function () {
+    //         equipStats.percentASPD += 10;
+    //         if (refinement.armor >= 5) {
+    //             if (skill.id === "AB_ADORAMUS" || skill.id === "AB_JUDEX")
+    //                 multipliers.skill += 50;
+    //         }
+    //         if (refinement.armor >= 7) {
+    //             if (skill.id === "AB_ADORAMUS" || skill.id === "AB_JUDEX")
+    //                 multipliers.skill += 50;
+    //         }
+    //         if (refinement.armor >= 10) {
+    //             multipliers.skill_property[HOLY] += 15;
+    //         }
+    //         // A cada nível de [Oratio]:
+    //         // INT +3. ATQM +15.
+    //         equipStats.int += 30;
+    //         equipStats.flatMATK += 150;
+    //         // A cada nível de [Gênese]:
+    //         // Dano mágico contra todas as raças +14%.
+    //         multipliers.race[ALL] += 70;
+    //     }
+    // },
     {
         id: '450291 ', dbname: 'Amazing_Grace', name: 'Graça Alcançada', slot1: 'card',
         script: function () {
@@ -1207,7 +1207,7 @@ const garments = [
         }
     },
     {
-        id: '480251', dbname: 'Mystical_Wing', name: '(jRO) Asas Majestosas', slot1: 'card',
+        id: '480251', dbname: 'Mystical_Wing', name: 'Asas Majestosas', slot1: 'card',
         script: function () {
             sum = stats.str + stats.agi + stats.vit + stats.int + stats.dex + stats.luk;
             multipliers.matk += Math.floor(sum/100) * 5;
@@ -1387,22 +1387,22 @@ const shoes = [
             equipStats.flatMATK += stats.baseLv;
         }
     },
-    {
-        id: '470106', dbname: 'Shoes_Of_Judex_', name: '(jRO) Purge Shoes (Ativado)', slot1: 'card',
-        script: function () {
-            equipStats.VCT += 50;
-            equipStats.castdelay += 50;
-            multipliers.property[ALL] += 25;
-            // Efeito
-            if (skill.id === 'AB_JUDEX')
-                multipliers.skill += stats.baseLv;
-            //
-            if (refinement.shoes >= 5)
-                equipStats.castdelay += 10;
-            if (refinement.shoes >= 7)
-                equipStats.castdelay += 10;
-        }
-    },
+    // {
+    //     id: '470106', dbname: 'Shoes_Of_Judex_', name: '(jRO) Purge Shoes (Ativado)', slot1: 'card',
+    //     script: function () {
+    //         equipStats.VCT += 50;
+    //         equipStats.castdelay += 50;
+    //         multipliers.property[ALL] += 25;
+    //         // Efeito
+    //         if (skill.id === 'AB_JUDEX')
+    //             multipliers.skill += stats.baseLv;
+    //         //
+    //         if (refinement.shoes >= 5)
+    //             equipStats.castdelay += 10;
+    //         if (refinement.shoes >= 7)
+    //             equipStats.castdelay += 10;
+    //     }
+    // },
     {
         id: '470180', dbname: 'Starry_Sky_Twin_Prime', name: 'Botas Três Marias', slot1: 'card',
         script: function () {
