@@ -81,6 +81,10 @@ function damage_calculation() {
     minMATK = Math.floor(minMATK * (multipliers.matk) / 100);
     minMATK = Math.floor(minMATK * (multipliers.size[ALL] + multipliers.size[target.size]) / 100);
     minMATK = Math.floor(minMATK * (multipliers.property[ALL] + multipliers.property[target.property[0]]) / 100);
+    // Oratio
+    if (buffs.oratio > 0) {
+        minMATK = Math.floor((minMATK * 110)/100);
+    }
     minMATK = Math.floor(minMATK * (multipliers.skill_property[ALL] + multipliers.skill_property[skill.property]) / 100);
     minMATK = Math.floor(minMATK * (multipliers.race[ALL] + multipliers.race[target.race]) / 100);
     minMATK = Math.floor(minMATK * (multipliers.protocol[ALL] + multipliers.protocol[target.type]) / 100);
@@ -89,15 +93,15 @@ function damage_calculation() {
     maxMATK = Math.floor(maxMATK * (multipliers.matk) / 100);
     maxMATK = Math.floor(maxMATK * (multipliers.size[ALL] + multipliers.size[target.size]) / 100);
     maxMATK = Math.floor(maxMATK * (multipliers.property[ALL] + multipliers.property[target.property[0]]) / 100);
+    // Oratio
+    if (buffs.oratio > 0) {
+        maxMATK = Math.floor((maxMATK * 110)/100);
+    }
     maxMATK = Math.floor(maxMATK * (multipliers.skill_property[ALL] + multipliers.skill_property[skill.property]) / 100);
     maxMATK = Math.floor(maxMATK * (multipliers.race[ALL] + multipliers.race[target.race]) / 100);
     maxMATK = Math.floor(maxMATK * (multipliers.protocol[ALL] + multipliers.protocol[target.type]) / 100);
     maxMATK = Math.floor(maxMATK * (multipliers.monster) / 100);
-    // Oratio
-    if (buffs.oratio > 0) {
-        minMATK = Math.floor(minMATK * 1.1);
-        maxMATK = Math.floor(maxMATK * 1.1);
-    }
+
     // Calculo de Fraqueza e Resistência
     let softMDEF = Math.floor(((target.level / 4) + (target.int / 4)));
     if (equipStats.bypass > 100)

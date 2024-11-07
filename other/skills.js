@@ -131,4 +131,13 @@ buffs = [
             buffs.mystical_amplification = level;
         },
     },
+    {
+        name: "Espírito do Sacerdote",
+        id: "SL_PRIEST",
+        max_level: 5,
+        script(level){
+            if (skill.id === "AL_HOLYLIGHT")
+                skill.dmg = 6.25;
+        },
+    },
 ]

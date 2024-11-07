@@ -319,6 +319,9 @@ const s_necklace = [
     {
         id: '24252', dbname: 'S_Acolyte_Pendant', name: 'Colar Sombrio de Noviço',
         script: function () {
+            if (skill.id === "AL_HOLYLIGHT"){
+                multipliers.skill += 50 + (s_refinement.necklace * 10);
+            }
         }
     },
     {

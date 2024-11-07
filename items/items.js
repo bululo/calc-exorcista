@@ -414,6 +414,9 @@ const low = [
             }
         }
     },
+    {
+        id: '19439', dbname: 'Subject_Aura', name: 'Aura Fantasma', script: function () {},
+    },
 ];
 
 const armors = [
@@ -688,6 +691,26 @@ const armors = [
             }            
         }
     },
+    {
+        id: '15377', dbname: 'Illusion_Armor_B', name: 'Colete Ilusión B', slot1: 'card', slot2: '29540', slot3: '29535', slot4: '29535',
+        script: function () {
+            // ATQM +100
+            equipStats.flatMATK += 100;
+            // A cada 2 refinos: ATQM +10.
+            equipStats.flatMATK += Math.floor(refinement.armor/2) * 10;
+            // Refino +7 ou mais: Conjuração variável -10%.
+            if (refinement.armor >= 7)
+                equipStats.VCT += 10;
+            // Conjunto [Motor Ilusión A]
+            // Velocidade de ataque +10%.
+            if (document.getElementById('gar').value === '20933')
+                equipStats.percentASPD += 10;
+            // Conjunto [Motor Ilusión B]
+            // ATQM +50 adicional.
+            if (document.getElementById('gar').value === '20934')
+                equipStats.flatMATK += 50;
+        }
+    }
 ];
 
 malangdo = '29446,29445,4827,4826,4812,4813,4761';
@@ -938,6 +961,27 @@ const weapons = [
             equipStats.dex += 1;
         }
     },
+    // {
+    //     id: '26161',
+    //     dbname: 'Ponitendtia',
+    //     name: 'Penitência',
+    //     slot1: 'card',
+    //     slot2: 'card',
+    //     slot3: '4813,4814,4815',
+    //     slot4: '29599,4813,4814,4815',
+    //     script: function () {
+    //         weapon.baseMATK = 175;
+    //         weapon.lv = 4;
+    //
+    //         multipliers.skill_property[HOLY] += 5;
+    //         equipStats.flatMATK += refinement.weapon * 4;
+    //         if (refinement.weapon >= 9)
+    //             if (skill.id === "PR_MAGNUS" || skill.id === "AB_JUDEX")
+    //                 multipliers.skill += 30;
+    //         if (refinement.weapon >= 11 && skill.id === 'PR_MAGNUS')
+    //             multipliers.skill += 20;
+    //     }
+    // }
 ];
 
 const shields = [
@@ -1340,7 +1384,6 @@ const shoes = [
     // {
     //     id: '22182', dbname: 'Shoes_Of_Punishment_BR', name: 'Sapatos da Penitência [0]', slot1: 'card',
     //     script: function () {
-    //         equipStats.castdelay += Math.floor((stats.agi + stats.vit) / 50) * 3;
     //     }
     // },
     {
@@ -1439,6 +1482,98 @@ const shoes = [
             multipliers.skill_property[HOLY] += 20;
         }
     },
+    {
+        id: '470298', dbname: '', name: 'Sapatilha Fantasma', slot1: 'card',
+        script: function () {
+            // Dano mágico +5%.
+            multipliers.matk += 5;
+            // HP e SP máx. +7%.
+            // Refino +8 ou mais:
+            // Conjuração variável -10%.
+            if (refinement.shoes >= 8)
+                equipStats.VCT+= 10;
+            // Refino +10 ou mais:
+            // Conjuração fixa -0,5 segundos.
+            if (refinement.shoes >= 10)
+                equipStats.flatFCT+= 0.5;
+            // Refino +12 ou mais:
+            // Dano mágico de todas as propriedades +15%.
+            if (refinement.shoes >= 12)
+                multipliers.skill_property[ALL]+= 15;
+            // Conjunto [Aura Fantasma]
+            if (document.getElementById('low').value === '19439'){
+                // INT base 130 ou mais:
+                if (stats.int >= 130){
+                    // Conjuração fixa -0,5 segundos adicional
+                    equipStats.flatFCT+= 0.5;
+                }
+            }
+        }
+    },
+    {
+        id: '470298 ', dbname: '', name: 'Sapatilha Fantasma (Efeito Ativado)', slot1: 'card',
+        script: function () {
+            // Dano mágico +5%.
+            multipliers.matk += 5;
+            // HP e SP máx. +7%.
+            // Refino +8 ou mais:
+            // Conjuração variável -10%.
+            if (refinement.shoes >= 8)
+                equipStats.VCT+= 10;
+            // Refino +10 ou mais:
+            // Conjuração fixa -0,5 segundos.
+            if (refinement.shoes >= 10)
+                equipStats.flatFCT+= 0.5;
+            // Refino +12 ou mais:
+            // Dano mágico de todas as propriedades +15%.
+            if (refinement.shoes >= 12)
+                multipliers.skill_property[ALL]+= 15;
+            // Conjunto [Aura Fantasma]
+            if (document.getElementById('low').value === '19439'){
+                // INT base 130 ou mais:
+                if (stats.int >= 130){
+                    // Conjuração fixa -0,5 segundos adicional
+                    equipStats.flatFCT += 0.5;
+                    // Ao realizar ataques mágicos, 1,5% de chance de ativar um Efeito por 5 segundos.
+                    // Efeito: INT +70.
+                    equipStats.int += 70;
+                }
+            }
+        }
+    },
+    // Especulação Sapato Edda (Efeito base bRO, efeito de conjunto jRO)
+    // {
+    //     id: '470091',
+    //     dbname: 'Disappointment_P_Shoes',
+    //     name: 'Sapato da Especulação',
+    //     script: function (){
+    //         // Dano mágico +5%.
+    //         multipliers.matk += 5;
+    //         // HP e SP máx. +7%.
+    //         // Refino +8 ou mais:
+    //         // Conjuração variável -10%.
+    //         if (refinement.shoes >= 8)
+    //             equipStats.VCT+= 10;
+    //         // Refino +10 ou mais:
+    //         // Conjuração fixa -0,5 segundos.
+    //         if (refinement.shoes >= 10)
+    //             equipStats.flatFCT+= 0.5;
+    //         // Refino +12 ou mais:
+    //         // Dano mágico de todas as propriedades +15%.
+    //         if (refinement.shoes >= 12)
+    //             multipliers.skill_property[ALL]+= 15;
+    //         //Conjunto
+    //         // [Penitência]
+    //         // A cada nível de base:
+    //         // Dano de [Magnus Exorcismus] +1%.
+    //         // Dano de [Luz Divina] +20%.
+    //         if (document.getElementById('wea').value === '26161'){
+    //             if (skill.id === "AL_HOLYLIGHT"){
+    //                 multipliers.skill += stats.baseLv * 20;
+    //             }
+    //         }
+    //     }
+    // },
 ];
 
 explo_acc = '4814,4815,4869,4872,4897';

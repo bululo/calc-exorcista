@@ -38,7 +38,8 @@ const enchants = [
     {id: '4827', dbname: 'Spell6',  name: 'Pedra de Encantamento 6',  script:function() { equipStats.flatMATK+=21; equipStats.VCT+=10;}},
     {id: '4831', dbname: 'Spell10', name: 'Pedra de Encantamento 10', script:function() { equipStats.flatMATK+=50; equipStats.VCT+=20;}},
     // Pedras Super
-    {id: '4854', dbname: 'S_Agi', name: 'Super Agilidade', script:function() {
+    {id: '4854', dbname: 'S_Agi', name: 'Super Agilidade',
+        script:function() {
             equipStats.agi+=1;
             if (sourceRefine()>=8)
                 equipStats.agi+=3
@@ -52,8 +53,10 @@ const enchants = [
             }
             // Velocidade de Ataque +1.
             // Tempo de conjuração fixa -7%.
-    }},
-    {id: '4856', dbname: 'S_Int', name: 'Super Inteligência', script:function() {
+        }
+    },
+    {id: '4856', dbname: 'S_Int', name: 'Super Inteligência',
+        script:function() {
             equipStats.int+=1;
             if (sourceRefine()>=8)
                 equipStats.int+=3
@@ -64,8 +67,10 @@ const enchants = [
                 if (equipStats.percentFCT < 7)
                     equipStats.percentFCT = 7;
             }
-        }},
-    {id: '4858', dbname: 'S_Luck', name: 'Super Sorte', script:function() {
+        }
+    },
+    {id: '4858', dbname: 'S_Luck', name: 'Super Sorte',
+        script:function() {
             equipStats.luk+=1;
             if (sourceRefine()>=8)
                 equipStats.luk+=3
@@ -74,7 +79,8 @@ const enchants = [
                 if (equipStats.percentFCT < 7)
                     equipStats.percentFCT = 7;
             }
-        }},
+        }
+    },
     // Anti-Atraso
     {id: '4869', dbname: 'Attack_Delay_1', name: 'Anti-Atraso 1', script:function() { equipStats.percentASPD+=  4;}}, // ASPD + 4%
     {id: '4872', dbname: 'Attack_Delay_2', name: 'Anti-Atraso 2', script:function() { equipStats.percentASPD+=  6;}}, // ASPD + 6%
@@ -106,6 +112,45 @@ const enchants = [
     {id: '4876 ', dbname: 'Runaway_Magic', name: 'Epifania (Ativado)', script:function() { equipStats.int+=200; }},
     // Pedra de Feitiço
     {id: '4889', dbname: 'Conjure5',  name: 'Pedra de Feitiço 5',  script:function() { equipStats.flatMATK+= 30; equipStats.VCT+= 3;}},
+    // Módulos 17.1
+    {id: '29535', dbname: 'Improve_Orb_Matk', name: 'S-ATQM',
+        script: function (){
+            // Dano mágico +5%
+            multipliers.matk += 5;
+            // Refino +7 ou mais: ATQM +25
+            if (sourceRefine() >= 7)
+                equipStats.flatMATK += 25;
+            // Refino +9 ou mais: ATQM +25 adicional
+            if (sourceRefine() >= 9)
+                equipStats.flatMATK += 25;
+        }
+    },
+    {id: '29540', dbname: 'Improve_Orb_Delay', name: 'U-Pós',
+        script: function (){
+            // Pós-conjuração -5%
+            equipStats.castdelay += 5;
+            // Refino +7 ou mais: Pós-conjuração -5% adicional
+            if (sourceRefine() >= 7)
+                equipStats.castdelay += 5;
+            // Refino +9 ou mais: Pós-conjuração -5% adicional
+            if (sourceRefine() >= 9)
+                equipStats.castdelay += 5;
+        }
+    },
+    // Enchants Biolab
+    {id: '29599', dbname: 'Magaleta_Memory', name: 'Memória de Margaretha',
+        script: function (){
+            // Conjunto [Penitência]
+            if (document.getElementById('wea').value === '26161'){
+                if (skill.id === "PR_MAGNUS"){
+                    multipliers.skill += Math.floor(refinement.weapon/3) * 10;
+                }
+                else if (skill.id === "AB_JUDEX"){
+                    multipliers.skill += Math.floor(refinement.weapon/3) * 5;
+                }
+            }
+        },
+    },
 ];
 
 function sourceRefine(){
