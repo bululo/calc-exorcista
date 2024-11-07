@@ -647,13 +647,21 @@ const armors = [
             if (refinement.armor >= 13) {
                 multipliers.skill_property[HOLY] += 15;
             }
-            // A cada nível de [Oratio]:
+        
+             // A cada nível de [Oratio]:
             // INT +3. ATQM +15.
-            equipStats.int += 30;
-            equipStats.flatMATK += 150;
+            if(learned_skills.oratio > 0){
+                equipStats.int += learned_skills.oratio  * 3;
+                equipStats.flatMATK += learned_skills.oratio  * 15;
+            }
+
             // A cada nível de [Gênese]:
             // Dano mágico contra todas as raças +4%.
-            multipliers.race[ALL] += 20;
+            if(learned_skills.genese > 0) {
+                multipliers.race[ALL] += learned_skills.genese * 4;
+            }
+           
+            
         }
     },
     {

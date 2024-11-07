@@ -160,6 +160,7 @@
     <button class="tablinks" onclick="switchTab(event, 'Equipamentos')" id="defaultOpen">Equipamentos</button>
     <button class="tablinks" onclick="switchTab(event, 'Equip. Sombrios')">Equip. Sombrios</button>
     <button class="tablinks" onclick="switchTab(event, 'Buffs/Consumíveis')">Buffs/Consumíveis</button>
+    <button class="tablinks" onclick="switchTab(event, 'Skills')">Skills</button>
 </div>
 <div class="container split tabcontent" id="Equipamentos">
     <!-- TOP -->
@@ -491,6 +492,98 @@
                 </td>
             </tr>
         </table>
+    </div>
+</div>
+
+<div class="container tabcontent" id="Skills">
+    <div style="padding-top: 8px">
+        <label for="skillTable">Skills</label>
+        <table id="skillTable" class="skills">
+            <!--3rd Buffs -->
+            <tr>
+                <td>
+                    <label for="skill_judex"><img src="https://static.divine-pride.net/images/skill/2038.png" id="skill_judex_img" alt=""></label>
+                    <label style="font-weight: normal"><input type="number" class="level_skill" id="skill_judex" name="judex" style="width: 30px; margin-right:4px;" value="10">Judex</label>
+                </td>
+                <td>
+                    <label for="skill_adoramus"><img src="https://static.divine-pride.net/images/skill/2040.png" id="skill_adoramus_img" alt=""></label>
+                    <label style="font-weight: normal"><input type="number" class="level_skill" id="skill_adoramus" name="adoramus" style="width: 30px; margin-right:4px;" value="10">Adoramus</label>
+                </td>
+                <td>
+                    <label for="skill_oratio"><img src="https://static.divine-pride.net/images/skill/2046.png" id="skill_oratio_ung" alt=""></label>
+                    <label style="font-weight: normal"><input type="number" class="level_skill" id="skill_oratio" name="oratio" style="width: 30px; margin-right:4px;" value="10">Oratio</label>
+                </td>
+                <td>
+                    <label for="skill_genese"><img src="https://static.divine-pride.net/images/skill/2052.png" id="skill_genese_img" alt=""></label>
+                    <label style="font-weight: normal"><input type="number" class="level_skill" id="skill_genese" name="genese" style="width: 30px; margin-right:4px;" value="5">Gênese</label>
+                </td>
+            </tr>
+            <!--2nd/Trans Buffs -->
+            <!-- <tr>
+                <td>
+                    <label for="PR_IMPOSITIO"><img src="https://static.divine-pride.net/images/skill/66.png" id="PR_IMPOSITIO_IMG" alt=""></label>
+                    <label style="font-weight: normal"><input type="checkbox" id="PR_IMPOSITIO" name="PR_IMPOSITIO" value="PR_IMPOSITIO">Impositio Manus</label>
+                </td>
+                <td>
+                    <label for="PR_LEXAETERNA"><img src="https://static.divine-pride.net/images/skill/78.png" id="PR_LEXAETERNA_IMG" alt=""></label>
+                    <label style="font-weight: normal"><input type="checkbox" id="PR_LEXAETERNA" name="PR_LEXAETERNA" value="PR_LEXAETERNA">Lex Aeterna</label>
+                </td>
+                <td>
+                    <label for="PR_GLORIA"><img src="https://static.divine-pride.net/images/skill/75.png" id="PR_GLORIA_IMG" alt=""></label>
+                    <label style="font-weight: normal"><input type="checkbox" id="PR_GLORIA" name="PR_GLORIA" value="PR_GLORIA">Glória</label>
+                </td>
+                <td>
+                    <label for="HP_BASILICA"><img src="https://static.divine-pride.net/images/skill/362.png" id="HP_BASILICA_IMG" alt=""></label>
+                    <label style="font-weight: normal"><input type="checkbox" id="HP_BASILICA" name="HP_BASILICA" value="HP_BASILICA">Basílica</label>
+                </td>
+            </tr> -->
+            <!--Outras -->
+            <!-- <tr>
+                <td>
+                    <label for="ALL_ODINS_POWER"><img src="https://static.divine-pride.net/images/skill/2537.png" id="ALL_ODINS_POWER_IMG" alt=""></label>
+                    <label style="font-weight: normal"><input type="checkbox" id="ALL_ODINS_POWER" name="ALL_ODINS_POWER" value="ALL_ODINS_POWER">Poder de Odin nv.2</label>
+                </td>
+                <td>
+                    <label for="HW_MAGICPOWER"><img src="https://static.divine-pride.net/images/skill/366.png" id="HW_MAGICPOWER_IMG" alt=""></label>
+                    <label style="font-weight: normal"><input type="checkbox" id="HW_MAGICPOWER" name="HW_MAGICPOWER" value="HW_MAGICPOWER">Amplificação Mística nv.5</label>
+                </td>
+            </tr> -->
+        </table>
+        <!--Consumíveis -->
+        <!-- <label for="stuffsTable">Consumíveis</label>
+        <table id="stuffsTable" class="buffs">
+            <tr>
+                <td>
+                    <label for="Almighty" class="consumable" id="12883" style="font-weight: normal"><img src="https://www.divine-pride.net/img/items/item/bRO/12883" alt="">
+                        <br><input type="checkbox" id="Almighty" value="12883">Bolinho Divino</label>
+                </td>
+                <td>
+                    <label for="Infinity_Drink" class="consumable" id="23475" style="font-weight: normal"><img src="https://www.divine-pride.net/img/items/item/bRO/23475" alt="">
+                        <br><input type="checkbox" id="Infinity_Drink" value="23475">Poção Infinita</label>
+                </td>
+                <td>
+                    <label for="Red_Booster" class="consumable" id="12796" style="font-weight: normal"><img src="https://www.divine-pride.net/img/items/item/bRO/12796" alt="">
+                        <br><input type="checkbox" id="Red_Booster" value="12796">Elixir Rubro</label>
+                </td>
+                <td>
+                    <label for="Tyr's_Blessing" class="consumable" id="14601" style="font-weight: normal">
+                        <img src="https://www.divine-pride.net/img/items/item/bRO/14601" alt="">
+                        <br><input type="checkbox" id="Tyr's_Blessing" value="14601">Bênção de Tyr</label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="Combat_Pill" class="consumable" id="12791" style="font-weight: normal">
+                        <img src="https://www.divine-pride.net/img/items/item/bRO/12791" alt="">
+                        <br><input type="checkbox" id="Combat_Pill" value="12791" onclick="pillSelector(this)">Pílula de Combate</label>
+                </td>
+                <td>
+                    <label for="P_Combat_Pill" class="consumable" id="12792" style="font-weight: normal">
+                        <img src="https://www.divine-pride.net/img/items/item/bRO/12792" alt="">
+                        <br><input type="checkbox" id="P_Combat_Pill" value="12792" onclick="pillSelector(this)">Grande Pílula de Combate</label>
+                </td>
+            </tr>
+        </table> -->
     </div>
 </div>
 
