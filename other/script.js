@@ -430,7 +430,8 @@ function loadSavedCalc() {
 
             }
         }  
-    } 
+    }
+    damage_calculation();
 }
 
 function load() {
