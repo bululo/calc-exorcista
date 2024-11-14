@@ -1,7 +1,7 @@
 // #DEFINEs para melhorar a legibilidade do código das funções e facilitar
 // criar os scripts dos equipamentos, cartas e encantamentos
 let ALL = 0
-// SIZES
+// TARGET SIZE
 let SMALL = 1;
 let MEDIUM = 2;
 let LARGE = 3;
@@ -34,3 +34,9 @@ let GHOST = 9;
 let NORMAL = 1;
 let BOSS = 2;
 let GUARDIAN = 3;
+// WEAPON CLASSES
+let ONE_HANDED_STAFF = 1;
+let TWO_HANDED_STAFF = 2;
+let MACE = 3;
+let KNUCKLE = 4;
+let BOOK = 5;

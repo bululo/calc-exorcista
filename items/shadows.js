@@ -87,7 +87,7 @@ const s_weapon = [
             // Escudo Sombrio de Arcebispo
             // Recarga de [Adoramus] -1 segundo.
             if (document.getElementById('s_shi').value === '24305' && skill.id === 'AB_ADORAMUS')
-                skill.cooldown += -1.0;
+                skill.cooldown = ( (skill.cooldown*10) - 10 )/10;
         }
     },
     {
