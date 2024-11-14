@@ -431,6 +431,7 @@ function loadSavedCalc() {
             }
         }  
     }
+    calcularPontos();
     damage_calculation();
 }
 
