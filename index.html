@@ -145,6 +145,7 @@
         <option value="AB_JUDEX">Judex</option>
         <!--        <option>Luz Divina</option>-->
     </select>
+    
     <button onclick="damage_calculation();" style="text-align:center; width: 89px;
     max-width: 65px;
     height: 21px;
@@ -152,6 +153,15 @@
     /*margin-top: 4px;*/
     margin-bottom: 0;
     box-sizing: revert">Calcular
+    </button>
+
+    <button onclick="saveCalc();" style="text-align:center; width: 89px;
+    max-width: 65px;
+    height: 21px;
+    padding: 0;
+    float:right;
+    margin-bottom: 0;
+    box-sizing: revert">SALVAR
     </button>
 </div>
 
@@ -624,6 +634,7 @@
 <script type="text/javascript" src="other/tooltip.js"></script>
 <script>
     load();
+    loadSavedCalc();
     // test1();
 </script>
 </body>

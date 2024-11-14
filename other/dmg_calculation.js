@@ -59,6 +59,21 @@ let learned_skills = {
     impositio_manus:5,
 }
 
+function saveCalc() {
+    const elements = document.querySelectorAll('input, select, textarea');
+    const data = {};
+
+    elements.forEach(element => {
+        if (element.type === 'radio' || element.type === 'checkbox') {
+            data[element.id] = element.checked;
+        } else {
+            data[element.id] = element.value;
+        }
+    });
+
+    localStorage.setItem('calcData', JSON.stringify(data));
+}
+
 function damage_calculation() {
     // Zera os multiplicadores
     init();

@@ -413,6 +413,25 @@ function pillSelector (pill){
 //     image.src = "https://www.divine-pride.net/img/items/item/bRO/" + id;
 //
 // }
+function loadSavedCalc() {
+    const data = JSON.parse(localStorage.getItem('calcData'));
+
+    if (data) {
+        for (const [id, value] of Object.entries(data)) {
+            const element = document.getElementById(id);
+
+            if (element) {
+                if (element.type === 'radio' || element.type === 'checkbox') {
+                    element.checked = value;
+                } else {
+                    element.value = value;
+                }
+                element.dispatchEvent(new Event('change', { bubbles: true }));
+
+            }
+        }  
+    } 
+}
 
 function load() {
     // Chamada da função para preencher os selects de refinamento com +0~+20
@@ -451,4 +470,6 @@ function load() {
     document.getElementById('target_name').selectedIndex = 5;
     loadTarget(document.getElementById('target_name').value);
     damage_calculation();
+
+
 }
