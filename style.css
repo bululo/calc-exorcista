@@ -231,3 +231,8 @@ th, td {
         margin-bottom: 6px;
     }
 }
+
+
+#skillTable tbody tr td {
+    padding-bottom: 24px;
+}

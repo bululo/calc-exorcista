@@ -48,14 +48,44 @@ let buffs = {
     recognized_spell: false
 }
 
+let learned_skills = {
+    judex: 10,
+    adoramus: 10,
+    oratio:10,
+    genese:5,
+    praefatio:10,
+    lauda_agnus:4,
+    lauda_ramus:4,
+    impositio_manus:5,
+}
+
+function saveCalc() {
+    const elements = document.querySelectorAll('input, select, textarea');
+    const data = {};
+
+    elements.forEach(element => {
+        if (element.type === 'radio' || element.type === 'checkbox') {
+            data[element.id] = element.checked;
+        } else {
+            data[element.id] = element.value;
+        }
+    });
+
+    localStorage.setItem('calcData', JSON.stringify(data));
+}
+
 function damage_calculation() {
     // Zera os multiplicadores
     init();
     // Recupera a informação sobre o alvo
     updateTarget();
+    retrieveLevelSkills();
     // Aplica os Bonus dos Equipamentos
     retrieveEquipBonus();
     retrieveBuffs();
+    
+
+    console.log('learned_skill',learned_skills)
     // Seta os status na tela
     let span = document.getElementsByTagName("span");
     span[2].innerText = ' + ' + equipStats.str;
@@ -177,6 +207,7 @@ function init() {
     weapon.upgradeBonus = 0;
     weapon.class = 0;
     // Seta a skill a ser calculada
+    
     let selectedSkill = skills.find((line) => line.id === document.getElementById('skill').value);
     skill.name = selectedSkill.name;
     skill.id = selectedSkill.id;
@@ -263,6 +294,20 @@ function retrieveBuffs() {
             }
         }
     }
+}
+
+function retrieveLevelSkills() {
+    // setTimeout(() => {
+        const inputs = document.querySelectorAll("input.level_skill");
+        inputs.forEach(input => {
+            const skillName = input.getAttribute('name');
+            const skillValue = parseInt(input.value);
+
+            if (!learned_skills[skillName]) return;
+
+            learned_skills[skillName] = skillValue;
+        });
+    // }, 0);
 }
 
 function retrieveSlot(i, text, equip) {
