@@ -79,19 +79,29 @@ const tops = [
                     multipliers.skill += 50;
             }
             // Ao aprender [Gênese] nv.5:
-            multipliers.protocol[BOSS] += 25;
+            if(learned_skills.genese >= 5){
+                multipliers.protocol[BOSS] += 25;
+            }
+            
+            
             // A cada nível de [Lauda Ramus]:
-            // Dano mágico contra oponentes de propriedade Neutro, Terra, Maldito e Fantasma +5%.
-            multipliers.property[NEUTRAL] += 5 * 4;
-            multipliers.property[EARTH] += 5 * 4;
-            multipliers.property[UNDEAD] += 5 * 4;
-            multipliers.property[GHOST] += 5 * 4;
+            if(learned_skills.lauda_ramus > 0){
+                // Dano mágico contra oponentes de propriedade Neutro, Terra, Maldito e Fantasma +5%.
+                multipliers.property[NEUTRAL] += 5 * learned_skills.lauda_ramus;
+                multipliers.property[EARTH] += 5 * learned_skills.lauda_ramus;
+                multipliers.property[UNDEAD] += 5 * learned_skills.lauda_ramus;
+                multipliers.property[GHOST] += 5 * learned_skills.lauda_ramus;
+            }
+           
             // A cada nível de [Lauda Agnus]:
-            // Dano mágico contra oponentes de propriedade Neutro, Terra, Maldito e Fantasma +5%.
-            multipliers.property[NEUTRAL] += 5 * 4;
-            multipliers.property[EARTH] += 5 * 4;
-            multipliers.property[UNDEAD] += 5 * 4;
-            multipliers.property[GHOST] += 5 * 4;
+            if(learned_skills.lauda_agnus > 0){
+                 // Dano mágico contra oponentes de propriedade Neutro, Terra, Maldito e Fantasma +5%.
+                multipliers.property[NEUTRAL] += 5 * learned_skills.lauda_agnus;
+                multipliers.property[EARTH] += 5 * learned_skills.lauda_agnus;
+                multipliers.property[UNDEAD] += 5 * learned_skills.lauda_agnus;
+                multipliers.property[GHOST] += 5 * learned_skills.lauda_agnus;
+            }
+           
             // A cada refino:
             // Dano mágico contra as raças Humano e Humanoide +2%.
             multipliers.race[HUMAN] += refinement.top * 2;
@@ -281,7 +291,9 @@ const mid = [
         slot4: desentupidor,
         script: function () {
             multipliers.size[ALL] += 10;
-            equipStats.castdelay += 15;
+            if(learned_skills.praefatio >= 10){
+                equipStats.castdelay += 15;
+            }
         }
     },
     {
@@ -353,7 +365,10 @@ const low = [
         name: 'Lapela Sagrada',
         script: function () {
             equipStats.castdelay += 15;
-            multipliers.size[ALL] += 15;
+
+            if(learned_skills.genese >= 5){
+                multipliers.size[ALL] += 15;
+            }
         }
     },
     {
@@ -1650,9 +1665,11 @@ const accessory = [
             // Ao aprender [Offertorium] nv.5:
             equipStats.VCT += 30;
             // Ao aprender [Gênese] nv.5:
-            multipliers.skill_property[WIND] += 10;
-            multipliers.skill_property[HOLY] += 10;
-            multipliers.skill_property[NEUTRAL] += 10;
+            if(learned_skills.genese >= 5){
+                multipliers.skill_property[WIND] += 10;
+                multipliers.skill_property[HOLY] += 10;
+                multipliers.skill_property[NEUTRAL] += 10;
+            }   
         }
     },
     {
@@ -1767,8 +1784,10 @@ const accessory = [
             equipStats.castdelay += 5;
             equipStats.VCT += 10;
             // A cada nível de [Impositio Manus]:
-            // Dano mágico contra todos os tamanhos +3%.
-            multipliers.size[ALL] += 15;
+            if(learned_skills.impositio_manus >= 0){
+                // Dano mágico contra todos os tamanhos +3%.
+                multipliers.size[ALL] += 3 * learned_skills.impositio_manus;
+            }
         }
     },
     {

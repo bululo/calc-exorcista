@@ -52,7 +52,11 @@ let learned_skills = {
     judex: 10,
     adoramus: 10,
     oratio:10,
-    genese:5
+    genese:5,
+    praefatio:10,
+    lauda_agnus:4,
+    lauda_ramus:4,
+    impositio_manus:5,
 }
 
 function damage_calculation() {
@@ -60,10 +64,13 @@ function damage_calculation() {
     init();
     // Recupera a informação sobre o alvo
     updateTarget();
+    retrieveLevelSkills();
     // Aplica os Bonus dos Equipamentos
     retrieveEquipBonus();
     retrieveBuffs();
-    retrieveLevelSkills();
+    
+
+    console.log('learned_skill',learned_skills)
     // Seta os status na tela
     let span = document.getElementsByTagName("span");
     span[2].innerText = ' + ' + equipStats.str;
@@ -275,7 +282,7 @@ function retrieveBuffs() {
 }
 
 function retrieveLevelSkills() {
-    setTimeout(() => {
+    // setTimeout(() => {
         const inputs = document.querySelectorAll("input.level_skill");
         inputs.forEach(input => {
             const skillName = input.getAttribute('name');
@@ -285,7 +292,7 @@ function retrieveLevelSkills() {
 
             learned_skills[skillName] = skillValue;
         });
-    }, 0);
+    // }, 0);
 }
 
 function retrieveSlot(i, text, equip) {
