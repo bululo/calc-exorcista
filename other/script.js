@@ -11,6 +11,9 @@ function populateItemsSelect(selectId, itemList) {
         option.setAttribute('data-slot2', item.slot2);
         option.setAttribute('data-slot3', item.slot3);
         option.setAttribute('data-slot4', item.slot4);
+        // Flag de Arma de Duas Mãos
+        if (selectId === 'wea' && item.twoHanded)
+            option.setAttribute('twoHanded', 'true');
 
         // Alguns acessórios dependem de lado para equipar
         if (selectId === 'ac1') {
@@ -99,6 +102,14 @@ function populateSlot(position) {
         } else {
             slot.style.display = "none";
         }
+    }
+    // Desequipa Escudo ao equipar Arma de 2 Mãos ou o contrário
+    if (position === 'wea' && select.options[select.selectedIndex].getAttribute('twoHanded')==='true' && document.getElementById("shi").selectedIndex !== 0){
+        document.getElementById("shi").selectedIndex = 0;
+        document.getElementById("shi").onchange();
+    } else if (position === 'shi' && document.getElementById('wea').options[document.getElementById('wea').selectedIndex].getAttribute('twoHanded') === 'true' && select.selectedIndex !== 0){
+        document.getElementById("wea").selectedIndex = 0;
+        document.getElementById("wea").onchange();
     }
 }
 
@@ -313,6 +324,7 @@ function updateImage(position, value) {
                 break;
         }
     }
+    // Seleciona de qual servidor o ícone da image será escolhido
     if (id === '470106') {
         image.src = "https://www.divine-pride.net/img/items/item/jRO/" + id;
     } else if (id === '29516' || id === '310011') {

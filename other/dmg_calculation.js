@@ -18,7 +18,7 @@ let equipStats = {
 };
 let refinement = {top: null, armor: null, weapon: null, shield: null, garment: null, shoes: null};
 let s_refinement = {armor: null, weapon: null, shield: null, shoes: null, earring: null, necklace: null};
-let weapon = {baseMATK: null, lv: null, upgradeBonus: null};
+let weapon = {baseMATK: null, lv: null, upgradeBonus: null, class: null};
 let currentEquip = null;
 let skill = {
     name: null,
@@ -175,6 +175,7 @@ function init() {
     weapon.baseMATK = 0;
     weapon.lv = 0;
     weapon.upgradeBonus = 0;
+    weapon.class = 0;
     // Seta a skill a ser calculada
     let selectedSkill = skills.find((line) => line.id === document.getElementById('skill').value);
     skill.name = selectedSkill.name;
@@ -247,8 +248,8 @@ function retrieveEquipBonus() {
 
 function retrieveBuffs() {
     let buffsString = "";
-    var inputs = document.getElementsByTagName("input");
-    for(var i = 0; i < inputs.length; i++) {
+    let inputs = document.getElementsByTagName("input");
+    for(let i = 0; i < inputs.length; i++) {
         if(inputs[i].type === "checkbox" && inputs[i].checked === true) {
             buffsString+= inputs[i].value +" "+inputs[i].className;
 

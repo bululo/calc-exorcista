@@ -163,6 +163,18 @@ const cards = [
             equipStats.flatMATK += 25;
         }
     },
+    {
+        id: '300011', dbname: 'Holy_Frus_Card', name: 'Carta Frus Angelical', position: 'wea',
+        script: function () {
+            if (weapon.class === ONE_HANDED_STAFF || weapon.class === TWO_HANDED_STAFF){
+                multipliers.skill_property[HOLY] += 10;
+                if (refinement.weapon >= 10)
+                    multipliers.skill_property[HOLY] += 10;
+                if (refinement.weapon >= 14)
+                    multipliers.skill_property[HOLY] += 10;
+            }
+        }
+    },
 
 
     // shield cards

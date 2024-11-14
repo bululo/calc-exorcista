@@ -374,13 +374,11 @@ const low = [
             // Set Bonus Demon God's Apostle Shnaim Card
             // Increases physical and magical damage against all race enemies by 15%.
             if (document.getElementById('ac1_slot1').value === '27323' || document.getElementById('ac2_slot1').value === '27323') {
-                console.log('shenime');
                 multipliers.race[ALL] += 15;
             }
             // Set Bonus Demon God's Apostle Ahat Card
             // Increases physical and magical damage against all size enemies by 15%.
             if (document.getElementById('ac1_slot1').value === '27322' || document.getElementById('ac2_slot1').value === '27322') {
-                console.log('ahat');
                 multipliers.size[ALL] += 15;
             }
         }
@@ -403,13 +401,11 @@ const low = [
             // Set Bonus Demon God's Apostle Shnaim Card
             // Increases physical and magical damage against all race enemies by 15%.
             if (document.getElementById('ac1_slot1').value === '27323' || document.getElementById('ac2_slot1').value === '27323') {
-                console.log('shenime');
                 multipliers.race[ALL] += 15;
             }
             // Set Bonus Demon God's Apostle Ahat Card
             // Increases physical and magical damage against all size enemies by 15%.
             if (document.getElementById('ac1_slot1').value === '27322' || document.getElementById('ac2_slot1').value === '27322') {
-                console.log('ahat');
                 multipliers.size[ALL] += 15;
             }
         }
@@ -721,6 +717,7 @@ const weapons = [
         script: function () {
             weapon.baseMATK = 190;
             weapon.lv = 4;
+            weapon.class = BOOK;
             // A cada 2 refinos:
             // ATQ e ATQM +10.
             equipStats.flatMATK += Math.floor(refinement.weapon / 2) * 10;
@@ -742,6 +739,7 @@ const weapons = [
         script: function () {
             weapon.baseMATK = 190;
             weapon.lv = 4;
+            weapon.class = BOOK;
             // Random Options
             multipliers.skill_property[HOLY] +=12;
             // A cada 2 refinos:
@@ -765,6 +763,7 @@ const weapons = [
         script: function () {
             weapon.baseMATK = 190;
             weapon.lv = 4;
+            weapon.class = BOOK;
             // Random Options
             multipliers.protocol[BOSS] += 12;
             multipliers.skill_property[HOLY] +=12;
@@ -789,6 +788,7 @@ const weapons = [
         script: function () {
             weapon.baseMATK = 140;
             weapon.lv = 4;
+            weapon.class = ONE_HANDED_STAFF;
         }
     },
     {
@@ -796,6 +796,7 @@ const weapons = [
         script: function () {
             weapon.baseMATK = 170;
             weapon.lv = 4;
+            weapon.class = MACE;
             multipliers.matk += 3;
             if (refinement.weapon >= 7)
                 equipStats.percentASPD += 7
@@ -811,6 +812,7 @@ const weapons = [
         script: function () {
             weapon.baseMATK = 360;
             weapon.lv = 4;
+            weapon.class = MACE;
             equipStats.int += 3;
             equipStats.dex += 5;
             multipliers.skill_property[HOLY] += refinement.weapon * 10;
@@ -821,6 +823,7 @@ const weapons = [
         script: function () {
             weapon.baseMATK = 180;
             weapon.lv = 4;
+            weapon.class = ONE_HANDED_STAFF;
             multipliers.matk += refinement.weapon * 6;
             equipStats.castdelay += refinement.weapon;
             if (refinement.weapon >= 10)
@@ -833,6 +836,7 @@ const weapons = [
         script: function () {
             weapon.baseMATK = 190;
             weapon.lv = 4;
+            weapon.class = ONE_HANDED_STAFF;
             //
             equipStats.int += 6;
             equipStats.vit += 2;
@@ -855,6 +859,7 @@ const weapons = [
         script: function () {
             weapon.baseMATK = 190;
             weapon.lv = 4;
+            weapon.class = ONE_HANDED_STAFF;
             //
             equipStats.int += 6;
             equipStats.vit += 2;
@@ -880,6 +885,7 @@ const weapons = [
         script: function () {
             weapon.baseMATK = 200;
             weapon.lv = 4;
+            weapon.class = MACE;
             multipliers.matk += 3;
             multipliers.skill_property[HOLY] += Math.floor(refinement.weapon / 2);
             if (skill.id === "AB_ADORAMUS")
@@ -903,6 +909,7 @@ const weapons = [
         script: function () {
             weapon.baseMATK = 165;
             weapon.lv = 4;
+            weapon.class = MACE;
             multipliers.matk += 3;
             multipliers.skill_property[HOLY] += Math.floor(refinement.weapon / 2);
             if (skill.id === "AB_ADORAMUS")
@@ -913,40 +920,6 @@ const weapons = [
                 multipliers.skill_property[HOLY] += 10
         }
     }, // Adicionar BAs
-    // {
-    //     id: '26104', dbname: 'Blue_Staff', name: 'Cetro de Oxum', slot1: 'card', slot2: 'card', slot4: brasilis,
-    //     script: function () {
-    //         weapon.baseMATK = 140;
-    //         weapon.lv = 4;
-    //     }
-    // },
-    // {
-    //     id: '26113', dbname: 'Overfishing_Staff', name: 'Cetro de Xangô', slot1: 'card', slot2: 'card', slot4: brasilis,
-    //     script: function () {
-    //         weapon.baseMATK = 140;
-    //         weapon.lv = 4;
-    //     }
-    // },
-    // {
-    //     id: '26102', dbname: 'UnrivaledStaff', name: 'Cetro de Oxóssi', slot1: 'card', slot2: 'card', slot4: brasilis,
-    //     script: function () {
-    //         weapon.baseMATK = 140;
-    //         weapon.lv = 4;
-    //     }
-    // },
-    // {
-    //     id: '1688',
-    //     dbname: 'Staff_of_Trust',
-    //     name: 'Cetro de Iansã',
-    //     slot1: 'card',
-    //     slot2: 'card',
-    //     slot3: 'card',
-    //     slot4: brasilis,
-    //     script: function () {
-    //         weapon.baseMATK = 140;
-    //         weapon.lv = 4;
-    //     }
-    // },
     {
         id: '1675',
         dbname: 'Walking_Stick_',
@@ -958,30 +931,42 @@ const weapons = [
         script: function () {
             weapon.baseMATK = 125;
             weapon.lv = 4;
+            weapon.class = ONE_HANDED_STAFF;
             equipStats.dex += 1;
         }
     },
-    // {
-    //     id: '26161',
-    //     dbname: 'Ponitendtia',
-    //     name: 'Penitência',
-    //     slot1: 'card',
-    //     slot2: 'card',
-    //     slot3: '4813,4814,4815',
-    //     slot4: '29599,4813,4814,4815',
-    //     script: function () {
-    //         weapon.baseMATK = 175;
-    //         weapon.lv = 4;
-    //
-    //         multipliers.skill_property[HOLY] += 5;
-    //         equipStats.flatMATK += refinement.weapon * 4;
-    //         if (refinement.weapon >= 9)
-    //             if (skill.id === "PR_MAGNUS" || skill.id === "AB_JUDEX")
-    //                 multipliers.skill += 30;
-    //         if (refinement.weapon >= 11 && skill.id === 'PR_MAGNUS')
-    //             multipliers.skill += 20;
-    //     }
-    // }
+    {
+        id: '2057', dbname: 'Adorare_Staff', name: 'Adorare', slot1: 'card', slot2: 'card', slot3: '29599', slot4: '4813,4814,4815',
+        twoHanded: true,
+        script: function () {
+            weapon.baseMATK = 240;
+            weapon.lv = 4;
+            weapon.class = TWO_HANDED_STAFF;
+
+            multipliers.skill_property[HOLY] += 5;
+            equipStats.flatMATK += refinement.weapon * 4;
+            if (refinement.weapon >= 9)
+                if (skill.id === "AB_ADORAMUS")
+                    multipliers.skill += 30;
+        }
+
+    },
+    {
+        id: '26161', dbname: 'Ponitendtia',name: 'Penitência', slot1: 'card', slot2: 'card', slot3: '29599', slot4: '4813,4814,4815',
+        script: function () {
+            weapon.baseMATK = 175;
+            weapon.lv = 4;
+            weapon.class = ONE_HANDED_STAFF;
+
+            multipliers.skill_property[HOLY] += 5;
+            equipStats.flatMATK += refinement.weapon * 4;
+            if (refinement.weapon >= 9)
+                if (skill.id === "PR_MAGNUS" || skill.id === "AB_JUDEX")
+                    multipliers.skill += 30;
+            if (refinement.weapon >= 11 && skill.id === 'PR_MAGNUS')
+                multipliers.skill += 20;
+        }
+    },
 ];
 
 const shields = [
@@ -1149,7 +1134,7 @@ const garments = [
             multipliers.matk += Math.floor(refinement.garment / 2);
             multipliers.size[ALL] += Math.floor(refinement.garment / 3) * 3;
             if (refinement.garment >= 7)
-                equipStats.VCT;
+                equipStats.VCT += 7;
             if (refinement.garment >= 11)
                 multipliers.skill_property[ALL] += 10;
         }
@@ -1253,7 +1238,7 @@ const garments = [
     {
         id: '480251', dbname: 'Mystical_Wing', name: 'Asas Majestosas', slot1: 'card',
         script: function () {
-            sum = stats.str + stats.agi + stats.vit + stats.int + stats.dex + stats.luk;
+            let sum = stats.str + stats.agi + stats.vit + stats.int + stats.dex + stats.luk;
             multipliers.matk += Math.floor(sum/100) * 5;
             if (sum >= 400){
                 equipStats.percentASPD += 15;
@@ -1574,6 +1559,72 @@ const shoes = [
     //         }
     //     }
     // },
+    {
+        id: '470318', dbname: '', name: 'Galocha Fantasma', slot1: 'card',
+        script: function () {
+            // Dano mágico +5%.
+            multipliers.matk += 5;
+            // Refino +8 ou mais:
+            // Dano mágico contra todas as raças +15%.
+            if (refinement.shoes >= 8)
+                multipliers.race[ALL] += 15;
+            // Refino +10 ou mais:
+            // Conjuração fixa -0,5 segundos.
+            if (refinement.shoes >= 10)
+                equipStats.flatFCT += 0.5;
+            // Refino +12 ou mais:
+            // INT e DES +10.
+            // Dano mágico contra oponentes de todas as propriedades +15%.
+            if (refinement.shoes >= 12){
+                equipStats.int += 10;
+                equipStats.dex += 10;
+                multipliers.property[ALL] += 15;
+            }
+            // Conjunto [Aura Fantasma]
+            if (document.getElementById('low').value === '19439'){
+                // INT base 130 ou mais:
+                if (stats.int >= 130){
+                    // Conjuração fixa -0,5 segundos adicional
+                    equipStats.flatFCT += 0.5;
+                    // Ao realizar ataques mágicos, 1,5% de chance de ativar um Efeito por 5 segundos.
+                    // Efeito: INT +70.
+                    //equipStats.int += 70;
+                }
+            }
+            // Conjunto
+            // [Adorare]
+            if (document.getElementById('wea').value === '2057') {
+                // Dano mágico contra monstros Chefes +20%.
+                multipliers.protocol[BOSS] += 20;
+                // A cada refino do Calçado:
+                // Dano mágico contra todas as raças +2%.
+                multipliers.race[ALL] += refinement.shoes * 2;
+                // Soma dos refinos 18 ou mais:
+                // Recarga de [Adoramus] -0,3 segundos.
+                if ((refinement.shoes + refinement.weapon) >= 18 && skill.id === "AB_ADORAMUS")
+                    skill.cooldown += 0.3;
+                    //skill.cooldown += -0.3;
+                // Soma dos refinos 22 ou mais:
+                // Anula o consumo de Gemas ao usar habilidades.
+            }
+            // Conjunto
+            // [Penitência]
+            if (document.getElementById('wea').value === '26161'){
+                // Velocidade de ataque +10%.
+                equipStats.percentASPD += 10;
+                // A cada refino do Calçado:
+                // Dano mágico contra todas as raças +2%.
+                multipliers.race[ALL] += refinement.shoes * 2;
+                // Soma dos refinos 18 ou mais:
+                // Recarga de [Magnus Exorcismus] -4 segundos.
+                if ((refinement.shoes + refinement.weapon) >= 18 && skill.id === "PR_MAGNUS")
+                    skill.cooldown -= 4;
+                // Soma dos refinos 22 ou mais:
+                // Ao usar [Judex] 8% de chance de autoconjurar [Vituperatum] nv.4.
+            }
+
+        }
+    }
 ];
 
 explo_acc = '4814,4815,4869,4872,4897';
@@ -1643,7 +1694,7 @@ const accessory = [
                 if (equipStats.percentFCT < 50)
                     equipStats.percentFCT = 50;
                 multipliers.protocol[BOSS] += 20;
-                limit = Math.min(4, Math.floor(refinement.top / 3));
+                let limit = Math.min(4, Math.floor(refinement.top / 3));
                 equipStats.str += limit;
                 equipStats.agi += limit;
                 equipStats.vit += limit;
@@ -1720,6 +1771,7 @@ const accessory = [
             equipStats.luk += Math.floor(stats.agi / 18) * 3;
             equipStats.dex += Math.floor(stats.vit / 18) * 3;
             equipStats.VCT += Math.floor(stats.vit / 18);
+            equipStats.str += Math.floor(stats.int / 18) * 3;
             equipStats.castdelay += Math.floor(stats.int / 18);
             equipStats.agi += Math.floor(stats.luk / 18) * 3;
         }

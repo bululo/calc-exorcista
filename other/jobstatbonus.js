@@ -63,5 +63,12 @@ ArchBishop = [
     {level: 62, bonus: [6, 5, 7, 11, 7, 2]},
     {level: 63, bonus: [6, 5, 7, 11, 7, 3]},
     {level: 64, bonus: [6, 5, 7, 11, 7, 3]},
-    {level: 65, bonus: [6, 6, 7, 11, 7, 3]}
+    {level: 65, bonus: [6, 6, 7, 11, 7, 3]},
+    // Desconhecido
+    {level: 66, bonus: [6, 6, 7, 11, 7, 3]},
+    {level: 67, bonus: [6, 6, 7, 11, 7, 3]},
+    {level: 68, bonus: [6, 6, 7, 11, 7, 3]},
+    {level: 69, bonus: [6, 6, 7, 11, 7, 3]},
+    // Verificado
+    {level: 70, bonus: [6, 7, 7, 12, 7, 4]}
 ];

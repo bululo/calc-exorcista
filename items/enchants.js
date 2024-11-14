@@ -149,6 +149,12 @@ const enchants = [
                     multipliers.skill += Math.floor(refinement.weapon/3) * 5;
                 }
             }
+            // Conjunto [Adorare]
+            if (document.getElementById('wea').value === '2057'){
+                if (skill.id === "AB_ADORAMUS")
+                    multipliers.skill += Math.floor(refinement.weapon/3) * 5;
+                multipliers.skill_property[HOLY] += Math.floor(refinement.weapon/3) * 5;
+            }
         },
     },
 ];

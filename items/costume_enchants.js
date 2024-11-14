@@ -89,7 +89,7 @@ const c_gar = [
                     multipliers.skill += 15;
             if (document.getElementById('c_mid').value === '29514')
                 if (skill.id === 'AB_ADORAMUS')
-                    skill.cooldown += -1.0;
+                    skill.cooldown = ( (skill.cooldown*10) - 10 )/10;
             if (document.getElementById('c_low').value === '29515')
                 equipStats.flatFCT += 0.5;
         }
