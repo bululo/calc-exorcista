@@ -146,7 +146,7 @@
         <!--        <option>Luz Divina</option>-->
     </select>
     
-    <button onclick="damage_calculation();" style="text-align:center; width: 89px;
+    <button onclick="damage_calculation();" style="text-align:center; width: 65px;
     max-width: 65px;
     height: 21px;
     padding: 0;
@@ -155,13 +155,34 @@
     box-sizing: revert">Calcular
     </button>
 
-    <button onclick="saveCalc();" style="text-align:center; width: 89px;
+    <select id="loadout" style="text-align:left; width: 60px;
+    max-width: 60px;
+    height: 21px;
+    padding: 0;
+    margin-bottom: 0;
+    box-sizing: revert">
+        <option value="0">Slot 1</option>
+        <option value="1">Slot 2</option>
+        <option value="2">Slot 3</option>
+        <option value="3">Slot 4</option>
+        <option value="4">Slot 5</option>
+        <option value="5">Slot 6</option>
+        <option value="6">Slot 7</option>
+        <option value="7">Slot 8</option>
+    </select>
+    <button onclick="saveCalc();" style="text-align:center; width: 65px;
     max-width: 65px;
     height: 21px;
     padding: 0;
-    float:right;
     margin-bottom: 0;
     box-sizing: revert">Salvar
+    </button>
+    <button onclick="loadSavedCalc();" style="text-align:center; width: 65px;
+    max-width: 65px;
+    height: 21px;
+    padding: 0;
+    margin-bottom: 0;
+    box-sizing: revert">Carregar
     </button>
 </div>
 
@@ -513,11 +534,11 @@
             <tr>
                 <td>
                     <label for="skill_judex"><img src="https://static.divine-pride.net/images/skill/2038.png" id="skill_judex_img" alt=""></label>
-                    <label style="font-weight: normal"><input type="number" class="level_skill" id="skill_judex" name="judex" style="width: 30px; margin-right:4px;" min="0" max="10" value="10">Judex</label>
+                    <label style="font-weight: normal"><input type="number" class="level_skill" id="skill_judex" name="judex" style="width: 30px; margin-right:4px;" min="1" max="10" value="10">Judex</label>
                 </td>
                 <td>
                     <label for="skill_adoramus"><img src="https://static.divine-pride.net/images/skill/2040.png" id="skill_adoramus_img" alt=""></label>
-                    <label style="font-weight: normal"><input type="number" class="level_skill" id="skill_adoramus" name="adoramus" style="width: 30px; margin-right:4px;" min="0" max="10" value="10">Adoramus</label>
+                    <label style="font-weight: normal"><input type="number" class="level_skill" id="skill_adoramus" name="adoramus" style="width: 30px; margin-right:4px;" min="1" max="10" value="10">Adoramus</label>
                 </td>
                 <td>
                     <label for="skill_oratio"><img src="https://static.divine-pride.net/images/skill/2046.png" id="skill_oratio_ung" alt=""></label>
@@ -634,8 +655,6 @@
 <script type="text/javascript" src="other/tooltip.js"></script>
 <script>
     load();
-    loadSavedCalc();
-    // test1();
 </script>
 </body>
 </html>

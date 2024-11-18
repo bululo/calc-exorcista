@@ -59,33 +59,14 @@ let learned_skills = {
     impositio_manus:5,
 }
 
-function saveCalc() {
-    const elements = document.querySelectorAll('input, select, textarea');
-    const data = {};
-
-    elements.forEach(element => {
-        if (element.type === 'radio' || element.type === 'checkbox') {
-            data[element.id] = element.checked;
-        } else {
-            data[element.id] = element.value;
-        }
-    });
-
-    localStorage.setItem('calcData', JSON.stringify(data));
-}
-
 function damage_calculation() {
     // Zera os multiplicadores
     init();
     // Recupera a informação sobre o alvo
     updateTarget();
-    retrieveLevelSkills();
     // Aplica os Bonus dos Equipamentos
     retrieveEquipBonus();
     retrieveBuffs();
-    
-
-    console.log('learned_skill',learned_skills)
     // Seta os status na tela
     let span = document.getElementsByTagName("span");
     span[2].innerText = ' + ' + equipStats.str;
@@ -94,7 +75,6 @@ function damage_calculation() {
     span[5].innerText = ' + ' + equipStats.int;
     span[6].innerText = ' + ' + equipStats.dex;
     span[7].innerText = ' + ' + equipStats.luk;
-    //alert('Castdelay: ' + equipStats.castdelay);
     // Calcula a variação do ATQM
     let variance = weaponMATKvariance();
     let over = overUpgradeBonus();
@@ -171,7 +151,7 @@ function init() {
     multipliers.skill = 100;
     // Recupera os atributos do personagem
     stats.baseLv = parseInt(document.getElementById("base_lvl").value);
-    stats.jobLv = parseInt(document.getElementById("job_lvl").value);
+    stats.jobLv  = parseInt(document.getElementById("job_lvl").value);
     stats.str = parseInt(document.getElementById("base_str").value);
     stats.agi = parseInt(document.getElementById("base_agi").value);
     stats.vit = parseInt(document.getElementById("base_vit").value);
@@ -201,13 +181,14 @@ function init() {
     equipStats.int += jobStatBonus.bonus[3];
     equipStats.dex += jobStatBonus.bonus[4];
     equipStats.luk += jobStatBonus.bonus[5];
-    //
+    // Zera a configuração da Arma
     weapon.baseMATK = 0;
     weapon.lv = 0;
     weapon.upgradeBonus = 0;
     weapon.class = 0;
+    // Recupera o nv das skills
+    retrieveLevelSkills();
     // Seta a skill a ser calculada
-    
     let selectedSkill = skills.find((line) => line.id === document.getElementById('skill').value);
     skill.name = selectedSkill.name;
     skill.id = selectedSkill.id;
@@ -218,7 +199,7 @@ function init() {
     skill.fct = selectedSkill.fct;
     skill.vct = selectedSkill.vct;
     skill.castdelay = selectedSkill.castdelay;
-    //
+    // Reseta config de buffs
     buffs.oratio = 0;
     buffs.lex_aeterna = false;
     buffs.mystical_amplification = 0;

@@ -413,8 +413,32 @@ function pillSelector (pill){
 //     image.src = "https://www.divine-pride.net/img/items/item/bRO/" + id;
 //
 // }
+function saveCalc() {
+    const elements = document.querySelectorAll('input, select, textarea');
+    const data = {};
+
+    elements.forEach(element => {
+        if (element.type === 'radio' || element.type === 'checkbox') {
+            data[element.id] = element.checked;
+        } else {
+            data[element.id] = element.value;
+        }
+    });
+
+    let slot = document.getElementById('loadout').value;
+    if (slot === '0')
+        localStorage.setItem('calcData', JSON.stringify(data));
+    else
+        localStorage.setItem('calcData'+slot, JSON.stringify(data));
+}
+
 function loadSavedCalc() {
-    const data = JSON.parse(localStorage.getItem('calcData'));
+    let data = '';
+    let slot = document.getElementById('loadout').value;
+    if (slot === '0')
+        data = JSON.parse(localStorage.getItem('calcData'));
+    else
+        data = JSON.parse(localStorage.getItem('calcData'+slot));
 
     if (data) {
         for (const [id, value] of Object.entries(data)) {
@@ -471,7 +495,6 @@ function load() {
     document.getElementById("defaultOpen").click();
     document.getElementById('target_name').selectedIndex = 5;
     loadTarget(document.getElementById('target_name').value);
-    damage_calculation();
-
-
+    // Recupera a configuração salva no slot0 se existe
+    loadSavedCalc();
 }

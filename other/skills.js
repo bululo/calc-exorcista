@@ -3,7 +3,7 @@ skills = [
         name: "Adoramus",
         id: "AB_ADORAMUS",
         script(){
-            return (Math.floor(1030 * (stats.baseLv / 100)) / 100);
+            return (Math.floor((330 + (70 * learned_skills.adoramus) ) * (stats.baseLv / 100)) / 100);
         },
         property: HOLY,
         hits: 10,
@@ -16,8 +16,7 @@ skills = [
         name: "Judex",
         id: "AB_JUDEX",
         script(){
-            //return (Math.floor(700 * (stats.baseLv / 100)) / 100);
-            return (700 * (stats.baseLv / 100)) / 100;
+            return (Math.floor((300 + (40 * learned_skills.judex) ) * (stats.baseLv / 100)) / 100);
         },
         property: HOLY,
         hits: 3,
@@ -68,7 +67,7 @@ buffs = [
         id: "AB_ORATIO",
         max_level: 10,
         script(level){
-            buffs.oratio = level;
+            buffs.oratio = learned_skills.oratio;
         },
     },
     {
@@ -84,7 +83,7 @@ buffs = [
         id: "PR_IMPOSITIO",
         max_level: 5,
         script(level){
-            equipStats.flatMATK += level*5;
+            equipStats.flatMATK += learned_skills.impositio_manus*5;
         },
     },
     {
