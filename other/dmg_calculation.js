@@ -93,7 +93,7 @@ function damage_calculation() {
     minMATK = Math.floor(minMATK * (multipliers.property[ALL] + multipliers.property[target.property[0]]) / 100);
     // Oratio
     if (buffs.oratio > 0) {
-        minMATK = Math.floor((minMATK * 110)/100);
+        minMATK = Math.floor((minMATK * (100 + buffs.oratio))/100);
     }
     minMATK = Math.floor(minMATK * (multipliers.skill_property[ALL] + multipliers.skill_property[skill.property]) / 100);
     minMATK = Math.floor(minMATK * (multipliers.race[ALL] + multipliers.race[target.race]) / 100);
@@ -105,7 +105,7 @@ function damage_calculation() {
     maxMATK = Math.floor(maxMATK * (multipliers.property[ALL] + multipliers.property[target.property[0]]) / 100);
     // Oratio
     if (buffs.oratio > 0) {
-        maxMATK = Math.floor((maxMATK * 110)/100);
+        maxMATK = Math.floor((maxMATK * (100 + buffs.oratio))/100);
     }
     maxMATK = Math.floor(maxMATK * (multipliers.skill_property[ALL] + multipliers.skill_property[skill.property]) / 100);
     maxMATK = Math.floor(maxMATK * (multipliers.race[ALL] + multipliers.race[target.race]) / 100);
@@ -283,9 +283,7 @@ function retrieveLevelSkills() {
         inputs.forEach(input => {
             const skillName = input.getAttribute('name');
             const skillValue = parseInt(input.value);
-
-            if (!learned_skills[skillName]) return;
-
+            //if (!learned_skills[skillName]) return;
             learned_skills[skillName] = skillValue;
         });
     // }, 0);
