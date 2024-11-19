@@ -45,6 +45,8 @@ const tops = [
             equipStats.flatMATK += 2 * refinement.top;
             if (skill.id === "AB_JUDEX")
                 multipliers.skill += Math.floor(refinement.top / 2) * 20;
+            if (skill.id === "PR_MAGNUS")
+                multipliers.skill += Math.floor(refinement.top / 2) * 10;
         }
     },
     {
@@ -1788,6 +1790,9 @@ const accessory = [
                 // Dano mágico contra todos os tamanhos +3%.
                 multipliers.size[ALL] += 3 * learned_skills.impositio_manus;
             }
+            // A cada 2 níveis de base: Dano de [Magnus Exorcismus] +3%.
+            if (skill.id === "PR_MAGNUS")
+                multipliers.skill += Math.floor(stats.baseLv/2) * 3;
         }
     },
     {

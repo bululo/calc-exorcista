@@ -359,7 +359,7 @@ if (typeof DP.Tooltips == 'undefined') DP.Tooltips = new function () { // Remind
     function showTooltip(data) {
 
         if (currentLink != null) {
-            console.log(data.tooltipHtml);
+            //console.log(data.tooltipHtml);
             Tooltip.show(currentLink, data.tooltipHtml);
         }
     }

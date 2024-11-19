@@ -6,7 +6,7 @@ skills = [
             return (Math.floor((330 + (70 * learned_skills.adoramus) ) * (stats.baseLv / 100)) / 100);
         },
         property: HOLY,
-        hits: 10,
+        divisibility: 10,
         cooldown: 2.5,
         fct: 0.5,
         vct: 2,
@@ -19,11 +19,29 @@ skills = [
             return (Math.floor((300 + (40 * learned_skills.judex) ) * (stats.baseLv / 100)) / 100);
         },
         property: HOLY,
-        hits: 3,
+        divisibility: 3,
         cooldown: 0,
         fct: 0.5,
         vct: 2,
         castdelay: 0.5
+    },
+    {
+        name: "Magnus Exorcismus",
+        id: "PR_MAGNUS",
+        script(){
+            if (target.race == DEMON || target.race == UNDEAD || target.property[0] == DARK || target.property[0] == UNDEAD) {
+                return 130 / 100
+            }
+            else
+                return 100/100;
+        },
+        property: HOLY,
+        divisibility: 1,
+        hits: 10,
+        cooldown: 6,
+        fct: 1,
+        vct: 4,
+        castdelay: 1,
     },
     {
         name: "Luz Divina",
@@ -32,7 +50,7 @@ skills = [
             return 1.25;
         },
         property: HOLY,
-        hits: 1,
+        divisibility: 1,
         cooldown: 0,
         fct: 0.2,
         vct: 0.8,

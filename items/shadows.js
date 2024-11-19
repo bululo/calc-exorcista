@@ -2,6 +2,10 @@ const s_armor = [
     {
         id: '24273', dbname: 'S_Priest_Armor', name: 'Malha Sombria de Sacerdote',
         script: function () {
+            // Dano de [Magnus Exorcismus] +20%.
+            // A cada refino: Dano de [Magnus Exorcismus] +5%.
+            if (skill.id === "PR_MAGNUS")
+                multipliers.skill += 20 + (s_refinement.armor * 5);
             // Conjunto
             // Greva Sombria de Sacerdote
             // Dano mágico +3%.

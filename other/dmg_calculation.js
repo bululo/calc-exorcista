@@ -25,6 +25,7 @@ let skill = {
     id: null,
     dmg: null,
     property: null,
+    divisibility: null,
     hits: null,
     cooldown: null,
     fct: null,
@@ -62,8 +63,6 @@ let learned_skills = {
 function damage_calculation() {
     // Zera os multiplicadores
     init();
-    // Recupera a informação sobre o alvo
-    updateTarget();
     // Aplica os Bonus dos Equipamentos
     retrieveEquipBonus();
     retrieveBuffs();
@@ -128,9 +127,16 @@ function damage_calculation() {
         minMATK = minMATK * 2;
         maxMATK = maxMATK * 2;
     }
-    // Divisibilidade do Dano
-    minMATK = Math.floor(minMATK / skill.hits) * skill.hits;
-    maxMATK = Math.floor(maxMATK / skill.hits) * skill.hits;
+    // Divisibilidade do Dano, ex: Judex que causa 700% dividido em 3 hits
+    if (skill.divisibility > 1) {
+        minMATK = Math.floor(minMATK / skill.divisibility) * skill.divisibility;
+        maxMATK = Math.floor(maxMATK / skill.divisibility) * skill.divisibility;
+    }
+    // Número de hits que a skill a aplica uma porcentagem de dano, ex: Magnus Exorcismus ou Lanças que dão até 10 hits de 100%
+    if (skill.hits > 1){
+        minMATK = minMATK * skill.hits;
+        maxMATK = maxMATK * skill.hits;
+    }
     // Atualização do Resultado
     if (minMATK === maxMATK) {
         document.getElementById("finalSkillDamage").value = minMATK;
@@ -186,6 +192,8 @@ function init() {
     weapon.lv = 0;
     weapon.upgradeBonus = 0;
     weapon.class = 0;
+    // Recupera a informação sobre o alvo
+    updateTarget();
     // Recupera o nv das skills
     retrieveLevelSkills();
     // Seta a skill a ser calculada
@@ -194,7 +202,11 @@ function init() {
     skill.id = selectedSkill.id;
     skill.dmg = selectedSkill.script();
     skill.property = selectedSkill.property;
-    skill.hits = selectedSkill.hits;
+    skill.divisibility = selectedSkill.divisibility;
+    if (selectedSkill.hits !== undefined)
+        skill.hits = selectedSkill.hits;
+    else
+        skill.hits = 1;
     skill.cooldown = selectedSkill.cooldown;
     skill.fct = selectedSkill.fct;
     skill.vct = selectedSkill.vct;
@@ -239,21 +251,17 @@ function retrieveEquipBonus() {
     retrieveRefinements();
     const equipsArray = ['top', 'mid', 'low', 'arm', 'wea', 'shi', 'gar', 'sho', 'ac1', 'ac2', 'c_top', 'c_mid', 'c_low', 's_arm', 's_wea', 's_shi', 'c_gar', 's_sho', 's_ear', 's_nec'];
     equipsArray.forEach(equip => {
-        //alert("Posição: "+equip);
         currentEquip = equip;
         let select = document.getElementById(equip);
         let id = select.options[select.selectedIndex].value;
         if (id !== '') {
             let searchObject = returnArray(equip).find((item) => item.id === select.value);
             searchObject.script();
-            //alert(equipStats.flatMATK);
-
             // For each of the 4 possible slots
             retrieveSlot(1, searchObject.slot1, equip);
             retrieveSlot(2, searchObject.slot2, equip);
             retrieveSlot(3, searchObject.slot3, equip);
             retrieveSlot(4, searchObject.slot4, equip);
-            //alert('rodou com sucesso todos os slots do '+equip);
         }
     });
 }

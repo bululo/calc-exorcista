@@ -5,6 +5,8 @@ const c_top = [
     },
     {
         id: '310008', dbname: 'Highpriest_Top2', name: '(kRO) High Priest Stone II(Upper)', script: function () {
+            if (skill.id === 'PR_MAGNUS')
+                multipliers.skill += 15;
         }
     },
     {
@@ -55,6 +57,8 @@ const c_mid = [
 const c_low = [
     {
         id: '29515', dbname: 'Highpriest_Bottom', name: '(kRO) High Priest Stone (Lower)', script: function () {
+            if (skill.id === 'PR_MAGNUS')
+                multipliers.skill += 20;
         }
     },
     {
