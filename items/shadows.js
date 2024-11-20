@@ -120,6 +120,27 @@ const s_weapon = [
             multipliers.size[ALL] += Math.floor(s_refinement.weapon / 3);
         }
     },
+    {
+        id: '24497', dbname: 'S_Magnus_Weapon', name: 'Luva Sombria Magnus',
+        script: function () {
+            // ATQ e ATQM +1 por refino.
+            equipStats.flatMATK += s_refinement.weapon;
+            // Dano mágico de propriedade Sagrado +3%.
+            multipliers.skill_property[HOLY] += 3;
+            // Refino +7 ou mais: Dano mágico de propriedade Sagrado +3% adicional.
+            if (s_refinement.weapon >= 7)
+                multipliers.skill_property[HOLY] += 3;
+            // Refino +9 ou mais: Dano mágico de propriedade Sagrado +4% adicional.
+            if (s_refinement.weapon >= 9)
+                multipliers.skill_property[HOLY] += 4;
+            // Conjunto Escudo Sombrio de Arcebispo
+            if (document.getElementById('s_shi').value === '24305') {
+                // Ignora 40% da DEFM de todas as raças de monstros.
+                // A cada refino da Luva e do Escudo: Ignora +1% da DEFM de todas as raças de monstros.
+                equipStats.bypass += 40 + s_refinement.weapon + s_refinement.shield;
+            }
+        }
+    }
 ];
 
 const s_shield = [
@@ -286,6 +307,12 @@ const s_earring = [
             }
         }
     },
+    {
+        id: '24499', dbname: 'S_Magnus_Earing', name: 'Brinco Sombrio Magnus',
+        script: function () {
+            // KEKW
+        }
+    }
 ];
 
 const s_necklace = [
@@ -337,4 +364,21 @@ const s_necklace = [
                 equipStats.VCT += 3;
         }
     },
+    {
+        id: '24498', dbname: 'S_Magnus_Pendant', name: 'Colar Sombrio Magnus',
+        script: function () {
+            // Dano de [Magnus Exorcismus] +5%.
+            // A cada 2 refinos: Dano de [Magnus Exorcismus] +2%.
+            if (skill.id === "PR_MAGNUS")
+                multipliers.skill += 5 + ( Math.floor(s_refinement.necklace/2) * 2 );
+            // Conjunto
+            // Luva Sombria Magnus
+            // Brinco Sombrio Magnus
+            // A cada refino de cada peça: Dano de [Magnus Exorcismus] +1%.
+            if (document.getElementById('s_wea').value === '24497' &&
+                document.getElementById('s_ear').value === '24499' &&
+                skill.id === "PR_MAGNUS")
+                multipliers.skill += s_refinement.weapon + s_refinement.earring + s_refinement.necklace;
+        }
+    }
 ];
