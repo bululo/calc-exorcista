@@ -731,7 +731,42 @@ const armors = [
             if (document.getElementById('gar').value === '20934')
                 equipStats.flatMATK += 50;
         }
-    }
+    },
+    {
+        id: '15387', dbname: 'Jirant_Dress', name: 'Vestido da Bruxa', slot1: 'card',
+        script: function () {
+            // Ignora 50% da DEFM dos monstros Chefes.
+            if (target.type === BOSS)
+                equipStats.bypass += 50;
+            // A cada refino:
+            // ATQM +15.
+            // Dano mágico de propriedade Vento +2%.
+            equipStats.flatMATK += 15 * refinement.armor;
+            multipliers.skill_property[WIND] += 2 * refinement.armor;
+            // Conjunto [Manto da Bruxa]
+            if (document.getElementById('gar').value === '20908'){
+                // A cada refino da capa:
+                // Dano mágico +2%.
+                // Conjuração variável -2%.
+                multipliers.matk += 2 * refinement.garment;
+                equipStats.VCT += 2 * refinement.garment;
+            }
+            // Conjunto
+            // [Cajado da Bruxa]
+            // Habilita [Aumentar Agilidade] nv.1.
+            // A cada refino da arma a partir do +1:
+            // Dano de [Passos de Salamandra] e [Passos de Sílfide] +30%.
+            // Regenera +50 de HP ao derrotar monstros com ataques mágicos.
+            // Refino da arma +7 ou mais:
+            // Nível de [Aumentar Agilidade] igual ao nível de refino da arma até o +10.
+            // --------------------------
+            // Conjunto
+            // [Carta Professora Celia]
+            // Tolerância a Congelamento +100%.
+            // Conjuração variável de [Onda Psíquica] -100%.
+            // Desativa a autoconjuração de [Proteger Terreno].
+        }
+    },
 ];
 
 malangdo = '29446,29445,4827,4826,4812,4813,4761';
@@ -1076,11 +1111,81 @@ const shields = [
                 equipStats.flatMATK += 15;
         }
     },
-    // {
-    //     id: '28962', dbname: 'Haurvatat', name: 'Escudo Divino',
-    //     script: function () {
-    //     }
-    // },
+    {
+        id: '28962', dbname: 'Haurvatat', name: 'Escudo Divino',
+        script: function () {
+            // Resistência a propriedade Neutro +10%
+            // Resistência a oponentes de todos os Tamanhos +30%
+            // Conjunto [Super AGI]
+            if (document.getElementById('sho_slot2').value === '4854' ||
+                document.getElementById('arm_slot2').value === '4854' ||
+                document.getElementById('gar_slot2').value === '4854' ||
+                document.getElementById('gar_slot3').value === '4854' ||
+                document.getElementById('gar_slot4').value === '4854') {
+                // Velocidade de ataque +15%
+                equipStats.percentASPD += 15;
+            }
+            // Conjunto [Super INT]
+            if (document.getElementById('sho_slot2').value === '4856' ||
+                document.getElementById('arm_slot2').value === '4856' ||
+                document.getElementById('gar_slot2').value === '4856' ||
+                document.getElementById('gar_slot3').value === '4856' ||
+                document.getElementById('gar_slot4').value === '4856') {
+                // Dano mágico +15%
+                multipliers.matk += 15;
+            }
+            // Conjunto [Super SOR]
+            if (document.getElementById('sho_slot2').value === '4858' ||
+                document.getElementById('arm_slot2').value === '4858' ||
+                document.getElementById('gar_slot2').value === '4858' ||
+                document.getElementById('gar_slot3').value === '4858' ||
+                document.getElementById('gar_slot4').value === '4858') {
+                // Pós-conjuração -15%
+                equipStats.castdelay += 15;
+            }
+        }
+    },
+    {
+        id: '28956', dbname: 'Jirant_Mirror', name: 'Espelho da Bruxa', slot1: 'card',
+        script: function () {
+            // Resistência as propriedades Fogo, Vento, Fantasma e Sagrado +20%.
+            // --------------------------
+            // A cada nível de [Fé]:
+            // Resistência a propriedade Sagrado -2%
+            // Conjunto [Vestido da Bruxa]
+            if (document.getElementById('arm').value === '15387'){
+                // Dano mágico +5%.
+                multipliers.matk += 5;
+                // Ignora 25% da DEFM dos monstros Chefes.
+                if (target.type === BOSS)
+                    equipStats.bypass += 25;
+                // Armadura com refino +8 ou mais:
+                if (refinement.armor >= 8){
+                    // Dano mágico +5% adicional.
+                    multipliers.matk += 5;
+                    // Ignora +25% adicional da DEFM dos monstros Chefes.
+                    if (target.type === BOSS)
+                        equipStats.bypass += 25;
+                }
+            }
+            // Conjunto [Manto da Bruxa]
+            if (document.getElementById('gar').value === '20908'){
+                // Dano mágico +5%.
+                multipliers.matk += 5;
+                // Conjuração variável -5%.
+                equipStats.VCT += 5;
+                // Escudo com refino +8 ou mais:
+                if (refinement.shield >= 8){
+                    // Esquiva perfeita +20.
+                    // Dano mágico +5% adicional.
+                    multipliers.matk += 5;
+                    // Conjuração variável -5% adicional.
+                    equipStats.VCT += 5;
+                }
+            }
+
+        }
+    },
 ];
 
 explo_capa = '4856,4854,4858,4950,4949,4827,4826,4812,4872,4869'
@@ -1228,22 +1333,22 @@ const garments = [
     //             multipliers.size[SMALL] += 25;
     //     }
     // },
-    // {
-    //     id: '20925',
-    //     dbname: 'Commander_manteau_J',
-    //     name: 'Capa do Comandante',
-    //     slot1: 'card',
-    //     slot2: explo_capa,
-    //     slot3: explo_capa,
-    //     slot4: explo_capa,
-    //     script: function () {
-    //         equipStats.flatMATK += 10;
-    //         if (refinement.garment >= 5)
-    //             equipStats.flatMATK += 20;
-    //         if (refinement.garment >= 7)
-    //             equipStats.flatMATK += 30;
-    //     }
-    // },
+    {
+        id: '20925',
+        dbname: 'Commander_manteau_J',
+        name: 'Capa do Comandante',
+        slot1: 'card',
+        slot2: explo_capa,
+        slot3: explo_capa,
+        slot4: explo_capa,
+        script: function () {
+            equipStats.flatMATK += 10;
+            if (refinement.garment >= 5)
+                equipStats.flatMATK += 20;
+            if (refinement.garment >= 7)
+                equipStats.flatMATK += 30;
+        }
+    },
     {
         id: '480319', dbname: 'Divine_Phoenix', name: 'Relíquia Divina', slot1: 'card',
         script: function () {
@@ -1269,6 +1374,34 @@ const garments = [
                 equipStats.percentASPD += 15;
                 equipStats.castdelay += 15;
             }
+        }
+    },
+    {
+        id: '20908', dbname: 'Jirant_Cloak_BR', name: 'Manto da Bruxa', slot1: 'card',
+        script: function () {
+            // A cada 2 refinos:
+            // Resistência as propriedades Fogo e Vento +5%.
+            // Refino +5 ou mais:
+            if (refinement.garment >= 5) {
+                // Dano mágico +5%.
+                multipliers.matk += 5;
+                // Conjuração variável -5%.
+                equipStats.VCT += 5;
+            }
+            if (refinement >= 7){
+                // Dano mágico +5%.
+                multipliers.matk += 5;
+                // Conjuração variável -5%.
+                equipStats.VCT += 5;
+            }
+            // Refino +7 ou mais:
+            // Dano mágico +5% adicional.
+            // Conjuração variável -5% adicional.
+            // Refino +15 ou mais:
+            // Mantém [Vigor] ativo.
+            // Conjunto [Cajado da Bruxa]
+            // Dano mágico +5%.
+            // Resistência as propriedades Fogo e Vento +10%.
         }
     },
 ];
@@ -1688,6 +1821,9 @@ const accessory = [
             multipliers.property[EARTH] += 30;
             multipliers.property[WIND] += 30;
             multipliers.property[HOLY] += 30;
+            // Impede que um segundo acc ative efeitos de conjunto
+            if (document.getElementById('ac1').value === document.getElementById('ac2').value && currentEquip === 'ac2')
+                return
             // Conjunto [Pedra de Amplificação 1]
             // Ignora 70% da DEFM de todas as raças.
             // Dano mágico contra todas as raças +10%.
@@ -1714,8 +1850,9 @@ const accessory = [
             multipliers.matk += 5;
             equipStats.VCT += 10;
             equipStats.flatASPD += 1;
-            // Conjunto
-            // [Laço da Celine]
+            // Impede que um segundo acc ative efeitos de conjunto
+            if (document.getElementById('ac1').value === document.getElementById('ac2').value && currentEquip === 'ac2')
+                return
             // Conjunto [Laço da Celine]
             if (document.getElementById('top').value === '18849') {
                 if (equipStats.percentFCT < 50)
@@ -1740,6 +1877,9 @@ const accessory = [
         script: function () {
             multipliers.matk += 5;
             equipStats.VCT += 10;
+            // Impede que um segundo acc ative efeitos de conjunto
+            if (document.getElementById('ac1').value === document.getElementById('ac2').value && currentEquip === 'ac2')
+                return
             // Conjunto [Laço da Celine]
             if (document.getElementById('top').value === '18849') {
                 equipStats.flatFCT += 0.3;
@@ -1773,6 +1913,9 @@ const accessory = [
             equipStats.int += 3;
             equipStats.dex += 3;
             equipStats.luk += 3;
+            // Impede que um segundo acc ative efeitos de conjunto
+            if (document.getElementById('ac1').value === document.getElementById('ac2').value && currentEquip === 'ac2')
+                return
             // Conjunto [Memorável Desejo dos Deuses]
             if (document.getElementById('top').value === '18972') {
                 equipStats.castdelay += 20;
@@ -1842,15 +1985,27 @@ const accessory = [
         script: function () {
             multipliers.matk += 10;
             // Super Agilidade
-            if (document.getElementById('sho_slot2').value === '4854' || document.getElementById('arm_slot2').value === '4854') {
+            if (document.getElementById('sho_slot2').value === '4854' ||
+                document.getElementById('arm_slot2').value === '4854' ||
+                document.getElementById('gar_slot2').value === '4854' ||
+                document.getElementById('gar_slot3').value === '4854' ||
+                document.getElementById('gar_slot4').value === '4854') {
                 equipStats.percentASPD+=15;
             }
             // Super Inteligência
-            if (document.getElementById('sho_slot2').value === '4856' || document.getElementById('arm_slot2').value === '4856') {
+            if (document.getElementById('sho_slot2').value === '4856' ||
+                document.getElementById('arm_slot2').value === '4856' ||
+                document.getElementById('gar_slot2').value === '4856' ||
+                document.getElementById('gar_slot3').value === '4856' ||
+                document.getElementById('gar_slot4').value === '4856') {
                 multipliers.matk+=30;
             }
             // Super Sorte
-            if (document.getElementById('sho_slot2').value === '4858' || document.getElementById('arm_slot2').value === '4858') {
+            if (document.getElementById('sho_slot2').value === '4858' ||
+                document.getElementById('arm_slot2').value === '4858' ||
+                document.getElementById('gar_slot2').value === '4858' ||
+                document.getElementById('gar_slot3').value === '4858' ||
+                document.getElementById('gar_slot4').value === '4858') {
                 equipStats.castdelay+=30;
             }
         }
