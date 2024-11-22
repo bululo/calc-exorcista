@@ -17,7 +17,7 @@ const tops = [
                 multipliers.matk += 3;
             }
             if (refinement.top > 10 && refinement.top <= 15) {
-                equipStats.flatFCT += (refinement.top - 10) / 10;
+                equipStats.flatFCT = ( (equipStats.flatFCT*10) + (refinement.top - 10) ) / 10;
             }
             // Conjunto
             if (document.getElementById('wea').value === '1631') {
@@ -229,7 +229,7 @@ const tops = [
                 //multipliers.skill_property+=10;
             }
             if (refinement.top >= 11)
-                equipStats.flatFCT += 0.2;
+                equipStats.flatFCT = ( (equipStats.flatFCT*10) + 2 ) / 10;
             //Conjuntos
             if (document.getElementById('arm').value === '15146' || document.getElementById('arm').value === '15163') {
                 multipliers.race[ALL] += Math.floor(refinement.armor / 3) * 8;
@@ -349,7 +349,7 @@ const low = [
     {
         id: '18536', dbname: 'Foxtail', name: 'Rabo de Gato', script: function () {
             equipStats.flatMATK += 10;
-            equipStats.flatFCT += 0.1;
+            equipStats.flatFCT = ( (equipStats.flatFCT*10) + 1 ) / 10;
         }
     },
     {
@@ -1666,7 +1666,7 @@ const shoes = [
             // Refino +10 ou mais:
             // Conjuração fixa -0,5 segundos.
             if (refinement.shoes >= 10)
-                equipStats.flatFCT+= 0.5;
+                equipStats.flatFCT = ( (equipStats.flatFCT*10) + 5 ) / 10;
             // Refino +12 ou mais:
             // Dano mágico de todas as propriedades +15%.
             if (refinement.shoes >= 12)
@@ -1676,7 +1676,7 @@ const shoes = [
                 // INT base 130 ou mais:
                 if (stats.int >= 130){
                     // Conjuração fixa -0,5 segundos adicional
-                    equipStats.flatFCT += 0.5;
+                    equipStats.flatFCT = ( (equipStats.flatFCT*10) + 5 ) / 10;
                     // Ao realizar ataques mágicos, 1,5% de chance de ativar um Efeito por 5 segundos.
                     // Efeito: INT +70.
                     equipStats.int += 70;
@@ -1700,7 +1700,7 @@ const shoes = [
     //         // Refino +10 ou mais:
     //         // Conjuração fixa -0,5 segundos.
     //         if (refinement.shoes >= 10)
-    //             equipStats.flatFCT+= 0.5;
+    //             equipStats.flatFCT = ( (equipStats.flatFCT*10) + 5 ) / 10;
     //         // Refino +12 ou mais:
     //         // Dano mágico de todas as propriedades +15%.
     //         if (refinement.shoes >= 12)
@@ -1729,7 +1729,7 @@ const shoes = [
             // Refino +10 ou mais:
             // Conjuração fixa -0,5 segundos.
             if (refinement.shoes >= 10)
-                equipStats.flatFCT += 0.5;
+                equipStats.flatFCT = ( (equipStats.flatFCT*10) + 5 ) / 10;
             // Refino +12 ou mais:
             // INT e DES +10.
             // Dano mágico contra oponentes de todas as propriedades +15%.
@@ -1743,7 +1743,7 @@ const shoes = [
                 // INT base 130 ou mais:
                 if (stats.int >= 130){
                     // Conjuração fixa -0,5 segundos adicional
-                    equipStats.flatFCT += 0.5;
+                    equipStats.flatFCT = ( (equipStats.flatFCT*10) + 5 ) / 10;
                     // Ao realizar ataques mágicos, 1,5% de chance de ativar um Efeito por 5 segundos.
                     // Efeito: INT +70.
                     //equipStats.int += 70;
@@ -1882,7 +1882,7 @@ const accessory = [
                 return
             // Conjunto [Laço da Celine]
             if (document.getElementById('top').value === '18849') {
-                equipStats.flatFCT += 0.3;
+                equipStats.flatFCT = ( (equipStats.flatFCT*10) + 3 ) / 10;
                 equipStats.flatMATK += refinement.top * 10;
                 if (refinement.top >= 7) {
                     multipliers.race[HUMAN] += 10;

@@ -137,12 +137,26 @@ function damage_calculation() {
         minMATK = minMATK * skill.hits;
         maxMATK = maxMATK * skill.hits;
     }
-    // Atualização do Resultado
+    // Atualização do Resultado na Tela
     if (minMATK === maxMATK) {
         document.getElementById("finalSkillDamage").value = minMATK;
     } else {
-        document.getElementById("finalSkillDamage").value = minMATK + '~' + maxMATK;
+        document.getElementById("finalSkillDamage").value = minMATK + ' ~ ' + maxMATK;
     }
+    // Seta na tela o ATQM, Pós-Conjuração, Conjuração Fixa e Conjuração Variável
+    // ATQM
+    document.getElementById('matk').innerText = 'ATQM: '+statMATK+' + '+(equipStats.flatMATK+weapon.baseMATK+weapon.upgradeBonus);
+    // Pós
+    let castDelay = Math.max(0, (skill.castdelay * (100 - equipStats.castdelay)/100))
+    document.getElementById('castDelay').innerText = "Pós-Conjuração: "+castDelay.toFixed(2)+' s | '+skill.castdelay.toFixed(1)+' - '+String(equipStats.castdelay).padStart(3, ' ')+'%';
+    // Fixa
+    let fixedCastTime = Math.max(0,((((skill.fct*10)-(equipStats.flatFCT*10))/10)*(100-equipStats.percentFCT))/100);
+    document.getElementById('fixedCastTime').innerText = 'Conjuração Fixa: '+fixedCastTime.toFixed(2)+' s | '+skill.fct.toFixed(1)+' - '+equipStats.flatFCT.toFixed(1)+' - '+equipStats.percentFCT+'%';
+    // Variável
+    // VCT (seconds) = (BaseVCT - Sum_VCT) × (1 − SQRT[{DEX × 2 + INT} ÷ 530]) × (1 − Sum_GearVCTReduc ÷ 100) × (1 − Sum_SkillVCTReduc ÷ 100)
+    let variableCastTime = skill.vct * ( 1 - Math.sqrt(((dex*2)+int)/530) ) * (1 - equipStats.VCT/100);
+    variableCastTime = Math.max(0, variableCastTime);
+    document.getElementById('variableCastTime').innerText = 'Conjuração Variável: '+variableCastTime.toFixed(2)+' s | '+skill.vct.toFixed(1)+' - '+equipStats.VCT+'% - √('+(dex*2+int)+'/530)';
 }
 
 function init() {

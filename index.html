@@ -69,7 +69,8 @@
             </tr>
         </table>
 
-        <p id="custoAtributo" class="atributo-custo">Pontos: 0</p></div>
+        <p id="custoAtributo" class="atributo-custo">Pontos: 0</p>
+    </div>
     <div class="column class" id="target" style="">
         <table class="character">
             <tr>
@@ -192,6 +193,7 @@
     <button class="tablinks" onclick="switchTab(event, 'Equip. Sombrios')">Equip. Sombrios</button>
     <button class="tablinks" onclick="switchTab(event, 'Buffs/Consumíveis')">Buffs/Consumíveis</button>
     <button class="tablinks" onclick="switchTab(event, 'Skills')">Habilidades Pré-Requisito</button>
+    <button class="tablinks" style="position: absolute; margin-left: 695px;" onclick="switchTab(event, 'Detalhes')">☰</button>
 </div>
 <div class="container split tabcontent" id="Equipamentos">
     <!-- TOP -->
@@ -635,6 +637,31 @@
             </tr>
         </table> -->
     </div>
+</div>
+
+<div class="container tabcontent" id="Detalhes">
+    <div style="text-align: left;padding: 10px; margin-left: auto;margin-right: auto;">
+        <span id="matk" ></span><br>
+        <span id="castDelay"></span><br>
+        <span id="fixedCastTime"></span><br>
+        <span id="variableCastTime"></span>
+    </div>
+<!--    <table style="table-layout: fixed; border: 1px solid gainsboro">-->
+<!--        <tr style="border: 1px solid gainsboro"><td>ATQM:</td><td>X</td><td>X</td></tr>-->
+<!--        <tr><td>Pós-Conjuração:</td><td>X</td></tr>-->
+<!--        &lt;!&ndash;        Multiplicadores&ndash;&gt;-->
+<!--        <tr><td>Dano Mágico:</td><td>X</td></tr>-->
+<!--        <tr><td></td><td>Todos</td><td>Pequeno</td><td>Médio</td><td>Grande</td></tr>-->
+<!--        <tr><td>Dano Mágico contra Tamanho:</td><td>X</td></tr>-->
+<!--        <tr><td></td><td>Todas</td><td>Amorfo</td><td>Bruto</td><td>Planta</td><td>Inseto</td><td>Peixe</td><td>Demônio</td><td>Humanoide</td><td>Anjo</td><td>Dragão</td><td>Morto-Vivo</td></tr>-->
+<!--        <tr><td>Dano Mágico contra Propriedade:</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>-->
+<!--        <tr><td></td><td>Todas</td><td>Neutro</td><td>Água</td><td>Terra</td><td>Fogo</td><td>Vento</td><td>Veneno</td><td>Sagrado</td><td>Sombrio</td><td>Fantasma</td><td>Maldito</td></tr>-->
+<!--        <tr><td>Dano Mágico de Propriedade:</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>-->
+<!--        <tr><td>Dano Mágico contra Raça:</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>-->
+<!--        <tr><td></td><td>Todas</td><td>Neutro</td><td>Água</td><td>Terra</td><td>Fogo</td><td>Vento</td><td>Veneno</td><td>Sagrado</td><td>Sombrio</td><td>Fantasma</td><td>Maldito</td></tr>-->
+<!--        <tr><td>Dano contra Chefes:</td><td>X</td></tr>-->
+<!--        <tr><td>Dano contra Monstros Normais:</td><td>X</td></tr>-->
+<!--    </table>-->
 </div>
 
 <script src="other/define.js"></script>
