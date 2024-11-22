@@ -145,7 +145,7 @@ function damage_calculation() {
     }
     // Seta na tela o ATQM, Pós-Conjuração, Conjuração Fixa e Conjuração Variável
     // ATQM
-    document.getElementById('matk').innerText = 'ATQM: '+statMATK+' + '+(equipStats.flatMATK+weapon.baseMATK+weapon.upgradeBonus);
+    document.getElementById('matk').innerText = 'ATQM: '+statMATK+' + '+(equipStats.flatMATK+weapon.baseMATK+weapon.upgradeBonus)+" ± "+variance+' + 0~'+over;
     // Pós
     let castDelay = Math.max(0, (skill.castdelay * (100 - equipStats.castdelay)/100))
     document.getElementById('castDelay').innerText = "Pós-Conjuração: "+castDelay.toFixed(2)+' s | '+skill.castdelay.toFixed(1)+' - '+String(equipStats.castdelay).padStart(3, ' ')+'%';
