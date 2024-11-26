@@ -236,6 +236,59 @@ const tops = [
             }
         }
     },
+    {
+        id: '400118', dbname: 'BioWeapon_Helm_AB', name: 'Espólio de Margaretha', slot1: 'card',
+        script: function (){
+            // A cada 2 refinos: ATQ e ATQM +20.
+            equipStats.flatMATK += Math.floor(refinement.top/2) * 20;
+            // Refino +7 ou mais:
+            if (refinement.top >= 7){
+                // Conjuração variável -10%.
+                equipStats.VCT += 10;
+                // Velocidade de ataque +10%.
+                equipStats.percentASPD += 10;
+            }
+            // Refino +9 ou mais:
+            if (refinement.top >= 9) {
+                // ATQ da arma +15%.
+                // Dano mágico +15%.
+                multipliers.matk += 15;
+            }
+            // Refino +11 ou mais:
+            if (refinement.top >= 11){
+                // Dano físico contra todos os tamanhos +10%.
+                // Dano mágico de todas as propriedades +10%.
+                multipliers.skill_property[ALL] += 10;
+            }
+            // Conjunto [Adorare]
+            if (document.getElementById('wea').value === '2057') {
+                // Dano mágico de propriedade Sagrado +10%.
+                multipliers.skill_property[HOLY] += 10;
+                // A cada refino da arma: Dano de [Adoramus] +5%.
+                if (skill.id === "AB_ADORAMUS")
+                    multipliers.skill += refinement.weapon * 5;
+            }
+            // Conjunto [Penitência]
+            if (document.getElementById('wea').value === '26161') {
+                // Dano mágico de propriedade Sagrado +10%.
+                multipliers.skill_property[HOLY] += 10;
+                // A cada refino da arma: Dano de [Judex] +10%.
+                if (skill.id === "AB_JUDEX")
+                    multipliers.skill += refinement.weapon * 10;
+            }
+            // Conjunto [Mangual Lucis]
+            // Dano físico contra todos os tamanhos +10% adicional.
+            // A cada refino da arma:
+            // Dano de [Gemini Lumen] +10%.
+            // --------------------------
+            // Tipo: Equip. para Cabeça
+            // Equipa em: Topo
+            // DEF: 10 DEFM.: 0
+            // Peso: 10
+            // Nível necessário: 170
+            // Classes: Arcebispos e evoluções
+        }
+    },
 ];
 
 desentupidor = '4730,4710,4720,4750';

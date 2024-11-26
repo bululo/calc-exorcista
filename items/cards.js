@@ -294,6 +294,19 @@ const cards = [
                 equipStats.flatMATK += 40;
         }
     },
+    {
+        id: '300552', dbname: 'CLB_SS_LT_Card', name: 'Carta Tai-Zi', position: 'gar',
+        script: function () {
+            // A cada 20 de INT base:
+            // Pós-conjuração -1%.
+            equipStats.castdelay += Math.floor(stats.int/20);
+            // INT base 125 ou mais:
+            // Efetividade cura +30%.
+            // Dano mágico de todas as propriedades +30%.
+            if (stats.int >= 125)
+                multipliers.skill_property[ALL] += 30;
+        }
+    },
 
     // shoes cards
     {
