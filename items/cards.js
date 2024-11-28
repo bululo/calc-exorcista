@@ -175,6 +175,12 @@ const cards = [
             }
         }
     },
+    {
+        id: '300550', dbname: 'CLB_SS_EA_Card', name: 'Carta Fei-Chai', position: 'wea',
+        script: function () {
+            multipliers.size[ALL] += 10;
+        }
+    },
 
 
     // shield cards
