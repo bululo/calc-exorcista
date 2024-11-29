@@ -826,7 +826,7 @@ malangdo = '29446,29445,4827,4826,4812,4813,4761';
 brasilis = '29446,4831';
 const weapons = [
     {
-        id: '540011', dbname: 'Up_Demon_Hunting_Bible', name: 'Tomo Primordial', slot1: 'card', slot2: 'card',
+        id: '540011', dbname: 'Up_Demon_Hunting_Bible', name: 'Tomo Primordial', slot1: 'card', slot2: 'card', type: 'Livro',
         script: function () {
             weapon.baseMATK = 190;
             weapon.lv = 4;
@@ -848,7 +848,7 @@ const weapons = [
         }
     },
     {
-        id: '540011 ', dbname: 'Up_Demon_Hunting_Bible', name: 'Tomo Primordial (12% Sagrado)', slot1: 'card', slot2: 'card',
+        id: '540011 ', dbname: 'Up_Demon_Hunting_Bible', name: 'Tomo Primordial (12% Sagrado)', slot1: 'card', slot2: 'card',type: 'Livro',
         script: function () {
             weapon.baseMATK = 190;
             weapon.lv = 4;
@@ -872,7 +872,7 @@ const weapons = [
         }
     },
     {
-        id: '540011  ', dbname: 'Up_Demon_Hunting_Bible', name: 'Tomo Primordial (12% Sagrado/12% Chefe)', slot1: 'card', slot2: 'card',
+        id: '540011  ', dbname: 'Up_Demon_Hunting_Bible', name: 'Tomo Primordial (12% Sagrado/12% Chefe)', slot1: 'card', slot2: 'card',type: 'Livro',
         script: function () {
             weapon.baseMATK = 190;
             weapon.lv = 4;
@@ -897,7 +897,7 @@ const weapons = [
         }
     },
     {
-        id: '1631', dbname: 'Holy_Stick', name: 'Vara Sagrada', slot1: 'card', slot3: malangdo, slot4: malangdo,
+        id: '1631', dbname: 'Holy_Stick', name: 'Vara Sagrada', slot1: 'card', slot3: malangdo, slot4: malangdo,type: 'Cajado',
         script: function () {
             weapon.baseMATK = 140;
             weapon.lv = 4;
@@ -905,7 +905,7 @@ const weapons = [
         }
     },
     {
-        id: '16089', dbname: 'Ultio_Spes_OS', name: 'Ultio-OS', slot1: 'card', slot2: 'card',
+        id: '16089', dbname: 'Ultio_Spes_OS', name: 'Ultio-OS', slot1: 'card', slot2: 'card',type: 'Maça',
         script: function () {
             weapon.baseMATK = 170;
             weapon.lv = 4;
@@ -921,7 +921,7 @@ const weapons = [
         }
     },
     {
-        id: '590014', dbname: 'Meer_Sceptre', name: 'Mastro da Princesa', slot1: 'card',
+        id: '590014', dbname: 'Meer_Sceptre', name: 'Mastro da Princesa', slot1: 'card',type: 'Livro',type: 'Maça',
         script: function () {
             weapon.baseMATK = 360;
             weapon.lv = 4;
@@ -932,7 +932,7 @@ const weapons = [
         }
     },
     {
-        id: '550021', dbname: 'Deus_Ex_Machina_JP', name: 'O Criador', slot1: 'card', slot2: 'card', slot3: 'card',
+        id: '550021', dbname: 'Deus_Ex_Machina_JP', name: 'O Criador', slot1: 'card', slot2: 'card', slot3: 'Cajado',
         script: function () {
             weapon.baseMATK = 180;
             weapon.lv = 4;
@@ -945,7 +945,7 @@ const weapons = [
         }
     },
     {
-        id: '550031', dbname: 'Dea_Staff_IL Dea_Staff_IL', name: 'Dea Ilusional', slot1: 'card', slot2: 'card',
+        id: '550031', dbname: 'Dea_Staff_IL Dea_Staff_IL', name: 'Dea Ilusional', slot1: 'card', slot2: 'card',type: 'Cajado',
         script: function () {
             weapon.baseMATK = 190;
             weapon.lv = 4;
@@ -968,7 +968,7 @@ const weapons = [
         }
     },
     {
-        id: '550031 ', dbname: 'Dea_Staff_IL Dea_Staff_IL', name: 'Dea Ilusional (Ativado)', slot1: 'card', slot2: 'card',
+        id: '550031 ', dbname: 'Dea_Staff_IL Dea_Staff_IL', name: 'Dea Ilusional (Ativado)', slot1: 'card', slot2: 'card',type: 'Cajado',
         script: function () {
             weapon.baseMATK = 190;
             weapon.lv = 4;
@@ -994,7 +994,7 @@ const weapons = [
         }
     },
     {
-        id: '590012', dbname: 'Up_Saint_Hall', name: 'Clava Primordial', slot1: 'card', slot2: 'card',
+        id: '590012', dbname: 'Up_Saint_Hall', name: 'Clava Primordial', slot1: 'card', slot2: 'card',type: 'Maça',
         script: function () {
             weapon.baseMATK = 200;
             weapon.lv = 4;
@@ -1018,7 +1018,7 @@ const weapons = [
         }
     }, // Adicionar BAs
     {
-        id: '590003', dbname: 'Saint_Hall', name: 'Clava Ancestral', slot1: 'card', slot2: 'card',
+        id: '590003', dbname: 'Saint_Hall', name: 'Clava Ancestral', slot1: 'card', slot2: 'card',type: 'Maça',
         script: function () {
             weapon.baseMATK = 165;
             weapon.lv = 4;
@@ -1041,6 +1041,7 @@ const weapons = [
         slot2: 'card',
         slot3: 'card',
         slot4: malangdo,
+        type: 'Cajado',
         script: function () {
             weapon.baseMATK = 125;
             weapon.lv = 4;
@@ -1049,7 +1050,7 @@ const weapons = [
         }
     },
     {
-        id: '2057', dbname: 'Adorare_Staff', name: 'Adorare', slot1: 'card', slot2: 'card', slot3: '29599', slot4: '4813,4814,4815',
+        id: '2057', dbname: 'Adorare_Staff', name: 'Adorare', slot1: 'card', slot2: 'card', slot3: '29599', slot4: '4813,4814,4815',type: 'Cajado de Duas Mãos',
         twoHanded: true,
         script: function () {
             weapon.baseMATK = 240;
@@ -1065,7 +1066,7 @@ const weapons = [
 
     },
     {
-        id: '26161', dbname: 'Ponitendtia',name: 'Penitência', slot1: 'card', slot2: 'card', slot3: '29599', slot4: '4813,4814,4815',
+        id: '26161', dbname: 'Ponitendtia',name: 'Penitência', slot1: 'card', slot2: 'card', slot3: '29599', slot4: '4813,4814,4815',type: 'Cajado',
         script: function () {
             weapon.baseMATK = 175;
             weapon.lv = 4;

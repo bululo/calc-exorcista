@@ -157,6 +157,61 @@ function damage_calculation() {
     let variableCastTime = skill.vct * ( 1 - Math.sqrt(((dex*2)+int)/530) ) * (1 - equipStats.VCT/100);
     variableCastTime = Math.max(0, variableCastTime);
     document.getElementById('variableCastTime').innerText = 'Conjuração Variável: '+variableCastTime.toFixed(2)+' s | '+skill.vct.toFixed(1)+' - '+equipStats.VCT+'% - √('+(dex*2+int)+'/530)';
+
+
+    //ASPD - formula da imagem https://browiki.org/wiki/Arquivo:RenewASPDformula.png
+    const AB_ASPD_BASE = 151;
+
+    /**
+     * A: Classe + Arma + Penalidade do Escudo
+     * Example: Class Bonus + Weapon Penalty + Shield Penalty
+    */
+    const shield_penality = document.getElementById('shi').value ? -5 : 0;
+
+    let weapon_value = document.getElementById('wea').value;
+    let selected_weapon = returnArray('wea').find((item) => item.id === weapon_value);
+
+    let weapon_penality = 0;
+    switch(selected_weapon.type){
+        case 'Maça':
+            weapon_penality = 0;
+        break;
+        case 'Cajado':
+            weapon_penality = -15;
+        break;
+        case 'Livro':
+            weapon_penality = 1;
+        break;
+        case 'Cajado de Duas Mãos':
+            weapon_penality = -10;
+        break;
+        case 'Soqueira':
+            weapon_penality = -5;
+        break;
+    }
+
+    const ASPD_A = AB_ASPD_BASE + weapon_penality + shield_penality
+
+    
+    /**
+     * B: Bônus de AGI e DES
+     * Example: Calculate the contribution from Agility (AGI) and Dexterity (DEX)
+     */
+    const agilidade = stats.agi+equipStats.agi;
+    const destreza = stats.dex+equipStats.dex;
+    const ASPD_B = (Math.sqrt((destreza ** 2) / 5 + (agilidade ** 2) / 2) / 4).toFixed(2);
+
+    
+    /**
+     * C: Poções + Habilidades + Outros Fatores
+     * Example: Bonus from potions, skills, and other factors, scaled by AGI
+    */
+    const FAKE_POTIONS = 0; // Bonus from potions
+    const FAKE_SKILLS = 0; // Bonus from skills
+    const FAKE_OTHER_FACTORS = 0; // Bonus from other factors
+    const ASPD_C = (FAKE_POTIONS + FAKE_SKILLS + FAKE_OTHER_FACTORS) * (agilidade / 200);
+
+    console.log('ASPD',ASPD_A,ASPD_B,ASPD_C)
 }
 
 function init() {
