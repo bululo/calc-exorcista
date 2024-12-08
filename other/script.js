@@ -394,6 +394,37 @@ function pillSelector (pill){
     }
 }
 
+function classSelector(job) {
+    const selectElement = document.getElementById("skill");
+    selectElement.innerHTML = "";
+    let options = [];
+    switch(job) {
+        case "ARCHBISHOP":
+            options = [
+                { value: "AB_ADORAMUS", text: "Adoramus" },
+                { value: "AB_JUDEX", text: "Judex" },
+                { value: "PR_MAGNUS", text: "Magnus Exorcismus" }
+            ];
+            break;
+        case "SORCERER":
+            options = [
+                { value: "SO_DIAMONDDUST", text: "Pó de Diamante" }
+            ];
+            break;
+        default:
+            options = [
+                { value: "FEFEF", text: "FEFEFE" }
+            ];
+            break;
+    }
+    options.forEach(optionData => {
+        const option = document.createElement("option");
+        option.value = optionData.value;
+        option.textContent = optionData.text;
+        selectElement.appendChild(option);
+    });
+}
+
 // Atualiza a imagem das cartas e encantamentos
 // function updateImage(element) {
 //     alert(element.value);
@@ -424,22 +455,46 @@ function saveCalc() {
             data[element.id] = element.value;
         }
     });
+    // if (URL){
+    //     saveDataToURL(data);
+    // } else {
+        let slot = document.getElementById('loadout').value;
+        if (slot === '0')
+            localStorage.setItem('calcData', JSON.stringify(data));
+        else
+            localStorage.setItem('calcData' + slot, JSON.stringify(data));
+    // }
+}
 
-    let slot = document.getElementById('loadout').value;
-    if (slot === '0')
-        localStorage.setItem('calcData', JSON.stringify(data));
-    else
-        localStorage.setItem('calcData'+slot, JSON.stringify(data));
+function saveDataToURL(data) {
+    const jsonData = JSON.stringify(data);
+    const b64 = btoa(jsonData);
+    const encodedData = encodeURIComponent(b64);
+    const currentURL = window.location.href.split('?')[0]; // Get the base URL
+    const newURL = `${currentURL}?config=${encodedData}`;
+    window.history.pushState({}, '', newURL); // Update the URL without reloading
+    navigator.clipboard.writeText(newURL).catch(err => { // Copy the new URL to the clipboard
+        console.error('Failed to copy the URL to the clipboard: ', err);
+    });
 }
 
 function loadSavedCalc() {
     let data = '';
-    let slot = document.getElementById('loadout').value;
-    if (slot === '0')
-        data = JSON.parse(localStorage.getItem('calcData'));
-    else
-        data = JSON.parse(localStorage.getItem('calcData'+slot));
-
+    // if (initial){
+    //     const urlParams = new URLSearchParams(window.location.search);
+    //     const encodedData = urlParams.get('config');
+    //     if (encodedData) {
+    //         const decodedData = decodeURIComponent(encodedData);
+    //         data = JSON.parse(atob(decodedData));
+    //     }
+    // }
+    if (data === '') {
+        let slot = document.getElementById('loadout').value;
+        if (slot === '0')
+            data = JSON.parse(localStorage.getItem('calcData'));
+        else
+            data = JSON.parse(localStorage.getItem('calcData' + slot));
+    }
     if (data) {
         for (const [id, value] of Object.entries(data)) {
             const element = document.getElementById(id);
@@ -450,8 +505,12 @@ function loadSavedCalc() {
                 } else {
                     element.value = value;
                 }
-                element.dispatchEvent(new Event('change', { bubbles: true }));
-
+                if (element.type === 'radio') {
+                    if (element.checked)
+                        classSelector(element.value);
+                } else {
+                    element.dispatchEvent(new Event('change', {bubbles: true}));
+                }
             }
         }  
     }
@@ -459,7 +518,26 @@ function loadSavedCalc() {
     damage_calculation();
 }
 
+function loadDataFromURL() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const encodedData = urlParams.get('config');
+    if (encodedData) {
+        const decodedData = decodeURIComponent(encodedData);
+        const data = JSON.parse(decodedData);
+        // Now you have the data object to work with
+        loadSavedConfig(data); // Use your load function here
+    }
+}
+
+
 function load() {
+    // const radioButtons = document.querySelectorAll('input[name="class"]');
+    // radioButtons.forEach(radio => {
+    //     radio.addEventListener('change', (event) => {
+    //         classSelector(event.target.value);
+    //     });
+    // });
+    // classSelector(document.querySelector('input[name="class"]:checked').value);
     // Chamada da função para preencher os selects de refinamento com +0~+20
     populateRefinementOptions();
     populateShadowRefinementOptions();

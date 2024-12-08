@@ -190,6 +190,47 @@ th, td {
     background: hsla(0, 0%, 53.3%, .1);
     border-radius: 5px;
 }
+
+.class-picker {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: center; /* Centers vertically */
+    gap: 0px 10px;
+}
+
+.class-picker label {
+    margin: 0;
+}
+
+.class-picker input[type="radio"] {
+    display: none; /* Hide the actual box */
+}
+
+.class-picker input + img{
+    padding: 8.5px;
+    background: hsla(0, 0%, 53.3%, .1);
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.2s;
+    margin: 0;
+}
+
+.class-picker input[type="radio"]:hover + img {
+    /*background-color: rgba(143, 255, 124, 0.66);*/
+    background-color: #dcdcdc;
+}
+
+.class-picker input[type="radio"]:checked + img {
+    background-color: #dcdcdc;
+    /*background-color: rgba(96, 255, 61, 0.66);*/
+ }
+
+.disabled {
+    filter: grayscale(100%);
+    opacity: 0.5;
+    pointer-events: none;
+}
+
 .atributo-input {
     width: calc(100% - 16px);
     margin-top: 4px;

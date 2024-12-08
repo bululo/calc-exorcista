@@ -80,6 +80,26 @@ const cards = [
         }
     },
     {
+        id: '300209', dbname: 'SLD_Grave_Amon_Ra_Card', name: 'Carta Amon Ra do Pesadelo Selada', position: 'arm',
+        script: function () {
+            // Dano mágico contra as raças Demônio e Morto-Vivo +25%.
+            // Dano mágico contra as propriedades Sombrio e Maldito +25%.
+            multipliers.race[DEMON] += 25;
+            multipliers.race[UNDEAD] += 25;
+            multipliers.property[DARK] += 25;
+            multipliers.property[UNDEAD] += 25;
+            // Refino +15 ou mais:
+            // Dano mágico contra as raças Demônio e Morto-Vivo +12% adicional.
+            // Dano mágico contra as propriedades Sombrio e Maldito +12% adicional.
+            if (refinement.armor >= 15){
+                multipliers.race[DEMON] += 12;
+                multipliers.race[UNDEAD] += 12;
+                multipliers.property[DARK] += 12;
+                multipliers.property[UNDEAD] += 12;
+            }
+        }
+    },
+    {
         id: '4602', dbname: 'AmdaraisH_Card', name: 'Carta Amdarais Sombrio', position: 'arm',
         script: function () {
             multipliers.matk += 20;
@@ -175,6 +195,13 @@ const cards = [
             }
         }
     },
+    {
+        id: '300550', dbname: 'CLB_SS_EA_Card', name: 'Carta Fei-Chai', position: 'wea',
+        script: function () {
+            // Dano mágico contra todos os tamanhos +10%.
+            multipliers.size[ALL] += 10;
+        }
+    },
 
 
     // shield cards
@@ -182,6 +209,16 @@ const cards = [
         id: '4636', dbname: 'Bijou_Card', name: 'Carta Bijou', position: 'shi',
         script: function () {
             multipliers.matk += 10;
+        }
+    },
+    {
+        id: '300239', dbname: 'ILL_Maya_Card', name: 'Carta Maya Silente', position: 'shi',
+        script: function () {
+            // Custo de SP das habilidades +50%.
+            // Dano mágico contra as raças Bruto, Doram e Planta +50%.
+            multipliers.race[BRUTE] += 50;
+            multipliers.race[DORAM] += 50;
+            multipliers.race[PLANT] += 50;
         }
     },
     {
