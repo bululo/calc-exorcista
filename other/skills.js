@@ -56,6 +56,22 @@ skills = [
         vct: 0.8,
         castdelay: 0
     },
+    {
+        name: "Pó de Diamante",
+        id: "SO_DIAMONDDUST",
+        script(int) {
+            //return 1.25;
+            let diamondDustLv = 5;
+            let frostWeaponLv = 5;
+            return Math.floor(((diamondDustLv * int) + (frostWeaponLv * 200)) * (stats.baseLv/100))/100;
+        },
+        property: WATER,
+        divisibility: 5,
+        cooldown: 5,
+        fct: 0,
+        vct: 7,
+        castdelay: 1
+    },
 ]
 
 buffs = [

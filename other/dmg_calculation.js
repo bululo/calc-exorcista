@@ -91,7 +91,7 @@ function damage_calculation() {
     minMATK = Math.floor(minMATK * (multipliers.size[ALL] + multipliers.size[target.size]) / 100);
     minMATK = Math.floor(minMATK * (multipliers.property[ALL] + multipliers.property[target.property[0]]) / 100);
     // Oratio
-    if (buffs.oratio > 0) {
+    if (buffs.oratio > 0 && skill.property===HOLY) {
         minMATK = Math.floor((maxMATK * (100 + (buffs.oratio*2)))/100);
     }
     minMATK = Math.floor(minMATK * (multipliers.skill_property[ALL] + multipliers.skill_property[skill.property]) / 100);
@@ -103,7 +103,7 @@ function damage_calculation() {
     maxMATK = Math.floor(maxMATK * (multipliers.size[ALL] + multipliers.size[target.size]) / 100);
     maxMATK = Math.floor(maxMATK * (multipliers.property[ALL] + multipliers.property[target.property[0]]) / 100);
     // Oratio
-    if (buffs.oratio > 0) {
+    if (buffs.oratio > 0 && skill.property===HOLY) {
         maxMATK = Math.floor((maxMATK * (100 + (buffs.oratio*2)))/100);
     }
     maxMATK = Math.floor(maxMATK * (multipliers.skill_property[ALL] + multipliers.skill_property[skill.property]) / 100);
@@ -118,7 +118,12 @@ function damage_calculation() {
     // Bypass
     let hardMDEF = target.mdef - Math.floor(equipStats.bypass * target.mdef / 100);
     hardMDEF = (1000 + hardMDEF) / (1000 + (hardMDEF * 10));
-    let weakness = properties[target.property[1] - 1][target.property[0] - 1];
+    // let weakness = properties[target.property[1] - 1][target.property[0] - 1];
+    let weakness = propTable[skill.property-1][target.property[1] - 1][target.property[0] - 1];
+    if (skill.id === 'SO_DIAMONDDUST') {
+        let selectedSkill = skills.find((line) => line.id === document.getElementById('skill').value);
+        skill.dmg = selectedSkill.script(int);
+    }
     // Calculo do Dano da Habilidade
     minMATK = Math.floor((Math.floor((Math.floor(minMATK * skill.dmg) * hardMDEF - softMDEF) * (multipliers.skill) / 100) * weakness) / 100);
     maxMATK = Math.floor((Math.floor((Math.floor(maxMATK * skill.dmg) * hardMDEF - softMDEF) * (multipliers.skill) / 100) * weakness) / 100);
@@ -194,7 +199,7 @@ function init() {
     equipStats.percentASPD = 0;
     equipStats.bypass = 0;
     // Recupera os bonus de job
-    let jobStatBonus = ArchBishop.find((line) => line.level === stats.jobLv);
+    let jobStatBonus = retrieveJobStatBonus();
     equipStats.str += jobStatBonus.bonus[0];
     equipStats.agi += jobStatBonus.bonus[1];
     equipStats.vit += jobStatBonus.bonus[2];
@@ -230,6 +235,17 @@ function init() {
     buffs.lex_aeterna = false;
     buffs.mystical_amplification = 0;
     buffs.recognized_spell = false;
+}
+
+function retrieveJobStatBonus() {
+    // Recupera os bonus de job
+    const job = document.querySelector('input[name="class"]:checked').value;
+    switch(job) {
+        case "ARCHBISHOP":
+            return ArchBishop.find((line) => line.level === stats.jobLv);
+        case "SORCERER":
+            return Sorcerer.find((line) => line.level === stats.jobLv);
+    }
 }
 
 function updateTarget() {
@@ -300,15 +316,13 @@ function retrieveBuffs() {
 }
 
 function retrieveLevelSkills() {
-    // setTimeout(() => {
-        const inputs = document.querySelectorAll("input.level_skill");
-        inputs.forEach(input => {
-            const skillName = input.getAttribute('name');
-            const skillValue = parseInt(input.value);
-            //if (!learned_skills[skillName]) return;
-            learned_skills[skillName] = skillValue;
+    const inputs = document.querySelectorAll("input.level_skill");
+    inputs.forEach(input => {
+        const skillName = input.getAttribute('name');
+        const skillValue = parseInt(input.value);
+        //if (!learned_skills[skillName]) return;
+        learned_skills[skillName] = skillValue;
         });
-    // }, 0);
 }
 
 function retrieveSlot(i, text, equip) {

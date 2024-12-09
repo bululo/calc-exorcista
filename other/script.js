@@ -1,6 +1,10 @@
 // Function to populate the equipments selects
 function populateItemsSelect(selectId, itemList) {
     const select = document.getElementById(selectId);
+    const firstOption = select.options[0];
+    select.innerHTML = "";
+    select.appendChild(firstOption);
+    const job = document.querySelector('input[name="class"]:checked').value;
 
     itemList.forEach(item => {
         const option = document.createElement('option');
@@ -11,12 +15,17 @@ function populateItemsSelect(selectId, itemList) {
         option.setAttribute('data-slot2', item.slot2);
         option.setAttribute('data-slot3', item.slot3);
         option.setAttribute('data-slot4', item.slot4);
+        let display = true;
+        if (item.tags !== undefined){
+            if (!item.tags.includes(job))
+                return;
+        }
         // Flag de Arma de Duas Mãos
         if (selectId === 'wea' && item.twoHanded)
             option.setAttribute('twoHanded', 'true');
 
         // Alguns acessórios dependem de lado para equipar
-        if (selectId === 'ac1') {
+        if (selectId === 'ac1' && display) {
             if (item.position !== '2')
                 select.appendChild(option);
         } else if (selectId === 'ac2') {
@@ -423,6 +432,53 @@ function classSelector(job) {
         option.textContent = optionData.text;
         selectElement.appendChild(option);
     });
+    updateJobSpecificOptions(job);
+    // Atualiza a lista de equipamentos de acordo com a classe
+    populateItemsSelect('top', tops);
+    populateItemsSelect('mid', mid);
+    populateItemsSelect('low', low);
+    populateItemsSelect('arm', armors);
+    populateItemsSelect('wea', weapons);
+    populateItemsSelect('shi', shields);
+    populateItemsSelect('gar', garments);
+    populateItemsSelect('sho', shoes);
+    populateItemsSelect('ac1', accessory);
+    populateItemsSelect('ac2', accessory);
+}
+
+function updateJobSpecificOptions(job){
+    const buffsTable = document.getElementById("buffsTable");
+    //const learnedSkills = document.getElementById("skillTable");
+    const button = Array.from(document.querySelectorAll("button.tablinks")).find(
+        btn => btn.textContent.trim() === "Habilidades Pré-Requisito"
+    );
+    switch(job) {
+        case "ARCHBISHOP":
+            buffsTable.style.display = "table";
+            //learnedSkills.style.display = "table";
+            button.style.display = "inline-block";
+            break;
+        case "SORCERER":
+            // Seleciona todos os inputs dentro da tabela e os desmarca
+            let inputs = buffsTable.querySelectorAll("input");
+            inputs.forEach(input => {
+                if (input.type === "checkbox" || input.type === "radio") {
+                    input.checked = false;
+                }
+            });
+            // Remove a visibilidade da tabela
+            buffsTable.style.display = "none";
+            //learnedSkills.style.display = "none";
+            button.style.display = "none";
+            if (button.classList.contains("active")){
+                let buffsButton = Array.from(document.querySelectorAll("button.tablinks")).find(
+                    btn => btn.textContent.trim() === "Buffs/Consumíveis"
+                );
+                buffsButton.click();
+            }
+
+            break;
+    }
 }
 
 // Atualiza a imagem das cartas e encantamentos
@@ -531,28 +587,29 @@ function loadDataFromURL() {
 
 
 function load() {
-    // const radioButtons = document.querySelectorAll('input[name="class"]');
-    // radioButtons.forEach(radio => {
-    //     radio.addEventListener('change', (event) => {
-    //         classSelector(event.target.value);
-    //     });
-    // });
-    // classSelector(document.querySelector('input[name="class"]:checked').value);
     // Chamada da função para preencher os selects de refinamento com +0~+20
     populateRefinementOptions();
     populateShadowRefinementOptions();
+    // Seletor de Classe
+    const radioButtons = document.querySelectorAll('input[name="class"]');
+    radioButtons.forEach(radio => {
+        radio.addEventListener('change', (event) => {
+            classSelector(event.target.value);
+        });
+    });
+    classSelector(document.querySelector('input[name="class"]:checked').value);
     // Chamada da função para preencher as listas de equipamentos, cartas
     // encantamentos e bônus aleatório
-    populateItemsSelect('top', tops);
-    populateItemsSelect('mid', mid);
-    populateItemsSelect('low', low);
-    populateItemsSelect('arm', armors);
-    populateItemsSelect('wea', weapons);
-    populateItemsSelect('shi', shields);
-    populateItemsSelect('gar', garments);
-    populateItemsSelect('sho', shoes);
-    populateItemsSelect('ac1', accessory);
-    populateItemsSelect('ac2', accessory);
+    // populateItemsSelect('top', tops);
+    // populateItemsSelect('mid', mid);
+    // populateItemsSelect('low', low);
+    // populateItemsSelect('arm', armors);
+    // populateItemsSelect('wea', weapons);
+    // populateItemsSelect('shi', shields);
+    // populateItemsSelect('gar', garments);
+    // populateItemsSelect('sho', shoes);
+    // populateItemsSelect('ac1', accessory);
+    // populateItemsSelect('ac2', accessory);
     // Encantamentos Visuais
     populateCostumeShadowSelect('c_top', c_top);
     populateCostumeShadowSelect('c_mid', c_mid);

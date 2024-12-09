@@ -4,6 +4,7 @@ const tops = [
         dbname: 'Amistr_Beret',
         name: 'Quepe de Amistr',
         slot1: 'card',
+        tags: 'ARCHBISHOP',
         script: function () {
             equipStats.flatMATK += Math.floor(refinement.top / 2) * 10;
             if (refinement.top >= 7) {
@@ -35,6 +36,7 @@ const tops = [
         slot2: '29071,29072,29073,29074,29075,29076,29077,29078,29079,29080',
         slot3: '4730,4731,4732,4733,4734,4710,4711,4712,4713,4714,4720,4721,4722,4723,4724,4750,4751,4752,4753,4754',
         slot4: '4730,4731,4732,4733,4734,4710,4711,4712,4713,4714,4720,4721,4722,4723,4724,4750,4751,4752,4753,4754',
+        tags: 'ARCHBISHOP',
         script: function () {
             equipStats.str += 1;
             equipStats.agi += 1;
@@ -66,6 +68,7 @@ const tops = [
         id: '19469',
         dbname: 'Crown_Of_Saint_Jp',
         name: 'Coroa Sagrada',
+        tags: 'ARCHBISHOP',
         script: function () {
             equipStats.percentASPD += 10;
             if (skill.id === "AB_ADORAMUS" || skill.id === "AB_JUDEX")
@@ -238,6 +241,7 @@ const tops = [
     },
     {
         id: '400118', dbname: 'BioWeapon_Helm_AB', name: 'Espólio de Margaretha', slot1: 'card',
+        tags: 'ARCHBISHOP',
         script: function (){
             // A cada 2 refinos: ATQ e ATQM +20.
             equipStats.flatMATK += Math.floor(refinement.top/2) * 20;
@@ -289,6 +293,40 @@ const tops = [
             // Classes: Arcebispos e evoluções
         }
     },
+    {
+        id: '19426', dbname: 'King_Of_Spirit_Circlet', name: 'Coroa do Espírito do Rei',
+        tags: 'SORCERER',
+        script: function () {
+            // Coroa do Espírito do Rei
+            // 19426 King_Of_Spirit_Circlet
+            //
+            // Uma coroa qe pertence ao primeiro rei de prontera. Lendas dizem que se espírito ainda se mantém na coroa.
+            // --------------------------
+            // Pós-conjuração -10%.
+            // Dano de [Castigo de Nerthus] e [Pó de Diamante] +10%.
+            // --------------------------
+            // Refino +9 ou mais:
+            // Pós-conjuração -5% adicional.
+            // Dano de [Castigo de Nerthus] e [Pó de Diamante] +15% adicional.
+            // Refino +11 ou mais:
+            // Pós-conjuração -5% adicional.
+            // Dano de [Castigo de Nerthus] e [Pó de Diamante] +25% adicional.
+            // Refino +13 ou mais:
+            // Ignora 100% da DEFM de todas as raças.
+            // --------------------------
+            // Ao aprender [Aquecer Terreno] nv.5:
+            // Recarga de [Lanças dos Aesir] [Castigo de Nerthus] e [Pó de Diamante] -1 segundo.
+            // --------------------------
+            // Ao aprender [Escudo Elemental] nv.5:
+            // Dano mágico contra monstros Chefes +25%.
+            // --------------------------
+            // A cada nível de [Empatia Elemental]:
+            // Conjuração variável -4%.
+            // --------------------------
+            // A cada refino até o +10:
+            // Conjuração fixa -5%.
+        }
+    }
 ];
 
 desentupidor = '4730,4710,4720,4750';
@@ -344,6 +382,7 @@ const mid = [
         name: 'Adorno da Vitória',
         slot1: 'card',
         slot4: desentupidor,
+        tags: 'ARCHBISHOP',
         script: function () {
             multipliers.size[ALL] += 10;
             if(learned_skills.praefatio >= 10){
@@ -418,6 +457,7 @@ const low = [
         id: '420187',
         dbname: 'Sacred_Lapel',
         name: 'Lapela Sagrada',
+        tags: 'ARCHBISHOP',
         script: function () {
             equipStats.castdelay += 15;
 
@@ -700,6 +740,7 @@ const armors = [
     // },
     {
         id: '450291 ', dbname: 'Amazing_Grace', name: 'Graça Alcançada', slot1: 'card',
+        tags: 'ARCHBISHOP',
         script: function () {
             equipStats.percentASPD += 10;
             if (refinement.armor >= 9) {
@@ -827,6 +868,7 @@ brasilis = '29446,4831';
 const weapons = [
     {
         id: '540011', dbname: 'Up_Demon_Hunting_Bible', name: 'Tomo Primordial', slot1: 'card', slot2: 'card',
+        tags: 'ARCHBISHOP',
         script: function () {
             weapon.baseMATK = 190;
             weapon.lv = 4;
@@ -849,6 +891,7 @@ const weapons = [
     },
     {
         id: '540011 ', dbname: 'Up_Demon_Hunting_Bible', name: 'Tomo Primordial (12% Sagrado)', slot1: 'card', slot2: 'card',
+        tags: 'ARCHBISHOP',
         script: function () {
             weapon.baseMATK = 190;
             weapon.lv = 4;
@@ -873,6 +916,7 @@ const weapons = [
     },
     {
         id: '540011  ', dbname: 'Up_Demon_Hunting_Bible', name: 'Tomo Primordial (12% Sagrado/12% Chefe)', slot1: 'card', slot2: 'card',
+        tags: 'ARCHBISHOP',
         script: function () {
             weapon.baseMATK = 190;
             weapon.lv = 4;
@@ -898,6 +942,7 @@ const weapons = [
     },
     {
         id: '1631', dbname: 'Holy_Stick', name: 'Vara Sagrada', slot1: 'card', slot3: malangdo, slot4: malangdo,
+        tags: 'ARCHBISHOP',
         script: function () {
             weapon.baseMATK = 140;
             weapon.lv = 4;
@@ -906,6 +951,7 @@ const weapons = [
     },
     {
         id: '16089', dbname: 'Ultio_Spes_OS', name: 'Ultio-OS', slot1: 'card', slot2: 'card',
+        tags: 'ARCHBISHOP',
         script: function () {
             weapon.baseMATK = 170;
             weapon.lv = 4;
@@ -922,6 +968,7 @@ const weapons = [
     },
     {
         id: '590014', dbname: 'Meer_Sceptre', name: 'Mastro da Princesa', slot1: 'card',
+        tags: 'ARCHBISHOP',
         script: function () {
             weapon.baseMATK = 360;
             weapon.lv = 4;
@@ -946,6 +993,7 @@ const weapons = [
     },
     {
         id: '550031', dbname: 'Dea_Staff_IL Dea_Staff_IL', name: 'Dea Ilusional', slot1: 'card', slot2: 'card',
+        tags: 'ARCHBISHOP',
         script: function () {
             weapon.baseMATK = 190;
             weapon.lv = 4;
@@ -969,6 +1017,7 @@ const weapons = [
     },
     {
         id: '550031 ', dbname: 'Dea_Staff_IL Dea_Staff_IL', name: 'Dea Ilusional (Ativado)', slot1: 'card', slot2: 'card',
+        tags: 'ARCHBISHOP',
         script: function () {
             weapon.baseMATK = 190;
             weapon.lv = 4;
@@ -995,6 +1044,7 @@ const weapons = [
     },
     {
         id: '590012', dbname: 'Up_Saint_Hall', name: 'Clava Primordial', slot1: 'card', slot2: 'card',
+        tags: 'ARCHBISHOP',
         script: function () {
             weapon.baseMATK = 200;
             weapon.lv = 4;
@@ -1019,6 +1069,7 @@ const weapons = [
     }, // Adicionar BAs
     {
         id: '590003', dbname: 'Saint_Hall', name: 'Clava Ancestral', slot1: 'card', slot2: 'card',
+        tags: 'ARCHBISHOP',
         script: function () {
             weapon.baseMATK = 165;
             weapon.lv = 4;
@@ -1051,6 +1102,7 @@ const weapons = [
     {
         id: '2057', dbname: 'Adorare_Staff', name: 'Adorare', slot1: 'card', slot2: 'card', slot3: '29599', slot4: '4813,4814,4815',
         twoHanded: true,
+        tags: 'ARCHBISHOP',
         script: function () {
             weapon.baseMATK = 240;
             weapon.lv = 4;
@@ -1066,6 +1118,7 @@ const weapons = [
     },
     {
         id: '26161', dbname: 'Ponitendtia',name: 'Penitência', slot1: 'card', slot2: 'card', slot3: '29599', slot4: '4813,4814,4815',
+        tags: 'ARCHBISHOP',
         script: function () {
             weapon.baseMATK = 175;
             weapon.lv = 4;
@@ -1465,6 +1518,7 @@ lab_sho2 = '4856,4858,4854,' + lab_sho3;
 const shoes = [
     {
         id: '22225', dbname: 'Shoes_Of_Punishment_', name: 'Sapatos da Penitência [1]', slot1: 'card',
+        tags: 'ARCHBISHOP',
         script: function () {
             if (skill.id === "AB_JUDEX")
                 multipliers.skill += 30;
@@ -1566,6 +1620,7 @@ const shoes = [
     },
     {
         id: '470106 ', dbname: 'Shoes_Of_Judex_', name: 'Sapatos da Persistência', slot1: 'card',
+        tags: 'ARCHBISHOP',
         script: function () {
             equipStats.VCT += 20;
             equipStats.castdelay += 10;
@@ -1668,6 +1723,7 @@ const shoes = [
     },
     {
         id: '470014', dbname: 'Virgo_Shoes_J', name: 'Sapatos de Virgem',
+        tags: 'ARCHBISHOP',
         script: function () {
             equipStats.flatMATK += 50;
             equipStats.percentASPD += 10;
@@ -1843,6 +1899,7 @@ tumulo = '4721,4722,4723,4711,4713,4715,4813,4812,4826,4760,4883';
 const accessory = [
     {
         id: '490118', dbname: 'RingOfAdoramus', name: 'Anel de Adoramus', slot1: 'card', slot4: tumulo,
+        tags: 'ARCHBISHOP',
         script: function () {
             equipStats.int += 7;
             multipliers.size[ALL] += 10;
@@ -1978,6 +2035,7 @@ const accessory = [
     },
     {
         id: '28564', dbname: 'Valkyrie_Drop', name: 'Lágrima de Valquíria', slot1: 'card', slot4: tumulo,
+        tags: 'ARCHBISHOP',
         script: function () {
             equipStats.castdelay += 5;
             equipStats.VCT += 10;
@@ -2061,6 +2119,32 @@ const accessory = [
                 document.getElementById('gar_slot4').value === '4858') {
                 equipStats.castdelay+=30;
             }
+        }
+    },
+    {
+        id: '28394', dbname: 'King_of_Spirit_Ring', name: 'Bracelete da Valquíria Mágica',
+        tags: 'SORCERER',
+        script: function () {
+            // VIT +5.
+            equipStats.vit += 5;
+            // Pós-conjuração -5%.
+            equipStats.castdelay += 5;
+            // [Aquecer Terreno]
+            // Tempo de recarga -15 segundos.
+            // Tempo de conjuração variável -50%.
+            // [Lanças dos Aesir]
+            // Tempo de recarga -0,5 segundos.
+            // Tempo de conjuração variável -1,5 segundos.
+            // [Castigo de Nerthus]
+            // Tempo de recarga -2 segundos.
+            // [Pó de Diamante]
+            // Tempo de recarga -2 segundos.
+            if (skill.id === "SO_DIAMONDDUST"){
+                skill.cooldown += -2;
+                multipliers.skill += Math.floor(stats.baseLv/8);
+            }
+            // A cada 8 níveis de base:
+            // Dano de [Castigo de Nerthus] e [Pó de Diamante] +1%.
         }
     },
 ];
