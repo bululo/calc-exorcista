@@ -1084,6 +1084,32 @@ const weapons = [
 
 const shields = [
     {
+        id: '460091', dbname: '', name: 'Escudo Clerical', slot1: 'card',
+        script: function () {
+            // Ao realizar ataques físicos:
+            // 5% de chance de autoconjurar [Luz da Criação] nv.3.
+            // A cada refino:
+            // Chance de autoconjuração +1%.
+            // --------------------------
+            // Dano mágico +5%.
+            multipliers.matk += 5;
+            // Refino +7 ou mais: Dano mágico +5% adicional.
+            if (refinement.shield >= 7)
+                multipliers.matk += 5;
+            // Refino +9 ou mais: Dano mágico +5% adicional.
+            if (refinement.shield >= 9)
+                multipliers.matk += 5;
+            // Conjunto [Manto Clerical]
+            // Ao realizar ataques físicos:
+            // 2,5% de chance de autoconjurar [Escudo Mágico] nv.7.
+            // A cada refino do escudo:
+            // DEF +20. DEFM +2.
+            // Escudo com refino +8 ou mais:
+            // O usuário não pode ser empurrado.
+            // Resistência as propriedades Sombrio e Sagrado +50%.
+        }
+    },
+    {
         id: '28946', dbname: 'Bloody_Knight_Shield__', name: 'Sanguinário Purificado (50% Bypass Chefe)', slot1: 'card',
         script: function () {
             if (target.type === BOSS)
