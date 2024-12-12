@@ -515,7 +515,7 @@ const armors = [
                 // Soma dos refinos +23 ou mais:
                 // Dano mágico de todas as propriedades +20% adicional.
                 if ((refinement.top + refinement.armor) >= 23)
-                    multipliers.skill_property[ALL] += 23;
+                    multipliers.property[ALL] += 20;
             }
             // Conjunto [Adereço da Celine]
             if (document.getElementById('ac1').value === '32237' || document.getElementById('ac2').value === '32237') {
