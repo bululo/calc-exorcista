@@ -92,7 +92,7 @@ function damage_calculation() {
     minMATK = Math.floor(minMATK * (multipliers.property[ALL] + multipliers.property[target.property[0]]) / 100);
     // Oratio
     if (buffs.oratio > 0) {
-        minMATK = Math.floor((maxMATK * (100 + (buffs.oratio*2)))/100);
+        minMATK = Math.floor((minMATK * (100 + (buffs.oratio*2)))/100);
     }
     minMATK = Math.floor(minMATK * (multipliers.skill_property[ALL] + multipliers.skill_property[skill.property]) / 100);
     minMATK = Math.floor(minMATK * (multipliers.race[ALL] + multipliers.race[target.race]) / 100);
